@@ -6,22 +6,15 @@ const appDir = require('fs').realpathSync(process.cwd());
 
 console.log('Project root directory: ', appDir);
 
-// WEBPACK-DEV-MIDDLEWARE (for development)
-if (process.env.NODE_ENV === 'development') {
-  // This will will only run with 'npm run start:dev2'
-  console.log('WEBPACK-DEV-MIDDLEWARE RUNNING...');
-
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackDevConfig = require(path.resolve(appDir, 'webpack.dev'));
-  const compiler = webpack(webpackDevConfig);
-
-  app.use(webpackDevMiddleware(compiler));
-}
-
 // MIDDLEWARES
 app.use(logger); // logging
 app.use(express.json()); // body-parsing
+app.use(express.urlencoded({}))
+
+// STATIC-FILE SERVE
+app.use(express.static(path.resolve(appDir, 'assets')));
+app.use(express.static(path.resolve(appDir, 'src')));
+app.use(express.static(path.resolve(appDir, 'dist')));
 
 // ROUTES
 // Add your routes here and uncomment. For example:
@@ -37,11 +30,6 @@ app.get('/', (req, res, next) => {
     next(err);
   }
 });
-
-// STATIC-FILE SERVE
-app.use(express.static(path.resolve(appDir, 'assets')));
-app.use(express.static(path.resolve(appDir, 'src')));
-app.use(express.static(path.resolve(appDir, 'dist')));
 
 // FALLBACK HANDLER
 app.get('*', (req, res, next) => {

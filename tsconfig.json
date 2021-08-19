@@ -9,7 +9,7 @@
     ],
     "moduleResolution": "node",
     "watch": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "removeComments": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
