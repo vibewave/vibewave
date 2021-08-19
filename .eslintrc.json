@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "environments": [
+    "browser",
+    "node",
+    "commonjs",
+    "es6"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended"
+  ]
+}

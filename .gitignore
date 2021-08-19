@@ -1,0 +1,30 @@
+.DS_Store
+.cache
+*.Cache
+
+node_modules
+*bundle.js*
+
+# Private files including .env files
+.env
+
+# Ignore all build generated files in the root dist directory except for index.html
+/dist/*
+!/dist/index.html
+
+# .js | .js.map | .d.ts files (for Typescript Project)
+client/**/*.js*
+client/**/*.d.ts
+
+# Include only favicon.ico in assets/favicon/
+# ***********************************************************
+# logic for only including a specific file/folder within a deeply nested subdirectory:
+# 1) ignore everything inside the directory (e.g. /assets/*)
+# 2) then un-ignore the direct child file/folder (!/assets/favicon/)
+# repeat this process until you reach and un-ignore the desired file/folder. The key is that you can only un-ignore the direct child.
+# directly un-ignoring the whole path to the desired file/folder will not work (e.g. !/assets/favicon/favicon.ico)
+# ***********************************************************
+/assets/*
+!/assets/favicon/
+/assets/favicon/*
+!/assets/favicon/favicon.ico
