@@ -1,6 +1,6 @@
 const app = require('./app.js');
 const HOST = process.env.HOST ?? '127.0.0.1';
-const PORT = process.env.PORT ?? 8085;
+const PORT = process.env.PORT ?? 8086;
 
 const startServer = async () => {
   // START EXPRESS SERVER

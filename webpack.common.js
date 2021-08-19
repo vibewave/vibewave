@@ -19,6 +19,7 @@ module.exports = {
       {
         test: /\.tsx?$/i,
         exclude: /node_modules/,
+        include: path.resolve(appDir, 'client'),
         use: ["ts-loader"]
       },
       {
@@ -29,7 +30,7 @@ module.exports = {
             loader: 'babel-loader',
             options: {
               presets: [
-                '@babel/preset-env'
+                '@babel/preset-react'
               ]
             }
           }
