@@ -5,19 +5,7 @@ const pk = require(path.resolve(appDir, 'package.json'));
 
 const dbName = pk.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 const dbUrl = process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`;
-
-interface ssl {
-	rejectUnauthorized: boolean;
-}
-
-interface DialectOptions {
-	ssl: ssl;
-}
-
-interface Config {
-	logging?: boolean;
-	dialectOptions?: DialectOptions;
-}
+import { Config, } from '../../my-types';
 
 const config: Config = {
 	logging: false,

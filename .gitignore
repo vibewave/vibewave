@@ -15,6 +15,8 @@ node_modules
 # .js | .js.map | .d.ts files (for Typescript Project)
 client/**/*.js*
 client/**/*.d.ts
+server/**/*.js*
+server/**/*.d.ts
 
 # Include only favicon.ico in assets/favicon/
 # ***********************************************************
