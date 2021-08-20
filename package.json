@@ -8,13 +8,14 @@
   "main": "client/index.tsx",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "start": "npm run build & node server/server.js",
     "build:dev": "webpack --watch --config webpack.dev.js",
     "server": "node server/server.js",
     "server:dev": "nodemon server/server.js",
     "server:dev2": "NODE_ENV=development nodemon server/server.js",
     "server:webpack": "webpack serve --config webpack.dev.js",
-    "start": "npm run server:webpack & npm run server:dev",
-    "start:dev": "npm run build:dev & npm run server:dev"
+    "start:dev": "npm run server:webpack & npm run server:dev",
+    "start:dev3": "npm run build:dev & npm run server:dev"
   },
   "html": "src/index.html",
   "fallback": "src/fallback.html",

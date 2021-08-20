@@ -1,5 +1,5 @@
 const router = require('express').Router();
-module.exports = router;
+
 import { MiddlewareFn } from '../../../my-types';
 
 /* Add route middlewares below. For example:
@@ -13,3 +13,5 @@ router.use(<MiddlewareFn>function (req, res, next) {
 	res.status(404);
 	next(err);
 });
+
+module.exports = router;

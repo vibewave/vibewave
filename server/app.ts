@@ -6,7 +6,6 @@ const appDir = require('fs').realpathSync(process.cwd());
 import { MiddlewareFn, ErrorRequestHandler } from '../my-types';
 
 //used to allow save variable names for modules
-export {};
 
 console.log('Project root directory: ', appDir);
 
