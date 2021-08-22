@@ -26,6 +26,7 @@ export default function Room() {
 		setCurrentTimePosition(counter);
 	});
 
+	console.log('in room ');
 	// let count = 0
 	return (
 		<div>
