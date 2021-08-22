@@ -17,7 +17,7 @@
 		"start:dev": "npm run server:webpack & npm run server:dev",
 		"start:dev3": "npm run build:dev & npm run server:dev",
 		"deploy": "git add . && git commit -m Heroku && git push heroku deploy:main",
-		"heroku-postbuild": "tsc && npm run build"
+		"heroku-postbuild": "tsc"
 	},
 	"html": "src/index.html",
 	"fallback": "src/fallback.html",
