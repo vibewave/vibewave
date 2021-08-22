@@ -16,7 +16,8 @@
 		"server:webpack": "webpack serve --config webpack.dev.js",
 		"start:dev": "npm run server:webpack & npm run server:dev",
 		"start:dev3": "npm run build:dev & npm run server:dev",
-		"heroku-postbuild": "npm run build"
+		"postinstall": "tsc",
+		"deploy": "git add . && git commit -m Heroku && git push heroku deploy:main"
 	},
 	"html": "src/index.html",
 	"fallback": "src/fallback.html",
