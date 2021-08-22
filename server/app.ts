@@ -16,8 +16,8 @@ app.use(express.urlencoded({}));
 
 // STATIC-FILE SERVE
 app.use(express.static(path.resolve(appDir, 'assets')));
-app.use(express.static(path.resolve(appDir, 'src')));
 app.use(express.static(path.resolve(appDir, 'dist')));
+app.use(express.static(path.resolve(appDir, 'src')));
 
 // ROUTES
 // Add your routes here and uncomment. For example:

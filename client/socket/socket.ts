@@ -1,19 +1,23 @@
 import { io } from 'socket.io-client';
 
-export const socket = io('http://localhost:8086');
+export let socket: any;
 
-export let host = {isHost: false}
-
+if (process.env.NODE_ENV === 'production') {
+	socket = io();
+} else {
+	socket = io('http://localhost:8086');
+}
+export let host = { isHost: false };
 
 let currentTimePosition = 0;
 let room = 'currentRoomId';
 
 socket.on('connect', () => {
-  console.log(`Connected with id: ${socket.id}`);
+	console.log(`Connected with id: ${socket.id}`);
 });
 
 // if (isHost && trackUri changed)
-  socket.emit('songStarted', true);
+socket.emit('songStarted', true);
 
 // on Room click:
 // socket.emit('join-room', socket.id);
