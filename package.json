@@ -8,7 +8,7 @@
 	"main": "client/index.tsx",
 	"scripts": {
 		"build": "NODE_ENV=production webpack --config webpack.prod.js",
-		"start": "tsc && npm run build & node server/server.js",
+		"start": "node server/server.js",
 		"build:dev": "webpack --watch --config webpack.dev.js",
 		"server": "node server/server.js",
 		"server:dev": "nodemon server/server.js",
@@ -16,7 +16,8 @@
 		"server:webpack": "webpack serve --config webpack.dev.js",
 		"start:dev": "npm run server:webpack & npm run server:dev",
 		"start:dev3": "npm run build:dev & npm run server:dev",
-		"deploy": "git add . && git commit -m Heroku && git push heroku deploy:main"
+		"deploy": "git add . && git commit -m Heroku && git push heroku deploy:main",
+		"heroku-postbuild": "tsc && npm run build"
 	},
 	"html": "src/index.html",
 	"fallback": "src/fallback.html",
