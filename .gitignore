@@ -27,6 +27,7 @@ server/**/*.d.ts
 # directly un-ignoring the whole path to the desired file/folder will not work (e.g. !/assets/favicon/favicon.ico)
 # ***********************************************************
 /assets/*
+!/assets/vibewave-logo.png
 !/assets/favicon/
 /assets/favicon/*
 !/assets/favicon/favicon.ico
