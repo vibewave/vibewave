@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"\"node_modules/\"": true,
+		"client/**/*.d.ts": true,
+		"client/**/*.js*": true,
+		"server/**/*.d.ts": true,
+		"server/**/*.js*": true
+	}
+}
