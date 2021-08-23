@@ -18,6 +18,7 @@ const startSocket = (io) => {
             }
         });
         socket.on('song-started', () => {
+            counter = 0;
             console.log(`song started by ${socket.id}`);
             setInterval(() => {
                 counter++;
