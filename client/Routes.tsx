@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch} from 'react-router-dom';
 import Home from './components/Home';
+import SpotifyLogin from './components/SpotifyLogin';
 
 /**
  * COMPONENT
@@ -8,6 +9,9 @@ import Home from './components/Home';
 const Routes = () => {
     return (
       <Switch>
+        <Route path="/spotify-login">
+          <SpotifyLogin />
+        </Route>
         <Route component={Home} />
       </Switch>
     )
