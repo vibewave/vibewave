@@ -25,7 +25,7 @@ export default function useAuth(authCode: string) {
 
   const authenticate = async (code: string) => {
     try {
-      const { data } = await axios.post(`http://localhost:3032/auth/login`, {code});
+      const { data } = await axios.post(`http://localhost:3032/spotify/login`, {code});
       setAccessToken(data.accessToken);
       setRefreshToken(data.refreshToken);
       setExpiresIn(data.expiresIn);
@@ -38,7 +38,7 @@ export default function useAuth(authCode: string) {
 
   const reAuthenticate = async () => {
     try {
-      const { data }  = await axios.post(`http://localhost:3032/auth/refresh`, {refreshToken});
+      const { data }  = await axios.post(`http://localhost:3032/spotify/refresh`, {refreshToken});
       setAccessToken(data.accessToken);
       setExpiresIn(data.expiresIn);
     }

@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import SpotifyWebApi from 'spotify-web-api-node';
 import Player from './Player';
-import useAuth from '../customHooks/useAuth';
 
 const useStyles = makeStyles((theme) => ({
   roomContainer: {
@@ -81,12 +80,6 @@ export default function Room() {
 		setCurrentTimePosition(counter);
 	});
 
-  socket.on('time-position', (counter: number) => {
-    console.log('inside time-position client for user ', socket.id);
-    console.log(`Current time: ${counter}`);
-    setCurrentTimePosition(counter);
-  });
-
   return (
     <Container component="div" disableGutters={true} maxWidth={false} className={classes.roomContainer}>
       {isHost && "I am the host"}
@@ -110,7 +103,7 @@ export default function Room() {
               <Grid item xs={8} className={classes.mainArea}>
               </Grid>
               <Grid item xs={2} className={classes.playerDiv}>
-                <Player />
+                {/* <Player /> */}
               </Grid>
           </Grid>
         </Grid>

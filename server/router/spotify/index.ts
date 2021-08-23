@@ -5,14 +5,14 @@ const router = express.Router();
 const changeErrStatus = require('../../utils/changeErrStatus');
 module.exports = router;
 
-// POST /auth/login
+// POST /spotify/login
 router.post('/login', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
-      redirectUri: process.env.REDIRECT_URI || 'http://localhost:3032',
-      clientId: process.env.CLIENT_ID || 'a28a1d73e5f8400485afaff5e584ca32',
-      clientSecret: process.env.CLIENT_SECRET || '1526d681970b49c98bbfd53d5071d9b1',
+      redirectUri: process.env.REDIRECT_URI,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
     });
 
     const { body } = await spotifyApi.authorizationCodeGrant(code);
@@ -31,14 +31,14 @@ router.post('/login', async (req: Request, res: Response, next: NextFunction) =>
   }
 });
 
-// POST /auth/refresh
+// POST /spotify/refresh
 router.post('/refresh', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
-      redirectUri: process.env.REDIRECT_URI || 'http://localhost:3032',
-      clientId: process.env.CLIENT_ID || 'a28a1d73e5f8400485afaff5e584ca32',
-      clientSecret: process.env.CLIENT_SECRET || '1526d681970b49c98bbfd53d5071d9b1',
+      redirectUri: process.env.REDIRECT_URI,
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
       refreshToken,
     });
 
