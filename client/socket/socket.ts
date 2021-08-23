@@ -1,20 +1,33 @@
 import { io } from 'socket.io-client';
 
+export let socket: any;
 
-const socket = io('http://localhost:8086');
+if (process.env.NODE_ENV === 'production') {
+	socket = io();
+} else {
+	socket = io('http://localhost:8086');
+}
+export let host = { isHost: false };
 
 let currentTimePosition = 0;
 let room = 'currentRoomId';
 
 socket.on('connect', () => {
-  console.log(`Connected with id: ${socket.id}`);
-
-
-  socket.emit('songStarted', true);
-
-  socket.emit('user-joined-room', room);
+	console.log(`Connected with id: ${socket.id}`);
 });
 
-socket.on('time-position', (counter) => {
-  spotifyApi.seek(counter);
-})
+// if (isHost && trackUri changed)
+socket.emit('songStarted', true);
+
+// on Room click:
+// socket.emit('join-room', socket.id);
+
+// socket.on('isHost', ()=> {
+//   host.isHost = true;
+//   console.log('isHost after connect is ' , host.isHost);
+// })
+
+// on user joining room, then seek to current position of player
+// socket.on('time-position', (counter) => {
+//   // spotifyApi.seek(counter);
+// });

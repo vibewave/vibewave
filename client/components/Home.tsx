@@ -1,9 +1,10 @@
 import React from 'react'
+import Room from './Room'
 
 const Home = () => {
   return (
     <div>
-      Home
+      <Room />
     </div>
   );
 }

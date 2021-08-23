@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
+		"target": "ES2017",
+		"module": "commonjs",
 		"lib": ["DOM", "DOM.Iterable", "ESNEXT"],
 		"moduleResolution": "node",
-		"watch": true,
+		"watch": false,
 		"jsx": "react",
 		"removeComments": true,
 		"noImplicitAny": true,

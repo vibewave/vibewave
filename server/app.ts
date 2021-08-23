@@ -6,7 +6,6 @@ const appDir = require('fs').realpathSync(process.cwd());
 import { MiddlewareFn, ErrorRequestHandler } from '../my-types';
 
 //used to allow save variable names for modules
-export {};
 
 console.log('Project root directory: ', appDir);
 
@@ -17,8 +16,8 @@ app.use(express.urlencoded({}));
 
 // STATIC-FILE SERVE
 app.use(express.static(path.resolve(appDir, 'assets')));
-app.use(express.static(path.resolve(appDir, 'src')));
 app.use(express.static(path.resolve(appDir, 'dist')));
+app.use(express.static(path.resolve(appDir, 'src')));
 
 // ROUTES
 // Add your routes here and uncomment. For example:
