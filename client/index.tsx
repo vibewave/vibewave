@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
 import history from './history'
-// import store from './store'
+import store from './store'
 import App from './App'
-import '../src/style.css'
+// import '../src/style.css'
 
 // establishes socket connection
 // import './socket'
 
 ReactDOM.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <Router history={history}>
       <App />
-    </Router>,
-  // </Provider>,
+    </Router>
+  </Provider>,
   document.getElementById('app')
 );

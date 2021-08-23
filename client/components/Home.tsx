@@ -1,10 +1,10 @@
-import React from 'react'
-import Room from './Room'
+import React from 'react';
+import Rooms from './Rooms';
 
 const Home = () => {
   return (
     <div>
-      <Room />
+      <Rooms />
     </div>
   );
 }
