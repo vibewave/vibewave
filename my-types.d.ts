@@ -28,6 +28,15 @@ export interface Config {
 // 	status?: number;
 // }
 
-export interface Error {
-	status?: number;
+export class ApiError extends Error {
+	status: number;
+	constructor(status?: number, message?: string, name?: string) {
+			super(message);
+			this.name = name;
+			this.status = status;
+	}
 }
+
+// export interface Error {
+// 	status?: number;
+// }
