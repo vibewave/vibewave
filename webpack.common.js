@@ -10,18 +10,12 @@ module.exports = {
   },
   resolve: {
     mainFields: ['browser', 'module', 'main'],
-    extensions: ['.tsx', '.ts', '.js', '.json'],
+    extensions: ['.js', '.json'],
     mainFiles: ['index'],
     modules: ['node_modules']
   },
   module: {
     rules: [
-      {
-        test: /\.tsx?$/i,
-        exclude: /node_modules/,
-        include: path.resolve(appDir, 'client'),
-        use: ["ts-loader"]
-      },
       {
         test: /\.m?jsx?$/i,
         exclude: /node_modules/,
