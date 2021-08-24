@@ -22,6 +22,8 @@ app.use(express.static(path.resolve(appDir, 'src')));
 // ROUTES
 // Add your routes here and uncomment. For example:
 app.use('/api', require('./router/api'));
+// app.use('/auth', require('./router/auth'));
+app.use('/spotify', require('./router/spotify'));
 // ...
 // */
 
