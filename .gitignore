@@ -12,12 +12,6 @@ node_modules
 /dist/*
 !/dist/index.html
 
-# .js | .js.map | .d.ts files (for Typescript Project)
-client/**/*.js*
-client/**/*.d.ts
-server/**/*.js*
-server/**/*.d.ts
-
 # Include only favicon.ico in assets/favicon/
 # ***********************************************************
 # logic for only including a specific file/folder within a deeply nested subdirectory:
