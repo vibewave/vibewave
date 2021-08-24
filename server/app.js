@@ -11,7 +11,7 @@ console.log('Project root directory: ', appDir);
 // MIDDLEWARES
 app.use(logger); // logging
 app.use(express.json()); // body-parsing
-app.use(express.urlencoded({}));
+app.use(express.urlencoded({ extended: false }));
 
 // STATIC-FILE SERVE
 app.use(express.static(path.resolve(appDir, 'assets')));
