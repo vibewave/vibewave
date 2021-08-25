@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
 // import history from '../../history';
-import { createRooms } from '../../store/rooms';
-import { useDispatch } from 'react-redux';
+import { createRoom } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const CreateRoom = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const user = useSelector(state => state.auth);
 
-	const [roomName, setRoomName] = useState('');
+	const [roomTitle, setRoomTitle] = useState('');
+	const [roomDesc, setRoomDesc] = useState('');
 
-	const handleSubmit = event => {
+	const handleSubmit = async event => {
 		event.preventDefault();
-		console.log('roomName: ', roomName);
-		history.push('/');
-		dispatch(createRooms(roomName));
+		const room = await dispatch(
+			createRoom({ title: roomTitle, description: roomDesc, hostId: user.id })
+		);
+		history.push(`/rooms/${room.id}`);
 	};
 
 	return (
@@ -24,11 +28,19 @@ const CreateRoom = () => {
 				<br />
 				<TextField
 					id="outlined-basic"
-					label="RoomName"
+					label="RoomTitle"
 					variant="outlined"
-					value={roomName}
-					onChange={e => setRoomName(e.target.value)}
+					value={roomTitle}
+					onChange={e => setRoomTitle(e.target.value)}
 				/>
+				<TextField
+					id="outlined-basic"
+					label="RoomDesc"
+					variant="outlined"
+					value={roomDesc}
+					onChange={e => setRoomDesc(e.target.value)}
+				/>
+				<Button type="submit">Submit</Button>
 			</form>
 		</div>
 	);

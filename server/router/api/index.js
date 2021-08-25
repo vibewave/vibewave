@@ -5,6 +5,9 @@ router.use('/user', require('./routes/user'));
 ...
 */
 
+router.use('/users', require('./users'));
+router.use('/rooms', require('./rooms'));
+
 // ERROR HANDLER
 router.use((req, res, next) => {
 	const err = new Error('404: Not Found');
