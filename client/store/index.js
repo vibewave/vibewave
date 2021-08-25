@@ -4,9 +4,10 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 // import auth from './auth'
 import rooms from './rooms';
+import spotifyAuth from './spotifyAuth';
 
 // const reducer = combineReducers({ auth })
-const reducer = combineReducers({ rooms });
+const reducer = combineReducers({ rooms, spotifyAuth });
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
