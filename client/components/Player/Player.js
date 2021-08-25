@@ -14,27 +14,22 @@ export default function Player() {
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
 	const dispatch = useDispatch();
-	const trackUri = 'https://open.spotify.com/track/2gMXnyrvIjhVBUZwvLZDMP?si=c4fbfc627986400c';
+	const trackUri = 'spotify:track:2gMXnyrvIjhVBUZwvLZDMP';
 
 	const [play, setPlay] = useState(false);
 
 	useEffect(() => {
 		dispatch(spotifyAuthenticate(authCode));
-	}, [authCode]);
-
-	console.log(accessToken);
+	}, []);
 
 	useEffect(() => {
 		if (!accessToken) return;
-		console.log('accessToken: ', accessToken);
 		spotifyApi.setAccessToken(accessToken);
 	}, [accessToken]);
 
-	// useEffect(() => {
-	// 	setPlay(true);
-	// }, [trackUri]);
-
 	return (
+		<>
+		{accessToken &&
 		<SpotifyPlayer
 			token={accessToken}
 			showSaveIcon
@@ -43,6 +38,7 @@ export default function Player() {
 			}}
 			play={play}
 			uris={trackUri ? [trackUri] : []}
-		/>
+		/>}
+		</>
 	);
 }

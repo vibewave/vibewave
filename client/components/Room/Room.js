@@ -10,7 +10,6 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 export default function Room() {
-	// console.log({authCode});
 	const classes = useStyles();
 
 	const [isHost, setIsHost] = useState(false);

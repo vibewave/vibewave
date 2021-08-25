@@ -24,13 +24,13 @@ export const spotifyAuthenticate = authCode => {
 			});
 			window.localStorage.setItem(
 				ACCESS_TOKEN,
-				JSON.stringify(data.accessToken)
+				data.accessToken
 			);
 			window.localStorage.setItem(
 				REFRESH_TOKEN,
-				JSON.stringify(data.refreshToken)
+				data.refreshToken
 			);
-			window.localStorage.setItem(EXPIRES_IN, JSON.stringify(data.expiresIn));
+			window.localStorage.setItem(EXPIRES_IN, data.expiresIn);
 
 			console.log(window.localStorage.getItem(ACCESS_TOKEN));
 			console.log(window.localStorage.getItem(REFRESH_TOKEN));
@@ -50,16 +50,7 @@ export const spotifyAuthenticate = authCode => {
 		}
 	};
 };
-const initialState = {};
 
-export default (state = initialState, action) => {
-	switch (action.type) {
-		case SET_SPOTIFY_AUTH:
-			return action.spotifyAuth;
-		default:
-			return state;
-	}
-};
 //   const reAuthenticate = async () => {
 //     try {
 //       const { data }  = await axios.post(`http://localhost:3032/spotify/refresh`, {refreshToken});
@@ -71,4 +62,14 @@ export default (state = initialState, action) => {
 //     }
 //   }
 
-//   return accessToken;
+
+const initialState = {};
+
+export default (state = initialState, action) => {
+	switch (action.type) {
+		case SET_SPOTIFY_AUTH:
+			return action.spotifyAuth;
+		default:
+			return state;
+	}
+};
