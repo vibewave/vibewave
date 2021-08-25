@@ -9,9 +9,6 @@ const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
 });
 
-const authCode =
-	new URLSearchParams(window.location.search).get('code') ?? '';
-
 export default function Room() {
 	const classes = useStyles();
 
@@ -63,7 +60,7 @@ export default function Room() {
 						<Grid item xs={2} className={classes.roomInfoDiv}></Grid>
 						<Grid item xs={8} className={classes.mainArea}></Grid>
 						<Grid item xs={2} className={classes.playerDiv}>
-							{/* <Player /> */}
+							<Player />
 						</Grid>
 					</Grid>
 				</Grid>

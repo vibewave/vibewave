@@ -26,7 +26,7 @@ const Routes = () => {
 	}, [auth]);
 
 	return (
-		<div>
+		<>
 			{isLoggedIn ? (
 				<Switch>
 					<Route path="/spotify-login">
@@ -62,7 +62,7 @@ const Routes = () => {
 					</Route>
 				</Switch>
 			)}
-		</div>
+		</>
 	);
 };
 

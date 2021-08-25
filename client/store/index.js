@@ -5,9 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import room from './room';
 import auth from './auth';
 import allRooms from './allRooms';
+import spotifyAuth from './spotifyAuth';
 
 // const reducer = combineReducers({ auth })
-const reducer = combineReducers({ auth, room, allRooms });
+const reducer = combineReducers({ auth, room, allRooms, spotifyAuth });
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
