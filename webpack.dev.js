@@ -3,7 +3,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const appDir = fs.realpathSync(process.cwd());
-const expressServerPORT = process.env.PORT ?? 8083; // Make sure the manual port number = port number set in server/server.js
+const expressServerPORT = process.env.PORT ?? 8086; // Make sure the manual port number = port number set in server/server.js
 
 module.exports = merge(common, {
   mode: 'development',
@@ -24,7 +24,15 @@ module.exports = merge(common, {
       '/api/': {
         target: `http://localhost:${expressServerPORT}`,
         secure: false
-      }
+      },
+      '/auth/': {
+        target: `http://localhost:${expressServerPORT}`,
+        secure: false
+      },
+      '/spotify/': {
+        target: `http://localhost:8086`,
+        secure: false
+      },
     }
   },
   output: {

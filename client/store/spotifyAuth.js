@@ -10,17 +10,17 @@ const SET_SPOTIFY_AUTH = 'SET_SPOTIFY_AUTH';
 //Action Creators
 
 const setSpotifyAuth = spotifyAuth => {
-	({
+	return {
 		type: SET_SPOTIFY_AUTH,
 		spotifyAuth,
-	});
+	};
 };
 
-export const spotifyAuthenticate = async authCode => {
+export const spotifyAuthenticate = authCode => {
 	return async dispatch => {
 		try {
-			const { data } = await axios.post(`http://localhost:3032/spotify/login`, {
-				authCode,
+			const { data } = await axios.post(`/spotify/login`, {
+				code: authCode,
 			});
 			window.localStorage.setItem(
 				ACCESS_TOKEN,
@@ -31,6 +31,11 @@ export const spotifyAuthenticate = async authCode => {
 				JSON.stringify(data.refreshToken)
 			);
 			window.localStorage.setItem(EXPIRES_IN, JSON.stringify(data.expiresIn));
+
+			console.log(window.localStorage.getItem(ACCESS_TOKEN));
+			console.log(window.localStorage.getItem(REFRESH_TOKEN));
+			console.log(window.localStorage.getItem(EXPIRES_IN));
+
 			dispatch(
 				setSpotifyAuth({
 					accessToken: window.localStorage.getItem(ACCESS_TOKEN),
@@ -38,9 +43,10 @@ export const spotifyAuthenticate = async authCode => {
 					expiresIn: window.localStorage.getItem(EXPIRES_IN),
 				})
 			);
-			window.history.pushState({}, '', '/');
-		} catch {
-			window.location.href = '/';
+			// window.history.pushState({}, '', '/');
+		} catch (err) {
+			// window.location.href = '/';
+			console.log(err);
 		}
 	};
 };

@@ -3,16 +3,33 @@ const express = require('express');
 const router = express.Router();
 const { models: { User }} = require('../../db');
 const changeErrStatus = require('../../utils/changeErrStatus');
+const {
+  REDIRECT_URI,
+  CLIENT_ID,
+  CLIENT_SECRET
+} = process.env;
 module.exports = router;
+
+console.log('this is spotify route...')
+router.get('/', (req, res, next) => {
+  console.log('you have reached spotify route');
+  try {
+    res.send('you have reached spotify route');
+  }
+  catch (err) {
+    next(err);
+  }
+});
 
 // POST /spotify/login
 router.post('/login', async (req, res, next) => {
+  console.log('this is spotify login route...')
   try {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
-      redirectUri: process.env.REDIRECT_URI,
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
+      redirectUri: REDIRECT_URI,
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
     });
 
     const { body } = await spotifyApi.authorizationCodeGrant(code);
@@ -36,9 +53,9 @@ router.post('/refresh', async (req, res, next) => {
   try {
     const refreshToken = req.body.refreshToken
     const spotifyApi = new SpotifyWebApi({
-      redirectUri: process.env.REDIRECT_URI,
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
+      redirectUri: REDIRECT_URI,
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
       refreshToken,
     });
 
