@@ -11,7 +11,7 @@ console.log('Project root directory: ', appDir);
 // MIDDLEWARES
 app.use(logger); // logging
 app.use(express.json()); // body-parsing
-app.use(express.urlencoded({}));
+app.use(express.urlencoded({ extended: false }));
 
 // STATIC-FILE SERVE
 app.use(express.static(path.resolve(appDir, 'assets')));
@@ -26,20 +26,31 @@ app.use('/spotify', require('./router/spotify'));
 // ...
 // */
 
-app.get('/', async (req, res, next) => {
-	try {
-		res.sendFile(path.join(appDir, 'dist/index.html'));
-	} catch (err) {
-		next(err);
-	}
-});
+// app.get('/', async (req, res, next) => {
+// 	try {
+// 		res.sendFile(path.join(appDir, 'dist/index.html'));
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
+
+// // FALLBACK HANDLER
+// app.get('*', async (req, res, next) => {
+// 	try {
+// 		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
 
 // FALLBACK HANDLER
-app.get('*', async (req, res, next) => {
-	try {
+app.get('*', (req, res) => {
+	const indexHtmlPath = path.resolve(appDir, 'dist/index.html');
+	if (indexHtmlPath) {
+		res.sendFile(indexHtmlPath);
+	} else {
 		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
-	} catch (err) {
-		next(err);
+		// res.send(`<main>Fallback HTML</main>`);
 	}
 });
 
