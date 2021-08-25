@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
-import history from '../../history';
+// import history from '../../history';
 import { createRooms } from '../../store/rooms';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const CreateRoom = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const [roomName, setRoomName] = useState('');
 
-	const handleSubmit = (event) => {
+	const handleSubmit = event => {
 		event.preventDefault();
 		console.log('roomName: ', roomName);
 		history.push('/');
