@@ -26,20 +26,31 @@ app.use('/spotify', require('./router/spotify'));
 // ...
 // */
 
-app.get('/', async (req, res, next) => {
-	try {
-		res.sendFile(path.join(appDir, 'dist/index.html'));
-	} catch (err) {
-		next(err);
-	}
-});
+// app.get('/', async (req, res, next) => {
+// 	try {
+// 		res.sendFile(path.join(appDir, 'dist/index.html'));
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
+
+// // FALLBACK HANDLER
+// app.get('*', async (req, res, next) => {
+// 	try {
+// 		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
+// 	} catch (err) {
+// 		next(err);
+// 	}
+// });
 
 // FALLBACK HANDLER
-app.get('*', async (req, res, next) => {
-	try {
+app.get('*', (req, res) => {
+	const indexHtmlPath = path.resolve(appDir, 'dist/index.html');
+	if (indexHtmlPath) {
+		res.sendFile(indexHtmlPath);
+	} else {
 		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
-	} catch (err) {
-		next(err);
+		// res.send(`<main>Fallback HTML</main>`);
 	}
 });
 
