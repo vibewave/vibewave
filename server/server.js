@@ -8,11 +8,8 @@ const { db } = require('./db');
 const startServer = async () => {
 	// START EXPRESS SERVER
 	try {
-		if (process.env.NODE_ENV === 'production') {
-			await db.sync();
-		} else {
-			await db.sync({ force: true });
-		}
+		await db.sync();
+
 		const server = app.listen(PORT, () => {
 			console.log(`Express Server listening at http://${HOST}:${PORT}\n...`);
 		});
