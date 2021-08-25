@@ -1,16 +1,25 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core';
+import { fetchRooms } from '../../store';
 
 const AllRooms = () => {
 	const rooms = useSelector(state => {
-		return state.rooms;
+		return state.allRooms;
 	});
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchRooms());
+	}, []);
 
 	return (
 		<div>
-			{rooms.map((room) => (
-				<div key={room}>{room}</div>
+			{rooms.map(room => (
+				<Grid key={room.id}>
+					<div>{room.title}</div>
+				</Grid>
 			))}
 		</div>
 	);
