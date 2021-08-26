@@ -36,6 +36,12 @@ export const spotifyAuthenticate = authCode => {
 			console.log(window.localStorage.getItem(REFRESH_TOKEN));
 			console.log(window.localStorage.getItem(EXPIRES_IN));
 
+			// window.localStorage.setItem('spotifyAuthCode', 'authenticated');
+			// console.log('authCode: ', window.localStorage.getItem('spotifyAuthCode'));
+
+			window.localStorage.removeItem('spotifyAuthCode');
+			window.localStorage.setItem('authWithSpotify', 'true');
+
 			dispatch(
 				setSpotifyAuth({
 					accessToken: window.localStorage.getItem(ACCESS_TOKEN),
@@ -43,27 +49,32 @@ export const spotifyAuthenticate = authCode => {
 					expiresIn: window.localStorage.getItem(EXPIRES_IN),
 				})
 			);
-			// window.history.pushState({}, '', '/');
 		} catch (err) {
-			// window.location.href = '/';
 			console.log(err);
 		}
 	};
 };
 
-//   const reAuthenticate = async () => {
-//     try {
-//       const { data }  = await axios.post(`http://localhost:3032/spotify/refresh`, {refreshToken});
-//       setAccessToken(data.accessToken);
-//       setExpiresIn(data.expiresIn);
-//     }
-//     catch {
-//       window.location.href = '/';
-//     }
-//   }
+// export const reAuthenticate = authCode => {
+// 	return async dispatch => {
+// 		try {
+// 			const refreshToken = window.localStorage.getItem(REFRESH_TOKEN);
+// 			const { data }  = await axios.post(`http://localhost:3032/spotify/refresh`, {refreshToken});
+// 			setAccessToken(data.accessToken);
+// 			setExpiresIn(data.expiresIn);
+// 		}
+// 		catch {
+// 			window.location.href = '/';
+// 		}
+// 	}
+// }
 
 
-const initialState = {};
+const initialState = {
+	accessToken: window.localStorage.getItem(ACCESS_TOKEN),
+	refreshToken: window.localStorage.getItem(ACCESS_TOKEN),
+	expiresIn: window.localStorage.getItem(ACCESS_TOKEN)
+};
 
 export default (state = initialState, action) => {
 	switch (action.type) {

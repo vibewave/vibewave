@@ -1,13 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Routes from './Routes';
 import Navbar from './components/Navbar/Navbar';
 
-const authCode =
-	new URLSearchParams(window.location.search).get('code') ?? '';
-if (authCode) {
-	window.localStorage.setItem('spotifyAuthCode', authCode);
+const spotifyAuthCode = new URLSearchParams(window.location.search).get('code');
+if (spotifyAuthCode) {
+	window.localStorage.setItem('spotifyAuthCode', spotifyAuthCode);
 }
-console.log(authCode);
+
+const spotifyAuthError = new URLSearchParams(window.location.search).get('error');
+if (spotifyAuthError) {
+	window.alert(`Spotify Authentication Failed. Your Spotify login credentials may have expired. Please login with Spotify again`);
+	const history = useHistory();
+	history.push('/spotify-login');
+}
 
 const App = () => {
 	return (

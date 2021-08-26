@@ -7,10 +7,10 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		border: '1px solid blue',
+		backgroundColor: '#151A1C'
 	},
 	spotifyLoginBtn: {
-		backgroundColor: '#37b954',
+		backgroundColor: '#1DB954',
 		color: '#fff',
 		cursor: 'pointer',
 	},
