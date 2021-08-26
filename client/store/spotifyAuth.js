@@ -32,12 +32,12 @@ export const spotifyAuthenticate = authCode => {
 			);
 			window.localStorage.setItem(EXPIRES_IN, data.expiresIn);
 
-			console.log(window.localStorage.getItem(ACCESS_TOKEN));
-			console.log(window.localStorage.getItem(REFRESH_TOKEN));
-			console.log(window.localStorage.getItem(EXPIRES_IN));
+			// console.log(window.localStorage.getItem(ACCESS_TOKEN));
+			// console.log(window.localStorage.getItem(REFRESH_TOKEN));
+			// console.log(window.localStorage.getItem(EXPIRES_IN));
 
 			window.localStorage.setItem('spotifyAuthCode', 'authenticated');
-			console.log('authCode: ', window.localStorage.getItem('spotifyAuthCode'));
+			// console.log('authCode: ', window.localStorage.getItem('spotifyAuthCode'));
 
 			// window.localStorage.removeItem('spotifyAuthCode');
 			// window.localStorage.setItem('authWithSpotify', 'true');

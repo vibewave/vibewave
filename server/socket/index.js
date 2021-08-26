@@ -4,6 +4,7 @@ let users = [];
 
 const startSocket = (io) => {
   let counter = 0;
+  const hardValue = 5;
 
   io.on('connection', (socket) => {
     console.log(socket.id);
@@ -26,18 +27,18 @@ const startSocket = (io) => {
     socket.on('song-started', () => {
       counter = 0;
       console.log(`song started by ${socket.id}`)
-      setInterval(() => {
-        counter++
+      const counterInterval = setInterval(() => {
+        counter += 100
       }, 100);
       console.log(counter);
     });
+
 
     socket.on('join-room', () => {
       // socket.join(room);
       console.log(`${socket.id} joined the room.`);
       console.log(`Counter from server: ${counter}`);
-      socket.emit('time-position', counter * 10);
-
+      socket.emit('time-position', counter);
     });
 
     socket.on('disconnect', ()=> {
