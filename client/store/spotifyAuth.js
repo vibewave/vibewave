@@ -36,8 +36,11 @@ export const spotifyAuthenticate = authCode => {
 			console.log(window.localStorage.getItem(REFRESH_TOKEN));
 			console.log(window.localStorage.getItem(EXPIRES_IN));
 
-			window.localStorage.setItem('spotifyAuthCode', 'authenticated');
-			console.log('authCode: ', window.localStorage.getItem('spotifyAuthCode'));
+			// window.localStorage.setItem('spotifyAuthCode', 'authenticated');
+			// console.log('authCode: ', window.localStorage.getItem('spotifyAuthCode'));
+
+			window.localStorage.removeItem('spotifyAuthCode');
+			window.localStorage.setItem('authWithSpotify', 'true');
 
 			dispatch(
 				setSpotifyAuth({

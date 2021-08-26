@@ -60,7 +60,7 @@ const Player = (props) => {
 				if (state.error) setPlayerError(state.error);
 			}}
 			play={isPlaying}
-			// autoPlay={true}
+			autoPlay={true}
 			uris={trackUri ? [trackUri] : []}
 			styles={{
 				activeColor: '#1DB954',
