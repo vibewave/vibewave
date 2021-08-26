@@ -10,20 +10,8 @@ const {
 } = process.env;
 module.exports = router;
 
-console.log('this is spotify route...')
-router.get('/', (req, res, next) => {
-  console.log('you have reached spotify route');
-  try {
-    res.send('you have reached spotify route');
-  }
-  catch (err) {
-    next(err);
-  }
-});
-
 // POST /spotify/login
 router.post('/login', async (req, res, next) => {
-  console.log('this is spotify login route...')
   try {
     const code = req.body.code
     const spotifyApi = new SpotifyWebApi({
