@@ -23,4 +23,14 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+// GET /api/rooms/:id return a specific room
+router.get('/:id', async (req, res, next) => {
+	try {
+		const room = await Room.findByPk(req.params.id);
+		res.send(room);
+	} catch (err) {
+		next(err);
+	}
+});
+
 module.exports = router;

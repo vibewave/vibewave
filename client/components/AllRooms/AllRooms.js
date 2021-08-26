@@ -19,7 +19,7 @@ const AllRooms = () => {
 		<div>
 			{rooms.map(room => (
 				<Grid key={room.id}>
-					<Link to ={`/rooms/${room.id}`} onClick={}>
+					<Link to={`/rooms/${room.id}`}>
 						<div>{room.title}</div>
 					</Link>
 				</Grid>
