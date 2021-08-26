@@ -14,9 +14,9 @@ const CreateRoom = () => {
 	const [roomTitle, setRoomTitle] = useState('');
 	const [roomDesc, setRoomDesc] = useState('');
 
-	const handleSubmit = async event => {
+	const handleSubmit = event => {
 		event.preventDefault();
-		const room = await dispatch(
+		const room = dispatch(
 			createRoom({ title: roomTitle, description: roomDesc, hostId: user.id })
 		);
 		history.push(`/rooms/${room.id}`);
