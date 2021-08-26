@@ -7,10 +7,11 @@ import { spotifyAuthenticate } from '../../store/spotifyAuth';
 const Home = () => {
 	const dispatch = useDispatch();
 	const authCode = window.localStorage.getItem('spotifyAuthCode');
-	const authWithSpotify = window.localStorage.getItem('authWithSpotify');
+	// const authWithSpotify = window.localStorage.getItem('authWithSpotify');
 
 	useEffect(() => {
-		if (authCode && authWithSpotify !== 'true') {
+		// if (authCode && authWithSpotify !== 'true') {
+		if (authCode && authCode !== 'authenticated') {
 			dispatch(spotifyAuthenticate(authCode));
 		}
 	}, [authCode]);
