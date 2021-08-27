@@ -29,7 +29,7 @@ const Room = props => {
 
 	useEffect(() => {
 		if (room.id) {
-			joinRoom();
+			// joinRoom();
 			if (user.id === room.hostId) {
 				setIsHost(true);
 			} else {
@@ -47,9 +47,9 @@ const Room = props => {
 		socket.emit('song-started', true);
 	};
 
-	const joinRoom = () => {
-		socket.emit('join-room');
-	};
+	// const joinRoom = () => {
+	// 	socket.emit('join-room');
+	// };
 
 	const getTimePosition = () => {
 		socket.on('time-position', counter => {
@@ -74,7 +74,7 @@ const Room = props => {
 							{isHost && 'I am the host'}
 							{!isHost && 'I am not the host'}
 							<button onClick={startSong}>Start Song</button>
-							<button onClick={joinRoom}>Join Room</button>
+							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}></div>
