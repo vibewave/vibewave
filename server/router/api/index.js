@@ -7,6 +7,7 @@ router.use('/user', require('./routes/user'));
 
 router.use('/users', require('./users'));
 router.use('/rooms', require('./rooms'));
+router.use('/tracks', require('./tracks'));
 
 // ERROR HANDLER
 router.use((req, res, next) => {
