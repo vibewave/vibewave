@@ -8,21 +8,34 @@ const useStyles = makeStyles(theme => ({
 		marginRight: '-0.5em',
 		display: 'flex',
 		justifyContent: 'space-between',
+		alignItems: 'center',
+		padding: '0.8em',
 	},
 
 	logoContainer: {
 		color: 'white',
-		padding: '0.2em',
+		alignSelf: 'center',
+		marginLeft: '0.5em',
 	},
 
 	createRoomContainer: {
 		color: 'white',
-		padding: '0.2em',
-		marginRight: '0.2em',
+		marginRight: '1.0em',
 	},
 
 	createRoomButton: {
 		border: 'solid 0.2em white',
+	},
+
+	menuButtonAndUsername: {
+		display: 'flex',
+		marginRight: '0.5em',
+		alignItems: 'center',
+	},
+
+	userContainer: {
+		paddingRight: '0.5em',
+		color: 'white',
 	},
 }));
 

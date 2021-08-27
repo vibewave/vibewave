@@ -1,45 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {
-	Button,
-	Menu,
-	MenuItem,
-	ListItemText,
-	withStyles,
-} from '@material-ui/core';
+import { Button, ListItemText, ButtonBase } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store';
 import { useHistory } from 'react-router-dom';
-
-const StyledMenu = withStyles({
-	paper: {
-		border: '1px solid #d3d4d5',
-	},
-})(props => (
-	<Menu
-		elevation={0}
-		getContentAnchorEl={null}
-		anchorOrigin={{
-			vertical: 'bottom',
-			horizontal: 'center',
-		}}
-		transformOrigin={{
-			vertical: 'top',
-			horizontal: 'center',
-		}}
-		{...props}
-	/>
-));
-
-const StyledMenuItem = withStyles(theme => ({
-	root: {
-		'&:focus': {
-			backgroundColor: theme.palette.primary.main,
-			'& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-				color: theme.palette.common.white,
-			},
-		},
-	},
-}))(MenuItem);
+import { StyledMenu, StyledMenuItem } from './NavbarMenuStyle';
 
 const NavbarMenu = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -50,7 +15,6 @@ const NavbarMenu = () => {
 
 	useEffect(async () => {
 		setIsLoggedIn(!!auth.id);
-		console.log(isLoggedIn);
 	}, [auth]);
 
 	const handleClick = event => {
@@ -66,33 +30,52 @@ const NavbarMenu = () => {
 		history.push('/login');
 	};
 
+	const handleCreateRoom = async () => {
+		history.push('/login');
+	};
+
 	return (
 		<div>
-			<Button
+			<ButtonBase
 				aria-controls="customized-menu"
 				aria-haspopup="true"
 				variant="contained"
 				color="primary"
 				onClick={handleClick}
 			>
-				Open Menu
-			</Button>
-			<StyledMenu
-				id="customized-menu"
-				anchorEl={anchorEl}
-				keepMounted
-				open={Boolean(anchorEl)}
-				onClose={handleClose}
-			>
-				<StyledMenuItem>
-					<ListItemText
-						primary={isLoggedIn ? `Welcome ${auth.username}` : 'Login'}
-					/>
-				</StyledMenuItem>
-				<StyledMenuItem>
-					<ListItemText onClick={handleLogout} primary="Logout" />
-				</StyledMenuItem>
-			</StyledMenu>
+				<MenuIcon style={{ color: '#fff' }} fontSize="large" />
+			</ButtonBase>
+			{isLoggedIn ? (
+				<StyledMenu
+					id="customized-menu"
+					anchorEl={anchorEl}
+					keepMounted
+					open={Boolean(anchorEl)}
+					onClose={handleClose}
+				>
+					<StyledMenuItem>
+						<ListItemText
+							onClick={() => history.push('/createroom')}
+							primary="Create Room"
+						/>
+					</StyledMenuItem>
+					<StyledMenuItem>
+						<ListItemText onClick={handleLogout} primary="Logout" />
+					</StyledMenuItem>
+				</StyledMenu>
+			) : (
+				<StyledMenu
+					id="customized-menu"
+					anchorEl={anchorEl}
+					keepMounted
+					open={Boolean(anchorEl)}
+					onClose={handleClose}
+				>
+					<StyledMenuItem>
+						<ListItemText primary={'About'} />
+					</StyledMenuItem>
+				</StyledMenu>
+			)}
 		</div>
 	);
 };

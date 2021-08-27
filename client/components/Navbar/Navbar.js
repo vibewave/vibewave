@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Typography, Button, Grid } from '@material-ui/core';
 import useStyles from './NavbarStyle';
@@ -6,19 +7,27 @@ import NavbarMenu from '../NavbarMenu/NavbarMenu';
 
 const Navbar = () => {
 	const classes = useStyles();
+	const auth = useSelector(state => state.auth);
+	const dispatch = useDispatch();
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	useEffect(async () => {
+		setIsLoggedIn(!!auth.id);
+	}, [auth]);
+
 	return (
 		<div id="navbar-container" className={classes.navBarContainer}>
-			<NavbarMenu />
 			<Typography variant="h4" className={classes.logoContainer}>
 				Vibewave
 			</Typography>
-			<Typography variant="h4" className={classes.createRoomContainer}>
-				<Link to="/createroom">
-					<Button variant="contained" className={classes.createRoomButton}>
-						Create Room
-					</Button>
-				</Link>
-			</Typography>
+			<div className={classes.menuButtonAndUsername}>
+				<Typography variant="h5" className={classes.userContainer}>
+					{auth.username}
+				</Typography>
+				<div className={classes.menuButton}>
+					<NavbarMenu />
+				</div>
+			</div>
 		</div>
 	);
 };

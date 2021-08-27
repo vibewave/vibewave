@@ -57,8 +57,7 @@ export default function Signup() {
 	const handleSubmit = async evt => {
 		evt.preventDefault();
 		const method = 'signup';
-		// const password = evt.target.password.value;
-		// const email = evt.target.email.value;
+
 		const userInfo = {
 			email: evt.target.email.value,
 			password: evt.target.password.value,
@@ -112,10 +111,6 @@ export default function Signup() {
 						id="password"
 						autoComplete="current-password"
 					/>
-					{/* <FormControlLabel
-						control={<Checkbox value="remember" color="primary" />}
-						label="Remember me"
-					/> */}
 					<Button
 						type="submit"
 						fullWidth
@@ -126,16 +121,7 @@ export default function Signup() {
 						Sign Up
 					</Button>
 					<Grid container>
-						<Grid item xs>
-							{/* <Link href="#" variant="body2">
-								Forgot password?
-							</Link> */}
-						</Grid>
-						{/* <Grid item>
-							<Link href="#" variant="body2">
-								{"Don't have an account? Sign Up"}
-							</Link>
-						</Grid> */}
+						<Grid item xs></Grid>
 					</Grid>
 				</form>
 			</div>
