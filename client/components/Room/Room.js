@@ -7,6 +7,7 @@ import Player from '../Player/Player';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRoom } from '../../store';
 import { useParams } from 'react-router-dom';
+// import { currentTimePosition } from '../../socket/socket';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -21,20 +22,14 @@ const Room = props => {
 
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
-	const [timeOfTimePositionFetch, setTimeOfTimePositionFetch] = useState(
-		Date.now()
-	);
 
 	useEffect(() => {
 		dispatch(getRoom(id));
 	}, []);
 
-	useEffect(async () => {
-		console.log('user is ', user.id);
-		console.log('room is ', room);
-		console.log('id is ', id);
+	useEffect(() => {
 		if (room.id) {
-			socket.emit('join-room');
+			// joinRoom();
 			if (user.id === room.hostId) {
 				setIsHost(true);
 			} else {
@@ -43,24 +38,27 @@ const Room = props => {
 		}
 	}, [room.id]);
 
-	console.log('isHost is ', isHost);
+	useEffect(() => {
+		getTimePosition();
+	}, []);
 
 	const startSong = () => {
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};
 
-	const joinRoom = () => {
-		console.log('join room button clicked.');
-		socket.emit('join-room');
-	};
+	// const joinRoom = () => {
+	// 	socket.emit('join-room');
+	// };
 
-	socket.on('time-position', counter => {
-		console.log('inside time-position client for user ', socket.id);
-		console.log(`Current time: ${counter}`);
-		setCurrentTimePosition(counter);
-		setTimeOfTimePositionFetch(Date.now());
-	});
+	const getTimePosition = () => {
+		socket.on('time-position', counter => {
+			console.log('inside time-position client for user ', socket.id);
+			console.log(`Current time: ${counter}`);
+			setCurrentTimePosition(counter);
+		});
+	}
+
 
 	return (
 		<Container
@@ -76,7 +74,7 @@ const Room = props => {
 							{isHost && 'I am the host'}
 							{!isHost && 'I am not the host'}
 							<button onClick={startSong}>Start Song</button>
-							<button onClick={joinRoom}>Join Room</button>
+							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}></div>
@@ -84,8 +82,6 @@ const Room = props => {
 							<Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-								timeOfTimePositionFetch={timeOfTimePositionFetch}
-								// startSong={startSong}
 							/>
 						</div>
 					</div>
