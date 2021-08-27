@@ -22,6 +22,7 @@ node_modules
 # ***********************************************************
 /assets/*
 !/assets/vibewave-logo.png
+!/assets/icons/
 !/assets/favicon/
 /assets/favicon/*
 !/assets/favicon/favicon.ico

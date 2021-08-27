@@ -21,18 +21,18 @@ app.use('/spotify', require('./router/spotify'));
 // ...
 // */
 
+app.get('/', async (req, res, next) => {
+	try {
+		res.sendFile(path.join(appDir, 'dist/index.html'));
+	} catch (err) {
+		next(err);
+	}
+});
+
 // STATIC-FILE SERVE
 app.use(express.static(path.resolve(appDir, 'assets')));
 app.use(express.static(path.resolve(appDir, 'dist')));
 app.use(express.static(path.resolve(appDir, 'src')));
-
-// app.get('/', async (req, res, next) => {
-// 	try {
-// 		res.sendFile(path.join(appDir, 'dist/index.html'));
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
 
 // // FALLBACK HANDLER
 // app.get('*', async (req, res, next) => {
