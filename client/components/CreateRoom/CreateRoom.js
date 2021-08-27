@@ -14,11 +14,15 @@ const CreateRoom = () => {
 	const [roomTitle, setRoomTitle] = useState('');
 	const [roomDesc, setRoomDesc] = useState('');
 
-	const handleSubmit = event => {
+	const handleSubmit = async event => {
 		event.preventDefault();
-		const room = dispatch(
+		const room = await dispatch(
 			createRoom({ title: roomTitle, description: roomDesc, hostId: user.id })
 		);
+		// Promise.resolve(room).then((roomObject) => {
+		// 	history.push(`/rooms/${roomObject.id}`)
+		// });
+		console.log('this is room: ', room);
 		history.push(`/rooms/${room.id}`);
 	};
 
