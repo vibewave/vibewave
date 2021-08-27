@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getRoom } from '../../store';
 import { useParams } from 'react-router-dom';
 import TrackSearch from '../TrackSearch/TrackSearch';
+import TrackQueue from '../TrackQueue/TrackQueue';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -81,6 +82,7 @@ const Room = props => {
 							<button onClick={joinRoom}>Join Room</button>
 							<div>{currentTimePosition}</div>
 						</div>
+						<TrackQueue />
 						<div className={classes.mainArea}></div>
 						<div className={classes.playerDiv}>
 							<Player

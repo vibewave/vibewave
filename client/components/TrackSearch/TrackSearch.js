@@ -5,15 +5,13 @@ import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
 import { addTrack } from '../../store/track';
 import { useParams } from 'react-router-dom';
 
-const TrackSearch = ({ spotifyApi }, props) => {
+const TrackSearch = ({ spotifyApi }) => {
 	const [searchSongName, setSearchSongName] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 	const [playingTrack, setPlayingTrack] = useState('');
 	const accessToken = window.localStorage.getItem('accessToken');
 	const dispatch = useDispatch();
 	const { id } = useParams();
-
-	console.log('roomId', id);
 
 	const chooseTrack = track => {
 		setPlayingTrack(track);
@@ -35,7 +33,6 @@ const TrackSearch = ({ spotifyApi }, props) => {
 			if (cancel) return;
 			setSearchResults(
 				res.body.tracks.items.map(track => {
-					console.log('track', track);
 					const smallestAlbumImage = track.album.images.reduce(
 						(smallest, image) => {
 							if (image.height < smallest.height) return image;

@@ -7,9 +7,17 @@ import auth from './auth';
 import allRooms from './allRooms';
 import spotifyAuth from './spotifyAuth';
 import track from './track';
+import trackQueue from './trackQueue';
 
 // const reducer = combineReducers({ auth })
-const reducer = combineReducers({ auth, room, allRooms, spotifyAuth, track });
+const reducer = combineReducers({
+	auth,
+	room,
+	allRooms,
+	spotifyAuth,
+	track,
+	trackQueue,
+});
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
