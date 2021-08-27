@@ -7,7 +7,7 @@ import Player from '../Player/Player';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRoom } from '../../store';
 import { useParams } from 'react-router-dom';
-import SongSearch from '../SongSearch/SongSearch';
+import TrackSearch from '../TrackSearch/TrackSearch';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -70,9 +70,7 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-			<SongSearch 
-				spotifyApi={spotifyApi}
-			/>
+			<TrackSearch spotifyApi={spotifyApi} />
 			<Grid container spacing={3} className={classes.mainGridContainer}>
 				<Grid item xs={9} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
