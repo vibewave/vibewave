@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-const AuthTest = () => {
-	return <div>Test</div>;
-};
+// const AuthTest = () => {
+// 	return <div>Test</div>;
+// };
 
-export default AuthTest;
+// export default AuthTest;
