@@ -33,6 +33,10 @@ module.exports = merge(common, {
 				target: `http://localhost:${expressServerPORT}`,
 				secure: false,
 			},
+			'/assets/': {
+				target: `http://localhost:${expressServerPORT}`,
+				secure: false,
+			},
 		},
 	},
 	output: {

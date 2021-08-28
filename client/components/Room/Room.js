@@ -58,8 +58,7 @@ const Room = props => {
 			console.log(`Current time: ${counter}`);
 			setCurrentTimePosition(counter);
 		});
-	}
-
+	};
 
 	return (
 		<Container
