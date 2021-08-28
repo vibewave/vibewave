@@ -27,10 +27,7 @@ const NavbarMenu = () => {
 
 	const handleLogout = async () => {
 		await dispatch(logout());
-		history.push('/login');
-	};
-
-	const handleCreateRoom = async () => {
+		handleClose();
 		history.push('/login');
 	};
 
@@ -72,7 +69,7 @@ const NavbarMenu = () => {
 					onClose={handleClose}
 				>
 					<StyledMenuItem>
-						<ListItemText primary={'About'} />
+						<ListItemText primary={'About Vibewave'} />
 					</StyledMenuItem>
 				</StyledMenu>
 			)}

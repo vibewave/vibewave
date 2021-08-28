@@ -55,14 +55,12 @@ export default function Login() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const handleSubmit = async evt => {
-		evt.preventDefault();
+	const handleSubmit = async e => {
+		e.preventDefault();
 		const method = 'login';
-		// const password = evt.target.password.value;
-		// const email = evt.target.email.value;
 		const userInfo = {
-			email: evt.target.email.value,
-			password: evt.target.password.value,
+			email: e.target.email.value,
+			password: e.target.password.value,
 		};
 		await dispatch(authenticate(method, userInfo));
 		history.push('/spotify-login');
@@ -114,14 +112,16 @@ export default function Login() {
 					>
 						Login
 					</Button>
-					<Grid container>
-						<Grid item xs>
-							{/* <Link href="#" variant="body2">
+					<Grid container justifyContent="center">
+						{/* <Grid item xs>
+							<Link href="#" variant="body2">
 								Forgot password?
-							</Link> */}
-						</Grid>
+							</Link>
+						</Grid> */}
 						<Grid item>
-							<Link href={'/signup'}>{"Don't have an account? Sign Up"}</Link>
+							<Link href={'/signup'}>
+								{"Don't have an account? Sign Up"}
+							</Link>
 						</Grid>
 					</Grid>
 				</form>

@@ -2,16 +2,13 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
 	roomContainer: {
+		margin: '0',
+		padding: '1em',
 		width: '100%',
-		height: '95%',
-		backgroundColor: '#151A1C',
-		color: '#fff'
+		height: '93%',
 	},
 	mainGridContainer: {
 		margin: '0',
-		height: '100%',
-	},
-	roomCenter: {
 		height: '100%',
 	},
 	roomCenterContainer: {
@@ -21,16 +18,13 @@ const useStyles = makeStyles(theme => ({
 		'justify-content': 'space-between',
 		'align-items': 'center'
 	},
-	roomRight: {
-		borderLeft: '1px solid white',
-	},
 	roomInfoDiv: {
-		width: '100%',
+		width: '90%',
 		height: '12%',
 		border: '1px solid #44494B',
 	},
 	mainArea: {
-		width: '100%',
+		width: '90%',
 		height: '80%',
 		backgroundColor: 'gray',
 		border: '1px solid #44494B',
@@ -39,6 +33,13 @@ const useStyles = makeStyles(theme => ({
 		width: '80%',
 		border: '1px solid #44494B',
 	},
+	roomRight: {
+		borderLeft: '1px solid white',
+	},
+	chatContainer: {
+		width: '100%',
+		height: '100%',
+	}
 }));
 
 export default useStyles;

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
 	spotifyLoginContainer: {
 		width: '100%',
-		height: '100%',
+		height: '90%',
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',

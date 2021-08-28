@@ -8,7 +8,6 @@ import NavbarMenu from '../NavbarMenu/NavbarMenu';
 const Navbar = () => {
 	const classes = useStyles();
 	const auth = useSelector(state => state.auth);
-	const dispatch = useDispatch();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(async () => {
@@ -21,9 +20,12 @@ const Navbar = () => {
 				Vibewave
 			</Typography>
 			<div className={classes.menuButtonAndUsername}>
+				{
+				isLoggedIn &&
 				<Typography variant="h5" className={classes.userContainer}>
 					{auth.username}
 				</Typography>
+				}
 				<div className={classes.menuButton}>
 					<NavbarMenu />
 				</div>

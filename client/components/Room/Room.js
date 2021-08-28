@@ -67,8 +67,7 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-			<TrackSearch spotifyApi={spotifyApi} />
-			<Grid container spacing={3} className={classes.mainGridContainer}>
+			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={9} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
@@ -77,9 +76,11 @@ const Room = props => {
 							<button onClick={startSong}>Start Song</button>
 							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
+							<TrackQueue />
 						</div>
-						<TrackQueue />
-						<div className={classes.mainArea}></div>
+						<div className={classes.mainArea}>
+							<TrackSearch spotifyApi={spotifyApi} />
+						</div>
 						<div className={classes.playerDiv}>
 							<Player
 								spotifyApi={spotifyApi}
@@ -88,7 +89,10 @@ const Room = props => {
 						</div>
 					</div>
 				</Grid>
-				<Grid item xs={3} className={classes.roomRight}></Grid>
+				<Grid item xs={3} className={classes.roomRight}>
+					<div className={classes.chatContainer}>
+					</div>
+				</Grid>
 			</Grid>
 		</Container>
 	);

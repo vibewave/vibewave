@@ -98,7 +98,6 @@ export default function Signup() {
 						label="Username"
 						name="username"
 						autoComplete="username"
-						autoFocus
 					/>
 					<TextField
 						variant="outlined"
@@ -120,8 +119,12 @@ export default function Signup() {
 					>
 						Sign Up
 					</Button>
-					<Grid container>
-						<Grid item xs></Grid>
+					<Grid container justifyContent="center">
+						<Grid item>
+							<Link href={'/login'}>
+								{"Already have an account? Login"}
+							</Link>
+						</Grid>
 					</Grid>
 				</form>
 			</div>
