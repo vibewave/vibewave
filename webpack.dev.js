@@ -33,11 +33,8 @@ module.exports = merge(common, {
 				target: `http://localhost:${expressServerPORT}`,
 				secure: false,
 			},
-			'/assets/': {
-				target: `http://localhost:${expressServerPORT}`,
-				secure: false,
-			},
 		},
+		publicPath: '/'
 	},
 	output: {
 		path: path.resolve(appDir, 'dist'),
