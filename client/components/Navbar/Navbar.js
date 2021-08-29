@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { Typography, Button, Grid } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import useStyles from './NavbarStyle';
 import NavbarMenu from '../NavbarMenu/NavbarMenu';
 
@@ -16,9 +15,9 @@ const Navbar = () => {
 
 	return (
 		<div id="navbar-container" className={classes.navBarContainer}>
-			<Typography variant="h4" className={classes.logoContainer}>
-				Vibewave
-			</Typography>
+			<div className={classes.logoContainer}>
+				<img src="/vibewave-logo-full.png" alt="vibewave logo" className={classes.logo}/>
+			</div>
 			<div className={classes.menuButtonAndUsername}>
 				{
 				isLoggedIn &&

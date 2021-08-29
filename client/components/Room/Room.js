@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { socket } from '../../socket/socket';
-import { Container, Grid, Button, Link } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import SpotifyWebApi from 'spotify-web-api-node';
 import useStyles from './RoomStyle';
-import Player from '../Player/Player';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRoom } from '../../store';
-import { useParams } from 'react-router-dom';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
+import Player from '../Player/Player';
+import { getRoom } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',

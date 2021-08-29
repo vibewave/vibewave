@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { socket } from '../../socket/socket';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { getRoom } from '../../store';
-import { useParams } from 'react-router-dom';
 
 const Player = (props) => {
 	const history = useHistory();
@@ -15,7 +14,6 @@ const Player = (props) => {
 		spotifyApi,
 		currentTimePosition,
 	} = props;
-
 
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.room);
@@ -55,12 +53,14 @@ const Player = (props) => {
 		return () => {};
 	}, [accessToken]);
 
+	// Seek player to particular time. Only run after the player is completely ready.
 	const browserAutoplayError = "Browser prevented autoplay due to lack of interaction";
 	const isPlayerReadyToSeek = isPlaying && (isReady === "READY" || (isReady === "ERROR" && playerError !== browserAutoplayError)) && accessToken && room?.id && !isHost && currentTimePosition > 0;
 
 	useEffect(() => {
 		console.log('isReady: ', isReady);
-		console.log('error is browser error: ', playerError === browserAutoplayError);
+		console.log('Error is browser autoplay error: ', playerError === browserAutoplayError);
+
 		if (isPlayerReadyToSeek) {
 			console.log('isReady: ', isReady);
 			console.log('seek useeffect running');
@@ -71,9 +71,9 @@ const Player = (props) => {
 		}
 	}, [isPlayerReadyToSeek]);
 
-	// Handle player errors.
-	// If 'Authentication failed' error, redirect user to re-login with Spotify.
-	// If other error, console.log(error).
+	/* Handle player errors.
+	- If 'Authentication failed' error, redirect user to re-login with Spotify.
+	- If other error, console.log(error) */
 	useEffect(() => {
 		if (playerError) {
 			console.log(playerError);

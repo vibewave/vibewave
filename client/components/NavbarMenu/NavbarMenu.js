@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, ListItemText, ButtonBase } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import ListItemText from '@material-ui/core/ListItemText';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import MenuIcon from '@material-ui/icons/Menu';
 import { StyledMenu, StyledMenuItem } from './NavbarMenuStyle';
+import { logout } from '../../store';
 
 const NavbarMenu = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -24,6 +25,11 @@ const NavbarMenu = () => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const handleCreateRoom = () => {
+		handleClose();
+		history.push('/createroom');
+	}
 
 	const handleLogout = async () => {
 		await dispatch(logout());
@@ -52,7 +58,7 @@ const NavbarMenu = () => {
 				>
 					<StyledMenuItem>
 						<ListItemText
-							onClick={() => history.push('/createroom')}
+							onClick={handleCreateRoom}
 							primary="Create Room"
 						/>
 					</StyledMenuItem>
