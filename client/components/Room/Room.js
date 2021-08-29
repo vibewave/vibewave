@@ -71,7 +71,9 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
+
 			<Grid container className={classes.mainGridContainer}>
+
 				<Grid item xs={9} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>

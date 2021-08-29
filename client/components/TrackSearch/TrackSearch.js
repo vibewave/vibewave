@@ -4,8 +4,10 @@ import { TextField } from '@material-ui/core';
 import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
 import { addTrack } from '../../store/track';
 import { useParams } from 'react-router-dom';
+import useStyles from './TrackSearchStyle';
 
 const TrackSearch = ({ spotifyApi }) => {
+	const classes = useStyles();
 	const [searchSongName, setSearchSongName] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 	const [playingTrack, setPlayingTrack] = useState('');
@@ -54,17 +56,18 @@ const TrackSearch = ({ spotifyApi }) => {
 	}, [searchSongName, accessToken]);
 
 	return (
-		<div>
+		<div className={classes.trackSearchContainer}>
 			<form>
 				<TextField
-					id="outlined-basic"
-					label="SongSearch"
+					className={classes.trackSearchInput}
+					inputProps={{ className: classes.trackSearchText }}
+					label="Search a song."
 					variant="outlined"
 					value={searchSongName}
 					onChange={e => setSearchSongName(e.target.value)}
 				></TextField>
 			</form>
-			<div className="songlist" style={{ overflow: 'auto' }}>
+			<div className={classes.songList}>
 				{searchResults.map(track => (
 					<TrackSearchResult
 						track={track}

@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 	mainArea: {
 		width: '90%',
 		height: '80%',
-		backgroundColor: 'gray',
 		border: '1px solid #44494B',
 	},
 	playerDiv: {
