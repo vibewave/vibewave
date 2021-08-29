@@ -16,7 +16,14 @@ export const fetchTracks = roomId => {
 	};
 };
 
-export default function (state = {}, action) {
+export const removeTrack = (trackId, roomId) => {
+	return async (dispatch) => {
+		await axios.delete(`/api/tracks/${trackId}`);
+		dispatch(fetchTracks(roomId));
+	}
+}
+
+export default function (state = [], action) {
 	switch (action.type) {
 		case FETCH_TRACKS:
 			return action.tracks;

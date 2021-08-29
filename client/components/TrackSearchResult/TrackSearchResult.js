@@ -1,5 +1,4 @@
 import React from 'react';
-import { classicNameResolver } from 'typescript';
 import useStyles from './TrackSearchResultStyle';
 
 const TrackSearchResult = ({ chooseTrack, track }) => {

@@ -11,11 +11,20 @@ const useStyles = makeStyles(theme => ({
 		margin: '0',
 		height: '100%',
 	},
+	roomLeft: {
+		height: '100%',
+		// borderRight: '1.5px solid white',
+		overflowY: 'auto'
+	},
+	chatContainer: {
+		width: '100%',
+		height: '100%',
+	},
 	roomCenterContainer: {
 		height: '100%',
 		display: 'flex',
 		'flex-direction': 'column',
-		'justify-content': 'space-between',
+		'justify-content': 'center',
 		'align-items': 'center'
 	},
 	roomInfoDiv: {
@@ -33,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 		border: '1px solid #44494B',
 	},
 	roomRight: {
-		borderLeft: '1px solid white',
+		borderLeft: '1.5px solid white',
 	},
 	chatContainer: {
 		width: '100%',

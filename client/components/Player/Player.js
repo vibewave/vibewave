@@ -3,7 +3,7 @@ import { socket } from '../../socket/socket';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { getRoom } from '../../store';
+import { getRoom, removeTrack } from '../../store';
 
 const Player = (props) => {
 	const history = useHistory();
@@ -13,13 +13,16 @@ const Player = (props) => {
 	const {
 		spotifyApi,
 		currentTimePosition,
+		currentTrack,
 	} = props;
+
+	console.log('currentTrack: ', currentTrack);
 
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.room);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
-	const trackUri = 'spotify:track:2gMXnyrvIjhVBUZwvLZDMP';
+	// const trackUri = 'spotify:track:2gMXnyrvIjhVBUZwvLZDMP';
 
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState("INITIALIZING");
@@ -30,6 +33,12 @@ const Player = (props) => {
 		dispatch(getRoom(id));
 		return () => {};
 	}, []);
+
+	// useEffect(() => {
+	// 	if(currentTrack.id) {
+	// 		dispatch(removeTrack(currentTrack.id, id));
+	// 	}
+	// }, [currentTrack.id]);
 
 	useEffect(() => {
 		if (room.id) {
@@ -98,7 +107,7 @@ const Player = (props) => {
 	};
 
 
-	if (!accessToken) return <></>;
+	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<SpotifyPlayer
 			token={accessToken}
@@ -108,7 +117,7 @@ const Player = (props) => {
 				if (state.status) setIsReady(state.status);
 			}}
 			play={isPlaying}
-			uris={trackUri ? [trackUri] : []}
+			uris={currentTrack.trackUri}
 			styles={{
 				activeColor: '#1DB954',
 				bgColor: '#27343A',

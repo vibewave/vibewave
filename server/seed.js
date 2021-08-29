@@ -47,7 +47,7 @@ const seed = async () => {
 			}
 		}
 
-		//create track
+		// create track
 		for (const trackInstance of tracks) {
 			try {
 				const newTrackInstance = await Track.create(trackInstance);
@@ -78,10 +78,9 @@ const seed = async () => {
 		} catch (err) {
 			console.log(err);
 		}
-		//room-rack associations
+		//room-track associations
 		try {
-			await roomInstances[0].setTracks([trackInstances[0]]);
-			await roomInstances[1].setTracks([trackInstances[1]]);
+			await roomInstances[1].setTracks([trackInstances[0], trackInstances[1]]);
 		} catch (err) {
 			console.log(err);
 		}

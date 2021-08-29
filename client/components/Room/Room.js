@@ -21,6 +21,8 @@ const Room = props => {
 	const { id } = useParams();
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
+	const tracks = useSelector(state => state.trackQueue);
+	const [currentTrack, setCurrentTrack] = useState({});
 
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
@@ -29,6 +31,12 @@ const Room = props => {
 		dispatch(getRoom(id));
 		return () => {};
 	}, []);
+
+	useEffect(() => {
+		if(tracks.length > 0) {
+			startSong();
+		}
+	}, [tracks]);
 
 	useEffect(() => {
 		if (room.id) {
@@ -48,6 +56,7 @@ const Room = props => {
 	}, []);
 
 	const startSong = () => {
+		setCurrentTrack(tracks[0]);
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};
@@ -73,8 +82,12 @@ const Room = props => {
 		>
 
 			<Grid container className={classes.mainGridContainer}>
-
-				<Grid item xs={9} className={classes.roomCenter}>
+				<Grid item xs={2} className={classes.roomLeft}>
+					<div className={classes.trackQueueContainer}>
+						<TrackQueue />
+					</div>
+				</Grid>
+				<Grid item xs={7} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
 							{isHost && 'I am the host'}
@@ -82,7 +95,6 @@ const Room = props => {
 							<button onClick={startSong}>Start Song</button>
 							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
-							<TrackQueue />
 						</div>
 						<div className={classes.mainArea}>
 							<TrackSearch spotifyApi={spotifyApi} />
@@ -91,6 +103,7 @@ const Room = props => {
 							<Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
+								currentTrack={currentTrack}
 							/>
 						</div>
 					</div>
