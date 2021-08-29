@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { socket } from '../../socket/socket';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { getRoom } from '../../store';
-import { useParams } from 'react-router-dom';
 
 const Player = (props) => {
 	const history = useHistory();
@@ -16,7 +15,6 @@ const Player = (props) => {
 		currentTimePosition,
 	} = props;
 
-
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.room);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
@@ -27,10 +25,10 @@ const Player = (props) => {
 	const [isReady, setIsReady] = useState("INITIALIZING");
 	const [playerError, setPlayerError] = useState('');
 	const [isHost, setIsHost] = useState(false);
-	// const [dataLoaded, setDataLoaded] = useState(false);
 
 	useEffect(() => {
 		dispatch(getRoom(id));
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -40,10 +38,12 @@ const Player = (props) => {
 				setIsHost(true);
 			}
 		}
+		return () => {};
 	}, [room.id]);
 
 	useEffect(() => {
 		setIsPlaying(true);
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -56,21 +56,15 @@ const Player = (props) => {
 		return () => {};
 	}, [accessToken]);
 
-	// useEffect(() => {
-	// 	console.log('seek useeffect running');
-	// 	if (isPlaying && isActive && accessToken && room?.id && !isHost && currentTimePosition > 0) {
-	// 		console.log('current Time Position: ', currentTimePosition);
-	// 			setTimeout(() => {
-	// 				spotifyApi.seek(currentTimePosition);
-	// 			}, 3000);
-	// 	}
-	// }, [isPlaying, isActive, accessToken, room.id, isHost, currentTimePosition]);
+	// Seek player to particular time. Only run after the player is completely ready.
+	const browserAutoplayError = "Browser prevented autoplay due to lack of interaction";
+	const isPlayerReadyToSeek = isPlaying && (isReady === "READY" || (isReady === "ERROR" && playerError !== browserAutoplayError)) && accessToken && room?.id && !isHost && currentTimePosition > 0;
 
-	const browserAutoplayError = "Browser prevented autoplay due to lack of interaction"
 	useEffect(() => {
 		console.log('isReady: ', isReady);
-		console.log('error is browser error: ', playerError === browserAutoplayError);
-		if (isPlaying && (isReady === "READY" || (isReady === "ERROR" && playerError !== browserAutoplayError)) && accessToken && room?.id && !isHost && currentTimePosition > 0) {
+		console.log('Error is browser autoplay error: ', playerError === browserAutoplayError);
+
+		if (isPlayerReadyToSeek) {
 			console.log('isReady: ', isReady);
 			console.log('seek useeffect running');
 			console.log('current Time Position: ', currentTimePosition);
@@ -78,12 +72,12 @@ const Player = (props) => {
 					spotifyApi.seek(currentTimePosition);
 				}, 100);
 		}
-	}, [isPlaying, isReady, playerError, accessToken, room.id, isHost, currentTimePosition]);
+		return () => {};
+	}, [isPlayerReadyToSeek]);
 
-
-	// Handle player errors.
-	// If 'Authentication failed' error, redirect user to re-login with Spotify.
-	// If other error, console.log(error).
+	/* Handle player errors.
+	- If 'Authentication failed' error, redirect user to re-login with Spotify.
+	- If other error, console.log(error) */
 	useEffect(() => {
 		if (playerError) {
 			console.log(playerError);
@@ -101,7 +95,8 @@ const Player = (props) => {
 	const redirectLogin = () => {
 		window.alert(`Spotify Authentication Failed. Your Spotify login credentials may have expired. Please login with Spotify again.`);
 		history.push('/spotify-login');
-	}
+	};
+
 
 	if (!accessToken) return <></>;
 	return (
@@ -109,13 +104,10 @@ const Player = (props) => {
 			token={accessToken}
 			showSaveIcon
 			callback={state => {
-				// if (!state.isPlaying) setIsPlaying(false);
 				if (state.error) setPlayerError(state.error);
 				if (state.status) setIsReady(state.status);
-				console.log(state);
 			}}
 			play={isPlaying}
-			// autoPlay={true}
 			uris={trackUri ? [trackUri] : []}
 			styles={{
 				activeColor: '#1DB954',

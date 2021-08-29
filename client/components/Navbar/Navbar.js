@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Typography, Button, Grid } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 import useStyles from './NavbarStyle';
 import NavbarMenu from '../NavbarMenu/NavbarMenu';
 
 const Navbar = () => {
 	const classes = useStyles();
 	const auth = useSelector(state => state.auth);
-	const dispatch = useDispatch();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(async () => {
@@ -17,13 +16,18 @@ const Navbar = () => {
 
 	return (
 		<div id="navbar-container" className={classes.navBarContainer}>
-			<Typography variant="h4" className={classes.logoContainer}>
-				Vibewave
-			</Typography>
+			<div className={classes.logoContainer}>
+				<Link to="/">
+					<img src="/vibewave-logo-full.png" alt="vibewave logo" className={classes.logo}/>
+				</Link>
+			</div>
 			<div className={classes.menuButtonAndUsername}>
+				{
+				isLoggedIn &&
 				<Typography variant="h5" className={classes.userContainer}>
 					{auth.username}
 				</Typography>
+				}
 				<div className={classes.menuButton}>
 					<NavbarMenu />
 				</div>

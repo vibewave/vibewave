@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { socket } from '../../socket/socket';
-import { Container, Grid, Button, Link } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import SpotifyWebApi from 'spotify-web-api-node';
 import useStyles from './RoomStyle';
-import Player from '../Player/Player';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRoom } from '../../store';
-import { useParams } from 'react-router-dom';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
+import Player from '../Player/Player';
+import { getRoom } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -26,6 +27,7 @@ const Room = props => {
 
 	useEffect(() => {
 		dispatch(getRoom(id));
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -37,10 +39,12 @@ const Room = props => {
 				console.log('joined the room');
 			}
 		}
+		return () => {};
 	}, [room.id]);
 
 	useEffect(() => {
 		getTimePosition();
+		return () => {};
 	}, []);
 
 	const startSong = () => {
@@ -67,7 +71,9 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-			<Grid container spacing={3} className={classes.mainGridContainer}>
+
+			<Grid container className={classes.mainGridContainer}>
+
 				<Grid item xs={9} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
@@ -76,8 +82,8 @@ const Room = props => {
 							<button onClick={startSong}>Start Song</button>
 							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
+							<TrackQueue />
 						</div>
-						<TrackQueue />
 						<div className={classes.mainArea}>
 							<TrackSearch spotifyApi={spotifyApi} />
 						</div>
@@ -89,7 +95,10 @@ const Room = props => {
 						</div>
 					</div>
 				</Grid>
-				<Grid item xs={3} className={classes.roomRight}></Grid>
+				<Grid item xs={3} className={classes.roomRight}>
+					<div className={classes.chatContainer}>
+					</div>
+				</Grid>
 			</Grid>
 		</Container>
 	);

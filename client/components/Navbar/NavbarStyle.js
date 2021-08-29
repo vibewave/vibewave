@@ -1,21 +1,26 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	navBarContainer: {
 		backgroundColor: '#012F41',
-		marginTop: '-0.5em',
-		marginLeft: '-0.5em',
-		marginRight: '-0.5em',
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: '0.8em',
+		height: '65px'
 	},
 
 	logoContainer: {
 		color: 'white',
 		alignSelf: 'center',
 		marginLeft: '0.5em',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	logo: {
+		height: '45px',
 	},
 
 	createRoomContainer: {

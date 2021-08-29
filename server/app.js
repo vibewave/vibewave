@@ -4,8 +4,6 @@ const logger = require('morgan')('dev');
 const app = express();
 const appDir = require('fs').realpathSync(process.cwd());
 
-//used to allow save variable names for modules
-
 console.log('Project root directory: ', appDir);
 
 // MIDDLEWARES
@@ -14,12 +12,9 @@ app.use(express.json()); // body-parsing
 app.use(express.urlencoded({ extended: false }));
 
 // ROUTES
-// Add your routes here and uncomment. For example:
 app.use('/api', require('./router/api'));
 app.use('/auth', require('./router/auth'));
 app.use('/spotify', require('./router/spotify'));
-// ...
-// */
 
 app.get('/', async (req, res, next) => {
 	try {
@@ -34,14 +29,16 @@ app.use(express.static(path.resolve(appDir, 'assets')));
 app.use(express.static(path.resolve(appDir, 'dist')));
 app.use(express.static(path.resolve(appDir, 'src')));
 
-// // FALLBACK HANDLER
-// app.get('*', async (req, res, next) => {
-// 	try {
-// 		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
-// 	} catch (err) {
-// 		next(err);
-// 	}
-// });
+// any remaining requests with an extension (.js, .css, etc.) send 404
+app.use((req, res, next) => {
+  if (path.extname(req.path).length) {
+    const err = new Error('Not found')
+    err.status = 404
+    next(err)
+  } else {
+    next()
+  }
+})
 
 // FALLBACK HANDLER
 app.get('*', (req, res) => {
@@ -49,8 +46,7 @@ app.get('*', (req, res) => {
 	if (indexHtmlPath) {
 		res.sendFile(indexHtmlPath);
 	} else {
-		res.sendFile(path.resolve(appDir, 'src/fallback.html'));
-		// res.send(`<main>Fallback HTML</main>`);
+		res.send(`<main>Page Not Found</main>`);
 	}
 });
 
