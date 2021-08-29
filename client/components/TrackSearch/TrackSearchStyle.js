@@ -8,6 +8,7 @@ const useStyles = makeStyles(theme => ({
 	trackSearchInput: {
 		borderRadius: '0.5em',
 		background: '#012F41',
+		width: '20em',
 	},
 	trackSearchText: {
 		color: 'white',
