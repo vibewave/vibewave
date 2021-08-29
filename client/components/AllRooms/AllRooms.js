@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Grid } from '@material-ui/core';
-import { fetchRooms } from '../../store';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import { fetchRooms } from '../../store';
 
 const AllRooms = () => {
 	const rooms = useSelector(state => {

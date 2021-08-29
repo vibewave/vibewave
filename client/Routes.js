@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import CreateRoom from './components/CreateRoom/CreateRoom';
-import Home from './components/Home/Home';
-import SpotifyLogin from './components/SpotifyLogin/SpotifyLogin';
-import Room from './components/Room/Room';
 import { useDispatch, useSelector } from 'react-redux';
 import { me } from './store';
+import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import SpotifyLogin from './components/SpotifyLogin/SpotifyLogin';
+import CreateRoom from './components/CreateRoom/CreateRoom';
+import Room from './components/Room/Room';
+import Fallback from './Fallback';
 
-/**
- * COMPONENT
- */
+
 const Routes = () => {
 	const dispatch = useDispatch();
 	const auth = useSelector(state => state.auth);
@@ -31,7 +30,7 @@ const Routes = () => {
 		<>
 			{isLoggedIn ? (
 				<Switch>
-					<Route path="/spotify-login">
+					<Route exact path="/spotify-login">
 						<SpotifyLogin />
 					</Route>
 					<Route exact path="/createroom">
@@ -44,6 +43,9 @@ const Routes = () => {
 						<Home />
 					</Route>
 					<Redirect to="/home" />
+					{/* <Route>
+						<Fallback />
+					</Route> */}
 				</Switch>
 			) : (
 				<Switch>

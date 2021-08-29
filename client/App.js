@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Routes from './Routes';
 import Navbar from './components/Navbar/Navbar';
+import Routes from './Routes';
 
 const spotifyAuthCode = new URLSearchParams(window.location.search).get('code');
 if (spotifyAuthCode) {

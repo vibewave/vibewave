@@ -1,10 +1,12 @@
 import React from 'react';
-import { Menu, MenuItem, withStyles } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
 
 export const StyledMenu = withStyles({
 	paper: {
 		border: '1px solid #d3d4d5',
-		width: '8em',
+		width: '11em',
 	},
 })(props => (
 	<Menu
@@ -25,10 +27,10 @@ export const StyledMenu = withStyles({
 export const StyledMenuItem = withStyles(theme => ({
 	root: {
 		'&:focus': {
-			backgroundColor: theme.palette.primary.main,
 			'& .MuiListItemIcon-root, & .MuiListItemText-primary': {
 				color: theme.palette.common.white,
 			},
 		},
+		height: '2em'
 	},
 }))(MenuItem);
