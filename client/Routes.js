@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { me } from './store';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
+import Fallback from './Fallback';
 
-/**
- * COMPONENT
- */
+
 const Routes = () => {
 	const dispatch = useDispatch();
 	const auth = useSelector(state => state.auth);
@@ -31,7 +30,7 @@ const Routes = () => {
 		<>
 			{isLoggedIn ? (
 				<Switch>
-					<Route path="/spotify-login">
+					<Route exact path="/spotify-login">
 						<SpotifyLogin />
 					</Route>
 					<Route exact path="/createroom">
@@ -44,6 +43,9 @@ const Routes = () => {
 						<Home />
 					</Route>
 					<Redirect to="/home" />
+					{/* <Route>
+						<Fallback />
+					</Route> */}
 				</Switch>
 			) : (
 				<Switch>
