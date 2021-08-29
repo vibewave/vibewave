@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
 		margin: '0',
 		padding: '1em',
 		width: '100%',
-		height: '93%',
+		height: '90%',
 	},
 	mainGridContainer: {
 		margin: '0',
