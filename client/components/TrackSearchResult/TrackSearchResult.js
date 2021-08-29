@@ -1,21 +1,26 @@
 import React from 'react';
+import { classicNameResolver } from 'typescript';
+import useStyles from './TrackSearchResultStyle';
 
 const TrackSearchResult = ({ chooseTrack, track }) => {
+  const classes = useStyles();
+
   const handlePlay = () => {
     chooseTrack(track);
   }
   return (
     <div 
-      className='searchResultContainer'
+      className={classes.searchResultItemsContainer}
       onClick={handlePlay}
     >
-      <img src={track.albumUrl} />
-      <div>
+      <div className={classes.searchResultItems}>
         <div>
-          {track.title}
+          <img src={track.albumUrl} />
         </div>
-        <div>
-          {track.artist}
+        <div className={classes.trackDescription}>
+          Title: {track.title}
+          <br />
+          Artist: {track.artist}
         </div>
       </div>
     </div>

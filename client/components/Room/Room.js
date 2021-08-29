@@ -67,7 +67,6 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-			<TrackSearch spotifyApi={spotifyApi} />
 			<Grid container spacing={3} className={classes.mainGridContainer}>
 				<Grid item xs={9} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
@@ -79,7 +78,9 @@ const Room = props => {
 							<div>{currentTimePosition}</div>
 						</div>
 						<TrackQueue />
-						<div className={classes.mainArea}></div>
+						<div className={classes.mainArea}>
+							<TrackSearch spotifyApi={spotifyApi} />
+						</div>
 						<div className={classes.playerDiv}>
 							<Player
 								spotifyApi={spotifyApi}
