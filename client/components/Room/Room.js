@@ -27,6 +27,7 @@ const Room = props => {
 
 	useEffect(() => {
 		dispatch(getRoom(id));
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -38,10 +39,12 @@ const Room = props => {
 				console.log('joined the room');
 			}
 		}
+		return () => {};
 	}, [room.id]);
 
 	useEffect(() => {
 		getTimePosition();
+		return () => {};
 	}, []);
 
 	const startSong = () => {

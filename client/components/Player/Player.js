@@ -28,6 +28,7 @@ const Player = (props) => {
 
 	useEffect(() => {
 		dispatch(getRoom(id));
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -37,10 +38,12 @@ const Player = (props) => {
 				setIsHost(true);
 			}
 		}
+		return () => {};
 	}, [room.id]);
 
 	useEffect(() => {
 		setIsPlaying(true);
+		return () => {};
 	}, []);
 
 	useEffect(() => {
@@ -69,6 +72,7 @@ const Player = (props) => {
 					spotifyApi.seek(currentTimePosition);
 				}, 100);
 		}
+		return () => {};
 	}, [isPlayerReadyToSeek]);
 
 	/* Handle player errors.
