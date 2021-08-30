@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { socket } from '../../socket/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -9,7 +9,7 @@ import useStyles from './RoomStyle';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
-import { getRoom } from '../../store';
+import { getRoom, removeTrack } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -21,8 +21,6 @@ const Room = props => {
 	const { id } = useParams();
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
-	const tracks = useSelector(state => state.trackQueue);
-	const [currentTrack, setCurrentTrack] = useState({});
 
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
@@ -31,13 +29,6 @@ const Room = props => {
 		dispatch(getRoom(id));
 		return () => {};
 	}, []);
-
-	useEffect(() => {
-		if(tracks.length > 0) {
-			setCurrentTrack(tracks[0]);
-			// startSong();
-		}
-	}, [tracks]);
 
 	// CALL THESE INSIDE A USEEFFECT:
 
@@ -52,7 +43,6 @@ const Room = props => {
 	//    }
 	//  });
 	// }
-
 
 	useEffect(() => {
 		if (room.id) {
@@ -72,7 +62,6 @@ const Room = props => {
 	}, []);
 
 	const startSong = () => {
-		// setCurrentTrack(tracks[0]);
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};
@@ -96,7 +85,6 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-
 			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={2} className={classes.roomLeft}>
 					<div className={classes.trackQueueContainer}>
@@ -119,14 +107,12 @@ const Room = props => {
 							<Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-								currentTrack={currentTrack}
 							/>
 						</div>
 					</div>
 				</Grid>
 				<Grid item xs={3} className={classes.roomRight}>
-					<div className={classes.chatContainer}>
-					</div>
+					<div className={classes.chatContainer}></div>
 				</Grid>
 			</Grid>
 		</Container>
