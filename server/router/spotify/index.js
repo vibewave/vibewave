@@ -10,10 +10,10 @@ module.exports = router;
 
 // POST /spotify/login
 router.post('/login', async (req, res, next) => {
+	console.log('redirect ', REDIRECT_URI);
+	console.log('Id ', CLIENT_ID);
+	console.log('secret ', CLIENT_SECRET);
 	try {
-		console.log('redirect ', REDIRECT_URI);
-		console.log('Id ', CLIENT_ID);
-		console.log('secret ', CLIENT_SECRET);
 		const code = req.body.code;
 		const spotifyApi = new SpotifyWebApi({
 			redirectUri: REDIRECT_URI,
