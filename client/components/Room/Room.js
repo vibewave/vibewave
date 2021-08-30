@@ -39,6 +39,21 @@ const Room = props => {
 		}
 	}, [tracks]);
 
+	// CALL THESE INSIDE A USEEFFECT:
+
+	// const emitTrackPopped = () => {
+	// 	socket.emit('trackPopped');
+	// }
+
+	// const updateTracks = () => {
+	// 	socket.on('trackQueueUpdated', (updatedTrackQueue) => {
+	// 		if (updatedTrackQueue !== trackQueue) {
+	//			setTrackQueue(updatedTrackQueue);
+	//    }
+	//  });
+	// }
+
+
 	useEffect(() => {
 		if (room.id) {
 			// joinRoom();
