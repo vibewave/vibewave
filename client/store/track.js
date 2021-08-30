@@ -19,6 +19,10 @@ export const addTrack = (track, roomId) => {
 	return async dispatch => {
 		const { data: dbTrack } = await axios.post(`/api/tracks`, {
 			trackUri: track.uri,
+			title: track.title,
+			artist: track.artist,
+			albumUrl: track.albumUrl,
+			duration: track.duration,
 			roomId,
 		});
 		const action = _addTrack(track);

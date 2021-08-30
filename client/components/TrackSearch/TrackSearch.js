@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import TrackSearchResult from '../TrackSearchResult/TrackSearchResult';
 import { addTrack } from '../../store/track';
+import { fetchTracks } from '../../store/trackQueue';
 import { useParams } from 'react-router-dom';
 import useStyles from './TrackSearchStyle';
 
@@ -15,11 +16,21 @@ const TrackSearch = ({ spotifyApi }) => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
-	const chooseTrack = track => {
+	// const [trackqueue, setTrackqueue] = useState([]);
+
+	const chooseTrack = async track => {
 		setPlayingTrack(track);
-		dispatch(addTrack(track, id));
+		await dispatch(addTrack(track, id));
+		dispatch(fetchTracks(id));
 		setSearchSongName('');
 	};
+
+	// const emitTrackAdded = () => {
+		// socket emit trackAdded event
+		// socket.on ('trackqueue updated), update the trackqueue local state
+	// }
+
+
 
 	useEffect(() => {
 		if (!accessToken) return;
@@ -47,6 +58,7 @@ const TrackSearch = ({ spotifyApi }) => {
 						artist: track.artists[0].name,
 						title: track.name,
 						uri: track.uri,
+						duration: track.duration_ms,
 						albumUrl: smallestAlbumImage.url,
 					};
 				})

@@ -48,10 +48,18 @@ const messages = [
 
 const tracks = [
 	{
-		trackUri: '2gMXnyrvIjhVBUZwvLZDMP',
+		trackUri: 'spotify:track:4ZtFanR9U6ndgddUvNcjcG',
+		title: 'good 4 u',
+		artist: 'Olivia Rodrigo',
+		albumUrl: 'https://i.scdn.co/image/ab67616d00004851a91c10fe9472d9bd89802e5a',
+		duration: '178146',
 	},
 	{
-		trackUri: '4iJyoBOLtHqaGxP12qzhQI',
+		trackUri: 'spotify:track:5HCyWlXZPP0y6Gqq8TgA20',
+		title: 'STAY (with Justin Bieber)',
+		artist: 'The Kid LA ROI',
+		albumUrl: 'https://i.scdn.co/image/ab67616d0000485141e31d6ea1d493dd77933ee5',
+		duration: '141805',
 	},
 ];
 
