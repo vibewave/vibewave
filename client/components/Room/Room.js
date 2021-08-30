@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { socket } from '../../socket/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -9,11 +9,19 @@ import useStyles from './RoomStyle';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
-import { getRoom } from '../../store';
+import { getRoom, removeTrack } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
 });
+
+const usePrevious = value => {
+	const ref = useRef();
+	useEffect(() => {
+		ref.current = value;
+	}, [value]);
+	return ref.current;
+};
 
 const Room = props => {
 	const classes = useStyles();
@@ -33,10 +41,24 @@ const Room = props => {
 	}, []);
 
 	useEffect(() => {
-		if(tracks.length > 0) {
+		console.log('tracks useeffect');
+		if (tracks.length > 0 && prevQueueLength !== tracks.length + 1) {
+			setCurrentTrack(tracks[0]);
 			startSong();
 		}
 	}, [tracks]);
+
+	useEffect(() => {
+		console.log('current track useeffect');
+		if (tracks.length === prevQueueLength) {
+			dispatch(removeTrack(currentTrack.id, id));
+		}
+	}, [currentTrack]);
+
+	const prevQueueLength = usePrevious(tracks.length);
+	console.log('mounted');
+	console.log('queue length is ', prevQueueLength);
+	console.log('tracks length is ', tracks.length);
 
 	useEffect(() => {
 		if (room.id) {
@@ -80,7 +102,6 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
-
 			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={2} className={classes.roomLeft}>
 					<div className={classes.trackQueueContainer}>
@@ -109,8 +130,7 @@ const Room = props => {
 					</div>
 				</Grid>
 				<Grid item xs={3} className={classes.roomRight}>
-					<div className={classes.chatContainer}>
-					</div>
+					<div className={classes.chatContainer}></div>
 				</Grid>
 			</Grid>
 		</Container>
