@@ -16,12 +16,21 @@ const TrackSearch = ({ spotifyApi }) => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
+	// const [trackqueue, setTrackqueue] = useState([]);
+
 	const chooseTrack = async track => {
 		setPlayingTrack(track);
 		await dispatch(addTrack(track, id));
 		dispatch(fetchTracks(id));
 		setSearchSongName('');
 	};
+
+	// const emitTrackAdded = () => {
+		// socket emit trackAdded event
+		// socket.on ('trackqueue updated), update the trackqueue local state
+	// }
+
+
 
 	useEffect(() => {
 		if (!accessToken) return;

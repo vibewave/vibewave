@@ -12,6 +12,8 @@ const Player = props => {
 
 	const { spotifyApi, currentTimePosition, currentTrack } = props;
 
+	// console.log('currentTrack: ', currentTrack);
+
 	const user = useSelector(state => state.user);
 	const room = useSelector(state => state.room);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
@@ -32,7 +34,7 @@ const Player = props => {
 	// 	if (currentTrack.id) {
 	// 		dispatch(removeTrack(currentTrack.id, id));
 	// 	}
-	// }, [currentTrack.id]);
+	// }, [isReady]);
 
 	useEffect(() => {
 		if (room.id) {
@@ -70,7 +72,6 @@ const Player = props => {
 		room?.id &&
 		!isHost &&
 		currentTimePosition > 0;
-
 	useEffect(() => {
 		console.log('isReady: ', isReady);
 		console.log(
@@ -121,6 +122,7 @@ const Player = props => {
 			callback={state => {
 				if (state.error) setPlayerError(state.error);
 				if (state.status) setIsReady(state.status);
+				console.log('volume: ', state.volume);
 			}}
 			play={isPlaying}
 			uris={currentTrack.trackUri}

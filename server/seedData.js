@@ -58,7 +58,7 @@ const tracks = [
 		trackUri: 'spotify:track:5HCyWlXZPP0y6Gqq8TgA20',
 		title: 'STAY (with Justin Bieber)',
 		artist: 'The Kid LA ROI',
-		albumUrl: 'https://i.scdn.co/image/ab67616d0000485141e31d6ea1d6ea1d493dd77933ee5',
+		albumUrl: 'https://i.scdn.co/image/ab67616d0000485141e31d6ea1d493dd77933ee5',
 		duration: '141805',
 	},
 ];

@@ -48,6 +48,20 @@ const Room = props => {
 		}
 	}, [tracks]);
 
+	// CALL THESE INSIDE A USEEFFECT:
+
+	// const emitTrackPopped = () => {
+	// 	socket.emit('trackPopped');
+	// }
+
+	// const updateTracks = () => {
+	// 	socket.on('trackQueueUpdated', (updatedTrackQueue) => {
+	// 		if (updatedTrackQueue !== trackQueue) {
+	//			setTrackQueue(updatedTrackQueue);
+	//    }
+	//  });
+	// }
+
 	useEffect(() => {
 		console.log('current track useeffect');
 		if (tracks.length === prevQueueLength) {
@@ -78,7 +92,7 @@ const Room = props => {
 	}, []);
 
 	const startSong = () => {
-		setCurrentTrack(tracks[0]);
+		// setCurrentTrack(tracks[0]);
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};

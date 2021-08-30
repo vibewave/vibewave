@@ -40,12 +40,28 @@ const startSocket = (io) => {
       console.log(`${socket.id} joined the room.`);
       console.log(`Counter from server: ${counter}`);
       socket.emit('time-position', counter);
+      // fetch new trackqueue list = updatedTrackQueue
+      // socket.emit('trackqueueUpdated', updatedTrackQueue)
     });
 
     socket.on('disconnect', ()=> {
       users = users.filter(user => user !== socket.id);
       console.log('users after dc ',users)
     });
+
+    // SOCKET LISTENERS FOR TRACKQUEUE UPDATES:
+
+    //socket.on('trackAdded', () => {
+      // add track to database
+      // fetch new trackqueue list = updatedTrackQueue
+      // socket.emit('trackqueueUpdated', updatedTrackQueue) -> emit to the room updatedTrackQueue (trackqueue updated event)
+    //})
+
+    //socket.on('trackPopped', () => {
+      // remove the track (by id) in database
+      // fetch new trackqueue list = updatedTrackQueue
+      // socket.emit('trackqueueUpdated', updatedTrackQueue) -> emit to the room updatedTrackQueue (trackqueue updated event)
+    //})
   });
 }
 
