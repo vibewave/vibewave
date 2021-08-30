@@ -34,7 +34,8 @@ const Room = props => {
 
 	useEffect(() => {
 		if(tracks.length > 0) {
-			startSong();
+			setCurrentTrack(tracks[0]);
+			// startSong();
 		}
 	}, [tracks]);
 
@@ -56,7 +57,7 @@ const Room = props => {
 	}, []);
 
 	const startSong = () => {
-		setCurrentTrack(tracks[0]);
+		// setCurrentTrack(tracks[0]);
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};
