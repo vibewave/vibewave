@@ -10,7 +10,13 @@ const Player = props => {
 	const dispatch = useDispatch();
 	const { id } = useParams();
 
-	const { spotifyApi, currentTimePosition, currentTrack } = props;
+	const {
+		spotifyApi,
+		currentTimePosition,
+		// currentTrack,
+		// trackEnded,
+		// setTrackEnded,
+	} = props;
 
 	// console.log('currentTrack: ', currentTrack);
 
@@ -23,6 +29,9 @@ const Player = props => {
 	const [isReady, setIsReady] = useState('INITIALIZING');
 	const [playerError, setPlayerError] = useState('');
 	const [isHost, setIsHost] = useState(false);
+	const [currentTrack, setCurrentTrack] = useState({});
+	const tracks = useSelector(state => state.trackQueue);
+	const [trackEnded, setTrackEnded] = useState(false);
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -36,6 +45,11 @@ const Player = props => {
 	// 	}
 	// }, [isReady]);
 
+	// console.log('isPlaying is ', isPlaying);
+	console.log(currentTrack);
+	console.log(isPlaying);
+
+	//check if host and set host
 	useEffect(() => {
 		if (room.id) {
 			joinRoom();
@@ -46,11 +60,30 @@ const Player = props => {
 		return () => {};
 	}, [room.id]);
 
+	//monitor if the track has ended
 	useEffect(() => {
+		console.log('in track ended use effect');
+		if (trackEnded) {
+			dispatch(removeTrack(currentTrack.id, id));
+		}
+	}, [trackEnded]);
+
+	useEffect(() => {
+		// console.log('tracks useeffect');
+		if (tracks.length > 0) {
+			setCurrentTrack(tracks[0]);
+			setTrackEnded(false);
+		}
+	}, [tracks, trackEnded]);
+
+	//start playing
+	useEffect(() => {
+		console.log('in player start song use effect');
 		setIsPlaying(true);
 		return () => {};
-	}, []);
+	}, [currentTrack]);
 
+	//check if accesstoken is available
 	useEffect(() => {
 		if (!accessToken) {
 			return () => {
@@ -120,9 +153,19 @@ const Player = props => {
 			token={accessToken}
 			showSaveIcon
 			callback={state => {
+				// console.log(state);
 				if (state.error) setPlayerError(state.error);
 				if (state.status) setIsReady(state.status);
-				console.log('volume: ', state.volume);
+				if (!state.isPlaying) setIsPlaying(false);
+				if (
+					state.progressMs === 0 &&
+					!state.isPlaying &&
+					state.status === 'READY'
+				) {
+					setTrackEnded(true);
+					console.log('the song has ended');
+				}
+				// console.log('state: ', state.progressMs);
 			}}
 			play={isPlaying}
 			uris={currentTrack.trackUri}
