@@ -7,7 +7,7 @@ const { users, rooms, tracks, messages, friendLists } = require('./seedData');
 const seed = async () => {
 	try {
 		if (process.env.NODE_ENV === 'production') {
-			await db.sync();
+			await db.sync({ force: true });
 		} else {
 			await db.sync({ force: true });
 		}
