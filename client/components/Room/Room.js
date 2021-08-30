@@ -15,23 +15,12 @@ const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
 });
 
-const usePrevious = value => {
-	const ref = useRef();
-	useEffect(() => {
-		ref.current = value;
-	}, [value]);
-	return ref.current;
-};
-
 const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
-	const tracks = useSelector(state => state.trackQueue);
-	const [currentTrack, setCurrentTrack] = useState({});
-	const [trackEnded, setTrackEnded] = useState(false);
 
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
@@ -41,33 +30,6 @@ const Room = props => {
 		return () => {};
 	}, []);
 
-	//these commented lines do work for a song ended but doesn't start the next song
-
-	//monitor if the track has ended
-	// useEffect(() => {
-	// 	console.log('in track ended use effect');
-	// 	if (trackEnded) {
-	// 		dispatch(removeTrack(currentTrack.id, id));
-	// 	}
-	// }, [trackEnded]);
-
-	//&& prevQueueLength !== tracks.length + 1
-	// useEffect(() => {
-	// 	console.log('tracks useeffect');
-	// 	console.log('prev queue length', prevQueueLength);
-	// 	console.log('tracks length', tracks.length);
-	// 	if (tracks.length > 0) {
-	// 		console.log('inside start song conditional');
-	// 		setCurrentTrack(tracks[0]);
-	// 		if (prevQueueLength === tracks.length + 1) {
-	// 			console.log('inside state conditional');
-	// 			startSong();
-	// 			setTrackEnded(false);
-	// 		}
-	// 	}
-	// }, [tracks, trackEnded]);
-
-	// console.log(trackEnded);
 	// CALL THESE INSIDE A USEEFFECT:
 
 	// const emitTrackPopped = () => {
@@ -81,18 +43,6 @@ const Room = props => {
 	//    }
 	//  });
 	// }
-
-	// useEffect(() => {
-	// 	console.log('current track useeffect');
-	// 	if (tracks.length === prevQueueLength) {
-	// 		dispatch(removeTrack(currentTrack.id, id));
-	// 	}
-	// }, [currentTrack]);
-
-	const prevQueueLength = usePrevious(tracks.length);
-	// console.log('mounted');
-	// console.log('queue length is ', prevQueueLength);
-	// console.log('tracks length is ', tracks.length);
 
 	useEffect(() => {
 		if (room.id) {
@@ -112,7 +62,6 @@ const Room = props => {
 	}, []);
 
 	const startSong = () => {
-		// setCurrentTrack(tracks[0]);
 		console.log('start song button clicked.');
 		socket.emit('song-started', true);
 	};
@@ -158,9 +107,6 @@ const Room = props => {
 							<Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-								// currentTrack={currentTrack}
-								// trackEnded={trackEnded}
-								// setTrackEnded={setTrackEnded}
 							/>
 						</div>
 					</div>

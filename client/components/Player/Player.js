@@ -35,19 +35,8 @@ const Player = props => {
 
 	useEffect(() => {
 		dispatch(getRoom(id));
-		// if (currentTrack.id) dispatch(removeTrack(currentTrack.id, id));
 		return () => {};
 	}, []);
-
-	// useEffect(() => {
-	// 	if (currentTrack.id) {
-	// 		dispatch(removeTrack(currentTrack.id, id));
-	// 	}
-	// }, [isReady]);
-
-	// console.log('isPlaying is ', isPlaying);
-	console.log(currentTrack);
-	console.log(isPlaying);
 
 	//check if host and set host
 	useEffect(() => {
@@ -62,14 +51,12 @@ const Player = props => {
 
 	//monitor if the track has ended
 	useEffect(() => {
-		console.log('in track ended use effect');
 		if (trackEnded) {
 			dispatch(removeTrack(currentTrack.id, id));
 		}
 	}, [trackEnded]);
 
 	useEffect(() => {
-		// console.log('tracks useeffect');
 		if (tracks.length > 0) {
 			setCurrentTrack(tracks[0]);
 			setTrackEnded(false);
@@ -78,7 +65,6 @@ const Player = props => {
 
 	//start playing
 	useEffect(() => {
-		console.log('in player start song use effect');
 		setIsPlaying(true);
 		return () => {};
 	}, [currentTrack]);
@@ -153,7 +139,6 @@ const Player = props => {
 			token={accessToken}
 			showSaveIcon
 			callback={state => {
-				// console.log(state);
 				if (state.error) setPlayerError(state.error);
 				if (state.status) setIsReady(state.status);
 				if (!state.isPlaying) setIsPlaying(false);
@@ -163,9 +148,7 @@ const Player = props => {
 					state.status === 'READY'
 				) {
 					setTrackEnded(true);
-					console.log('the song has ended');
 				}
-				// console.log('state: ', state.progressMs);
 			}}
 			play={isPlaying}
 			uris={currentTrack.trackUri}
