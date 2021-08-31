@@ -29,7 +29,7 @@ const AllRooms = () => {
 
 
 	const handleEnterRoom = async (roomId) => {
-		await axios.put(`/api/users/${auth.id}`, { roomId, status: 'ENTER' });
+		await axios.put(`/api/users/${auth.id}`, { roomId });
 		history.push(`/rooms/${roomId}`);
 	}
 

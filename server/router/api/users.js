@@ -21,12 +21,7 @@ router.get('/', async (req, res, next) => {
 router.put('/:userId', async (req, res, next) => {
 	try {
 		const user = await User.findByPk(req.params.userId);
-		if(req.body.status === 'ENTER') {
-			await user.update({ roomId: req.body.roomId });
-		}
-		else {
-			await user.update({ roomId: null });
-		}
+		await user.update({ roomId: req.body.roomId });
 		
 		res.json(user);
 	} catch (err) {
