@@ -57,11 +57,12 @@ const Player = props => {
 
 	//monitor if the track has ended
 	useEffect(() => {
-		if (trackEnded) {
+		if (trackEnded && currentTrack.id) {
 			dispatch(removeTrack(currentTrack.id, id));
 		}
 	}, [trackEnded]);
 
+	//set new track
 	useEffect(() => {
 		if (tracks.length > 0) {
 			setCurrentTrack(tracks[0]);
@@ -71,10 +72,16 @@ const Player = props => {
 
 	//start playing
 	useEffect(() => {
-		setIsPlaying(true);
+		if (trackEnded && tracks.length > 1) {
+			console.log('in if statement');
+			setIsPlaying(true);
+		} else {
+			setCurrentTrack({});
+		}
 		return () => {};
-	}, [currentTrack]);
+	}, [trackEnded]);
 
+	console.log(tracks);
 	//check if accesstoken is available
 	useEffect(() => {
 		if (!accessToken) {
@@ -161,7 +168,8 @@ const Player = props => {
 				if (
 					state.progressMs === 0 &&
 					!state.isPlaying &&
-					state.status === 'READY'
+					state.status === 'READY' &&
+					state.type === 'player_update'
 				) {
 					setTrackEnded(true);
 				}
