@@ -9,7 +9,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const RoomPopupDialog = (props) => {
   const {
     isDialogOpen,
-    closeRoomPopupDialog
+    closeRoomPopupDialog,
+    room
   } = props;
 
   return (
@@ -21,17 +22,23 @@ const RoomPopupDialog = (props) => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{`You have entered ${room.title}!`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+            {`- You can enjoy listening to the tracks hosted by HOST-NAME with all other users in this room.`}</DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`- You can also make  requests to the host to play your favorite tracks. Be aware if your track doesn't seem to fit the vibe of ${room.title}, the host may not play your requested song!`}</DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`- Due to modern browsers' autoplay policy, your Spotify player may abruptly stop while listening. In such case, simple click anywhere in the room and refresh the page!`}
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`- You have control over the play/pause button, so whenever you would like some peace without leaving the room, just pause the player. When you resume, you will resume listening to the currently song in this room.`}
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`- To start partying, click the button below and off you go~`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeRoomPopupDialog} color="primary">
-            Disagree
-          </Button>
           <Button onClick={closeRoomPopupDialog} color="primary">
             Got it. Let's Party!
           </Button>

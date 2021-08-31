@@ -152,12 +152,13 @@ const Player = props => {
 
 	const closeRoomPopupDialog = () => {
 		setIsDialogOpen(false);
+		setIsPlaying(true);
 	};
 
 	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<>
-		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} />
+		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} room={room} />
 		<SpotifyPlayer
 			token={accessToken}
 			showSaveIcon
