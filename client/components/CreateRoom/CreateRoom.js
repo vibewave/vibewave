@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { createRoom } from '../../store';
+import useStyles from './CreateroomStyle';
 
 const CreateRoom = () => {
+	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const user = useSelector(state => state.auth);
@@ -31,19 +33,30 @@ const CreateRoom = () => {
 				<br />
 				<TextField
 					id="outlined-basic"
-					label="RoomTitle"
+					label="Room Title"
 					variant="outlined"
 					value={roomTitle}
 					onChange={e => setRoomTitle(e.target.value)}
 				/>
-				<TextField
-					id="outlined-basic"
-					label="RoomDesc"
-					variant="outlined"
-					value={roomDesc}
-					onChange={e => setRoomDesc(e.target.value)}
-				/>
-				<Button type="submit">Submit</Button>
+				<div>
+					<TextField
+						id="outlined-basic"
+						label="Room Description"
+						variant="outlined"
+						size="medium"
+						value={roomDesc}
+						onChange={e => setRoomDesc(e.target.value)}
+						multiline
+						rows={12}
+						rowsMax={20}
+						className={classes.descriptionInput}
+					/>
+				</div>
+				<div>
+					<Button size="small " color="primary">
+						Submit
+					</Button>
+				</div>
 			</form>
 		</div>
 	);
