@@ -9,6 +9,7 @@ import useStyles from './RoomStyle';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
+import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import { getRoom, removeTrack } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
@@ -22,8 +23,11 @@ const Room = props => {
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 
+
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
+
+
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -78,44 +82,54 @@ const Room = props => {
 		});
 	};
 
+	const openRoomPopupDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+	const closeRoomPopupDialog = () => {
+		setIsDialogOpen(false);
+	};
+
 	return (
-		<Container
-			component="div"
-			disableGutters={true}
-			maxWidth={false}
-			className={classes.roomContainer}
-		>
-			<Grid container className={classes.mainGridContainer}>
-				<Grid item xs={2} className={classes.roomLeft}>
-					<div className={classes.trackQueueContainer}>
-						<TrackQueue />
-					</div>
-				</Grid>
-				<Grid item xs={7} className={classes.roomCenter}>
-					<div className={classes.roomCenterContainer}>
-						<div className={classes.roomInfoDiv}>
-							{isHost && 'I am the host'}
-							{!isHost && 'I am not the host'}
-							<button onClick={startSong}>Start Song</button>
-							{/* <button onClick={joinRoom}>Join Room</button> */}
-							<div>{currentTimePosition}</div>
+		<>
+			<Container
+				component="div"
+				disableGutters={true}
+				maxWidth={false}
+				className={classes.roomContainer}
+			>
+				<Grid container className={classes.mainGridContainer}>
+					<Grid item xs={2} className={classes.roomLeft}>
+						<div className={classes.trackQueueContainer}>
+							<TrackQueue />
 						</div>
-						<div className={classes.mainArea}>
-							<TrackSearch spotifyApi={spotifyApi} />
+					</Grid>
+					<Grid item xs={7} className={classes.roomCenter}>
+						<div className={classes.roomCenterContainer}>
+							<div className={classes.roomInfoDiv}>
+								{isHost && 'I am the host'}
+								{!isHost && 'I am not the host'}
+								<button onClick={startSong}>Start Song</button>
+								{/* <button onClick={joinRoom}>Join Room</button> */}
+								<div>{currentTimePosition}</div>
+							</div>
+							<div className={classes.mainArea}>
+								<TrackSearch spotifyApi={spotifyApi} />
+							</div>
+							<div className={classes.playerDiv}>
+								<Player
+									spotifyApi={spotifyApi}
+									currentTimePosition={currentTimePosition}
+								/>
+							</div>
 						</div>
-						<div className={classes.playerDiv}>
-							<Player
-								spotifyApi={spotifyApi}
-								currentTimePosition={currentTimePosition}
-							/>
-						</div>
-					</div>
+					</Grid>
+					<Grid item xs={3} className={classes.roomRight}>
+						<div className={classes.chatContainer}></div>
+					</Grid>
 				</Grid>
-				<Grid item xs={3} className={classes.roomRight}>
-					<div className={classes.chatContainer}></div>
-				</Grid>
-			</Grid>
-		</Container>
+			</Container>
+		</>
 	);
 };
 
