@@ -9,6 +9,7 @@ import useStyles from './RoomStyle';
 import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
+import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import { getRoom, removeTrack } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
@@ -29,8 +30,11 @@ const Room = props => {
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 
+
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
+
+
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -103,7 +107,7 @@ const Room = props => {
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
-							<TrackSearch spotifyApi={spotifyApi} />
+							{isHost && <TrackSearch spotifyApi={spotifyApi} />}
 						</div>
 						<div className={classes.playerDiv}>
 							<Player
