@@ -46,7 +46,7 @@ const startSocket = io => {
 		socket.on('track-added', room => {
 			console.log('a track has been added');
 			console.log(room);
-			// socket.to(room).broadcast.emit('refresh-tracks', room);
+			socket.to(room).emit('refresh-tracks', room);
 		});
 
 		socket.on('disconnect', () => {

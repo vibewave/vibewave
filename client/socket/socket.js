@@ -13,10 +13,10 @@ socket.on('connect', () => {
 	console.log(`Connected with id: ${socket.id}`);
 });
 
-// socket.on('refresh-tracks', room => {
-// 	console.log('inside of refresh tracks');
-// 	store.dispatch(fetchTracks(room));
-// });
+socket.on('refresh-tracks', room => {
+	console.log('inside of refresh tracks');
+	store.dispatch(fetchTracks(room));
+});
 
 // function
 

@@ -55,36 +55,32 @@ const Player = props => {
 		return () => {};
 	}, [room.id]);
 
-	//monitor if the track has ended
-	useEffect(async () => {
-		console.log('trackended use effect');
-		if (trackEnded && currentTrack.id) {
-			dispatch(removeTrack(currentTrack.id, id));
-		}
-	}, [trackEnded]);
-
-	//set new track
 	useEffect(() => {
+		//set the current track if tracks exist and are greater than 0
 		if (tracks.length > 0) {
 			setCurrentTrack(tracks[0]);
-			setTrackEnded(false);
 		}
-	}, [tracks, trackEnded]);
-
-	//if tracks are empty set the current track to empty
-	useEffect(() => {
-		if (tracks.length === 0) {
+		//if tracks are empty set the current track to empty and the player is ready. Is ready ensures that we do not set a null track when the initializing (causes player crash)
+		else if (tracks.length === 0 && isReady === 'READY') {
 			setCurrentTrack(null);
 		}
 	}, [tracks]);
 
-	//start playing
+	//start playing automatically if a song ends
 	useEffect(() => {
-		if (trackEnded && tracks.length > 1) {
-			setIsPlaying(true);
-		} else {
-			setCurrentTrack({});
+		console.log('in start playing use effect');
+		//when the track ends remove it from the db and queue
+		if (trackEnded && currentTrack.id) {
+			dispatch(removeTrack(currentTrack.id, id));
 		}
+		//automatically start playing the next song if the last track ended, and there are tracks
+		if (trackEnded && tracks.length > 1) {
+			//set timeout is required to make sure we don't start the previous song again
+			setTimeout(() => setIsPlaying(true), 100);
+		}
+
+		setTrackEnded(false);
+
 		return () => {};
 	}, [trackEnded]);
 
@@ -149,8 +145,8 @@ const Player = props => {
 	};
 
 	const openRoomPopupDialog = () => {
-    setIsDialogOpen(true);
-  };
+		setIsDialogOpen(true);
+	};
 
 	const closeRoomPopupDialog = () => {
 		setIsDialogOpen(false);
@@ -159,35 +155,38 @@ const Player = props => {
 	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<>
-		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} />
-		<SpotifyPlayer
-			token={accessToken}
-			showSaveIcon
-			callback={state => {
-				if (state.error) setPlayerError(state.error);
-				if (state.status) setIsReady(state.status);
-				if (!state.isPlaying) setIsPlaying(false);
-				if (
-					state.progressMs === 0 &&
-					!state.isPlaying &&
-					state.status === 'READY' &&
-					state.type === 'player_update'
-				) {
-					setTrackEnded(true);
-				}
-			}}
-			play={isPlaying}
-			uris={currentTrack.trackUri}
-			styles={{
-				activeColor: '#1DB954',
-				bgColor: '#27343A',
-				color: '#fff',
-				loaderColor: '#fff',
-				sliderColor: '#1DB954',
-				trackArtistColor: '#ccc',
-				trackNameColor: '#fff',
-			}}
-		/>
+			{/* <RoomPopupDialog
+				isDialogOpen={isDialogOpen}
+				closeRoomPopupDialog={closeRoomPopupDialog}
+			/> */}
+			<SpotifyPlayer
+				token={accessToken}
+				showSaveIcon
+				callback={state => {
+					if (state.error) setPlayerError(state.error);
+					if (state.status) setIsReady(state.status);
+					if (!state.isPlaying) setIsPlaying(false);
+					if (
+						state.progressMs === 0 &&
+						!state.isPlaying &&
+						state.status === 'READY' &&
+						state.type === 'player_update'
+					) {
+						setTrackEnded(true);
+					}
+				}}
+				play={isPlaying}
+				uris={currentTrack ? currentTrack.trackUri : null}
+				styles={{
+					activeColor: '#1DB954',
+					bgColor: '#27343A',
+					color: '#fff',
+					loaderColor: '#fff',
+					sliderColor: '#1DB954',
+					trackArtistColor: '#ccc',
+					trackNameColor: '#fff',
+				}}
+			/>
 		</>
 	);
 };
