@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { getRoom, removeTrack } from '../../store';
+import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
 const Player = props => {
 	const history = useHistory();
@@ -25,6 +26,7 @@ const Player = props => {
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
 
+	const [isDialogOpen, setIsDialogOpen] = useState(true);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState('INITIALIZING');
 	const [playerError, setPlayerError] = useState('');
@@ -32,6 +34,10 @@ const Player = props => {
 	const [currentTrack, setCurrentTrack] = useState({});
 	const tracks = useSelector(state => state.trackQueue);
 	const [trackEnded, setTrackEnded] = useState(false);
+
+	useEffect(() => {
+		setIsDialogOpen(true);
+	}, []);
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -140,8 +146,18 @@ const Player = props => {
 		history.push('/spotify-login');
 	};
 
+	const openRoomPopupDialog = () => {
+    setIsDialogOpen(true);
+  };
+
+	const closeRoomPopupDialog = () => {
+		setIsDialogOpen(false);
+	};
+
 	if (!accessToken || !currentTrack) return <></>;
 	return (
+		<>
+		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} />
 		<SpotifyPlayer
 			token={accessToken}
 			showSaveIcon
@@ -157,9 +173,6 @@ const Player = props => {
 				) {
 					setTrackEnded(true);
 				}
-				// if (tracks.length === 1 && state.progressMs === 0) {
-				// 	setCurrentTrack({});
-				// }
 			}}
 			play={isPlaying}
 			uris={currentTrack.trackUri}
@@ -173,6 +186,7 @@ const Player = props => {
 				trackNameColor: '#fff',
 			}}
 		/>
+		</>
 	);
 };
 
