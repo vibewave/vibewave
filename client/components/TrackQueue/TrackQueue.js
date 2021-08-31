@@ -8,19 +8,17 @@ const TrackQueue = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const { id } = useParams();
-	const tracks = useSelector(state => state.trackQueue);
-	
+	let tracks = useSelector(state => state.trackQueue);
+
 	useEffect(() => {
-		dispatch(fetchTracks(id))
+		dispatch(fetchTracks(id));
 	}, []);
-	
-	if (!tracks) return <></>
+
+	if (!tracks) return <></>;
 	return (
 		<div className={classes.trackQueueContainer}>
-			<h4>
-				Track Queue
-			</h4>
-			{tracks.map((track) => (
+			<h4>Track Queue</h4>
+			{tracks.map(track => (
 				<div key={track.id} className={classes.trackQueueItemsContainer}>
 					<div>
 						<img src={track.albumUrl} />

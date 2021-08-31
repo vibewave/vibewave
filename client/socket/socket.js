@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import store, { fetchTracks } from '../store';
 
 export let socket;
 
@@ -11,6 +12,11 @@ if (process.env.NODE_ENV === 'production') {
 socket.on('connect', () => {
 	console.log(`Connected with id: ${socket.id}`);
 });
+
+// socket.on('refresh-tracks', room => {
+// 	console.log('inside of refresh tracks');
+// 	store.dispatch(fetchTracks(room));
+// });
 
 // function
 

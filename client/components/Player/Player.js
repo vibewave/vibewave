@@ -39,9 +39,9 @@ const Player = props => {
 	}, []);
 
 	//check if host and set host
+	//consider refactoring and checking if redundant with Room
 	useEffect(() => {
 		if (room.id) {
-			joinRoom();
 			if (room?.id && user?.id === room?.hostId) {
 				setIsHost(true);
 			}
@@ -50,7 +50,8 @@ const Player = props => {
 	}, [room.id]);
 
 	//monitor if the track has ended
-	useEffect(() => {
+	useEffect(async () => {
+		console.log('trackended use effect');
 		if (trackEnded && currentTrack.id) {
 			dispatch(removeTrack(currentTrack.id, id));
 		}
@@ -64,10 +65,16 @@ const Player = props => {
 		}
 	}, [tracks, trackEnded]);
 
+	//if tracks are empty set the current track to empty
+	useEffect(() => {
+		if (tracks.length === 0) {
+			setCurrentTrack(null);
+		}
+	}, [tracks]);
+
 	//start playing
 	useEffect(() => {
 		if (trackEnded && tracks.length > 1) {
-			console.log('in if statement');
 			setIsPlaying(true);
 		} else {
 			setCurrentTrack({});
@@ -75,7 +82,6 @@ const Player = props => {
 		return () => {};
 	}, [trackEnded]);
 
-	console.log(tracks);
 	//check if accesstoken is available
 	useEffect(() => {
 		if (!accessToken) {
@@ -128,10 +134,6 @@ const Player = props => {
 		}
 		return () => {};
 	}, [playerError]);
-
-	const joinRoom = () => {
-		socket.emit('join-room');
-	};
 
 	const redirectLogin = () => {
 		window.alert(
