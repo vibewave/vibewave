@@ -101,7 +101,7 @@ const Room = props => {
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
-							<TrackSearch spotifyApi={spotifyApi} />
+							{isHost && <TrackSearch spotifyApi={spotifyApi} />}
 						</div>
 						<div className={classes.playerDiv}>
 							<Player

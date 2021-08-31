@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { fetchRooms } from '../../store';
@@ -11,12 +11,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 
 const AllRooms = () => {
 	const classes = useStyles();
-	const rooms = useSelector(state => {
-		return state.allRooms;
-	});
+	const history = useHistory();
+	const auth = useSelector(state => state.auth);
+	const rooms = useSelector(state => state.allRooms);
+
+	console.log('auth: ', auth);
 
 	const dispatch = useDispatch();
 
@@ -24,12 +27,18 @@ const AllRooms = () => {
 		dispatch(fetchRooms());
 	}, []);
 
+
+	const handleEnterRoom = async (roomId) => {
+		await axios.put(`/api/users/${auth.id}`, { roomId, status: 'ENTER' });
+		history.push(`/rooms/${roomId}`);
+	}
+
 	return (
 		<div className={classes.allCards}>
 			{rooms.map(room => (
-				<div key={room.id}>
+				<div key={room.id} onClick={() => handleEnterRoom(room.id)}>
 					<Card className={classes.singleCard}>
-						<Link to={`/rooms/${room.id}`}>
+						{/* <Link to={`/rooms/${room.id}`}> */}
 							<CardContent>
 								<Typography
 									gutterBottom
@@ -65,7 +74,7 @@ const AllRooms = () => {
 							>
 								{room.description}
 							</Typography>
-						</Link>
+						{/* </Link> */}
 					</Card>
 				</div>
 			))}
