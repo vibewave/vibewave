@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 		width: '200px',
 		height: '350px',
 	},
+	
 }));
 
 export default useStyles;
