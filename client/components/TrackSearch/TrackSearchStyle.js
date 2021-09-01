@@ -8,14 +8,14 @@ const useStyles = makeStyles(theme => ({
 	trackSearchInput: {
 		borderRadius: '0.5em',
 		background: '#012F41',
-		width: '20em',
+		width: '25em',
 	},
 	trackSearchText: {
 		color: 'white',
 	},
 	songList: {
-		height: '20em',
-		width: '28em',
+		height: '35em',
+		width: '25em',
 		overflow: 'auto',
 	}
 }));
