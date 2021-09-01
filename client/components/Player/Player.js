@@ -6,6 +6,9 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 import { getRoom, removeTrack } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
+//try including this into the non host seek useeffect
+const getTimeAndSeek = () => {};
+
 const Player = props => {
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -97,7 +100,13 @@ const Player = props => {
 
 		// if not the host grab the time from the host
 		if (!isHost && isPlaying) {
-			socket.emit('seek', room.id);
+			console.log('in non host user isPlaying');
+			socket.emit('seek', room.id, socket.id);
+			socket.on('time-position-test', (counter, socketId) => {
+				console.log('time position emit received by client');
+				console.log(socketId);
+				console.log(counter);
+			});
 		}
 	}, [isPlaying]);
 
@@ -172,10 +181,10 @@ const Player = props => {
 	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<>
-			{/* <RoomPopupDialog
+			<RoomPopupDialog
 				isDialogOpen={isDialogOpen}
 				closeRoomPopupDialog={closeRoomPopupDialog}
-			/> */}
+			/>
 			<SpotifyPlayer
 				token={accessToken}
 				showSaveIcon

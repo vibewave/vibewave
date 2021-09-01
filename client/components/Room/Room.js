@@ -30,11 +30,8 @@ const Room = props => {
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 
-
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
-
-
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -77,6 +74,7 @@ const Room = props => {
 		socket.emit('song-started', true);
 	};
 
+	// testing this in player
 	const getTimePosition = () => {
 		socket.on('time-position', counter => {
 			console.log('inside time-position client for user ', socket.id);

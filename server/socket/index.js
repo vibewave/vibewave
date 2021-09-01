@@ -61,8 +61,12 @@ const startSocket = io => {
 			console.log(roomCounters);
 		});
 
-		socket.on('seek', roomId => {
+		//a non-host user is seeking the time
+		socket.on('seek', (roomId, socketId) => {
 			console.log('in seek on server side');
+			console.log(roomId);
+			console.log(socketId);
+			socket.emit('time-position-test', roomCounters[roomId].counter, socketId);
 		});
 
 		socket.on('disconnect', () => {
