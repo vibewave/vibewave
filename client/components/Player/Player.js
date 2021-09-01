@@ -82,7 +82,7 @@ const Player = props => {
 		//automatically start playing the next song if the last track ended, and there are tracks
 		if (trackEnded && tracks.length > 1) {
 			//set timeout is required to make sure we don't start the previous song again
-			setTimeout(() => setIsPlaying(true), 100);
+			setTimeout(() => setIsPlaying(true), 50);
 		}
 
 		setTrackEnded(false);
@@ -116,9 +116,6 @@ const Player = props => {
 				}
 			});
 		}
-		// if (trackUpdate) {
-		// 	setTimeout(() => setTrackUpdate(false), 5000);
-		// }
 	}, [isPlaying]);
 
 	//check if accesstoken is available
