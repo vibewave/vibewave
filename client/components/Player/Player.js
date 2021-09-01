@@ -3,7 +3,7 @@ import { socket } from '../../socket/socket';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { getRoom, removeTrack } from '../../store';
+import { fetchTracks, getRoom, removeTrack } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
 //try including this into the non host seek useeffect
@@ -37,6 +37,10 @@ const Player = props => {
 	const [currentTrack, setCurrentTrack] = useState({});
 	const tracks = useSelector(state => state.trackQueue);
 	const [trackEnded, setTrackEnded] = useState(false);
+	const [progressMs, setProgressMs] = useState(0);
+	const [seeked, setSeeked] = useState(false);
+	const [playerType, setplayerType] = useState('player_update');
+	const [trackUpdate, setTrackUpdate] = useState(false);
 
 	useEffect(() => {
 		setIsDialogOpen(true);
@@ -78,7 +82,7 @@ const Player = props => {
 		//automatically start playing the next song if the last track ended, and there are tracks
 		if (trackEnded && tracks.length > 1) {
 			//set timeout is required to make sure we don't start the previous song again
-			setTimeout(() => setIsPlaying(true), 100);
+			setTimeout(() => setIsPlaying(true), 50);
 		}
 
 		setTrackEnded(false);
@@ -95,17 +99,21 @@ const Player = props => {
 		// if the host presses play reset the counter
 		if (isHost && isPlaying) {
 			console.log('in if statement for is playing');
-			socket.emit('reset-counter', room.id, currentTrack.duration);
+			socket.emit('reset-counter', room.id, progressMs, currentTrack.duration);
 		}
 
 		// if not the host grab the time from the host
-		if (!isHost && isPlaying) {
-			console.log('in non host user isPlaying');
+		if (!isHost && isPlaying && !trackUpdate) {
+			dispatch(fetchTracks(id));
 			socket.emit('seek', room.id, socket.id);
 			socket.on('time-position-test', (counter, socketId) => {
-				console.log('time position emit received by client');
-				console.log(socketId);
 				console.log(counter);
+				if (socketId === socket.id) {
+					console.log('inside seek client side');
+					setTimeout(() => {
+						spotifyApi.seek(counter);
+					}, 400);
+				}
 			});
 		}
 	}, [isPlaying]);
@@ -192,6 +200,13 @@ const Player = props => {
 					if (state.status) setIsReady(state.status);
 					if (!state.isPlaying) setIsPlaying(false);
 					if (state.isPlaying) setIsPlaying(true);
+					if (state.progressMs) setProgressMs(state.progressMs);
+					if (state.type) {
+						// if (state.type !== 'player_update') {
+						setplayerType(state.type);
+						if (state.type === 'track_update') setTrackUpdate(true);
+						// }
+					}
 					if (
 						state.progressMs === 0 &&
 						!state.isPlaying &&
