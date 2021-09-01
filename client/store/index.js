@@ -20,6 +20,15 @@ const reducer = combineReducers({
 	trackQueue,
 	userRoom,
 });
+
+// const middlewares = [
+// 	thunkMiddleware,
+// ];
+// if (process.env.NODE_ENV !== 'production') {
+// 	const reduxLogger = createLogger({ collapsed: true });
+// 	middlewares.push(reduxLogger);
+// }
+
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

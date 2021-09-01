@@ -170,12 +170,9 @@ const Player = props => {
 		history.push('/spotify-login');
 	};
 
-	const openRoomPopupDialog = () => {
-		setIsDialogOpen(true);
-	};
-
 	const closeRoomPopupDialog = () => {
 		setIsDialogOpen(false);
+		setIsPlaying(true);
 	};
 
 	if (!accessToken || !currentTrack) return <></>;
@@ -184,6 +181,8 @@ const Player = props => {
 			<RoomPopupDialog
 				isDialogOpen={isDialogOpen}
 				closeRoomPopupDialog={closeRoomPopupDialog}
+				room={room}
+				user={user}
 			/>
 			<SpotifyPlayer
 				token={accessToken}
