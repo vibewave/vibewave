@@ -196,7 +196,6 @@ const Player = props => {
 				token={accessToken}
 				showSaveIcon
 				callback={state => {
-					console.log(state);
 					if (state.error) setPlayerError(state.error);
 					if (state.status) setIsReady(state.status);
 					if (!state.isPlaying) setIsPlaying(false);
