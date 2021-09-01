@@ -2,6 +2,10 @@ const { Socket } = require('socket.io');
 
 let users = [];
 let roomCounters = { 1: { counter: 0 }, 2: { counter: 0 } };
+let roomIntervals = {};
+// const clearRoomInterval = id => {
+// 	clearInterval();
+// };
 // export const trackQueueOrder = {};
 
 const startSocket = io => {
@@ -34,12 +38,17 @@ const startSocket = io => {
 			console.log(counter);
 		});
 
-		socket.on('reset-counter', (id, duration) => {
+		socket.on('reset-counter', (id, progress = 0, duration) => {
+			if (roomIntervals[id]) {
+				clearInterval(roomIntervals[id]);
+			}
 			console.log('inside reset counter server side');
-			console.log(roomCounters);
+
 			console.log('id in server is ', id);
-			roomCounters[id].counter = 0;
-			const counterInterval = setInterval(() => {
+			roomCounters[id].counter = progress;
+			console.log(roomCounters);
+			console.log(duration);
+			roomIntervals[id] = setInterval(() => {
 				roomCounters[id].counter += 100;
 			}, 100);
 		});
@@ -64,8 +73,6 @@ const startSocket = io => {
 		//a non-host user is seeking the time
 		socket.on('seek', (roomId, socketId) => {
 			console.log('in seek on server side');
-			console.log(roomId);
-			console.log(socketId);
 			socket.emit('time-position-test', roomCounters[roomId].counter, socketId);
 		});
 
