@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../store';
+import { fetchRooms } from '../store';
 
 // Action Types
 const FETCH_USERS = 'FETCH_USERS';
@@ -32,6 +34,25 @@ export const leaveRoom = (roomId, userId) => {
   return async dispatch => {
     await axios.put(`/api/users/${userId}`, { roomId: null });
     dispatch(fetchUsers(roomId));
+  }
+}
+
+export const hostLeaveAndDeleteRoom = (roomId, userId, allRooms, history) => {
+  // console.log('inside hostLeaveRoom');
+  return async dispatch => {
+    for(let i = 0; i < allRooms.length; i++) {
+      // console.log(`allRooms[${i}].id: `, allRooms[i].id);
+      // console.log('roomId: ', roomId);
+      // console.log(`allRooms[${i}].hostId`, allRooms[i].hostId);
+      // console.log('userId: ', userId);
+      if(allRooms[i].id == roomId && allRooms[i].hostId == userId) {
+        // console.log('inside delete');
+        await axios.delete(`/api/rooms/${roomId}`);
+        dispatch(fetchUsers(roomId));
+        store.dispatch(fetchRooms());
+        history.push('/home');
+      }
+    }
   }
 }
 

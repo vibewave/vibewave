@@ -3,7 +3,7 @@ import { socket } from '../../socket/socket';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { getRoom, removeTrack } from '../../store';
+import { fetchUsers, removeTrack } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
 //try including this into the non host seek useeffect
@@ -25,7 +25,7 @@ const Player = props => {
 	// console.log('currentTrack: ', currentTrack);
 
 	const user = useSelector(state => state.auth);
-	const room = useSelector(state => state.room);
+	const roomAndUsers = useSelector(state => state.userRoom);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
 
@@ -43,20 +43,20 @@ const Player = props => {
 	}, []);
 
 	useEffect(() => {
-		dispatch(getRoom(id));
+		dispatch(fetchUsers(id));
 		return () => {};
 	}, []);
 
 	//check if host and set host
 	//consider refactoring and checking if redundant with Room
 	useEffect(() => {
-		if (room.id) {
-			if (room?.id && user?.id === room?.hostId) {
+		if (roomAndUsers.id) {
+			if (roomAndUsers?.id && user?.id === roomAndUsers?.hostId) {
 				setIsHost(true);
 			}
 		}
 		return () => {};
-	}, [room.id, user]);
+	}, [roomAndUsers.id, user]);
 
 	useEffect(() => {
 		//set the current track if tracks exist and are greater than 0
@@ -129,7 +129,7 @@ const Player = props => {
 		(isReady === 'READY' ||
 			(isReady === 'ERROR' && playerError !== browserAutoplayError)) &&
 		accessToken &&
-		room?.id &&
+		roomAndUsers?.id &&
 		!isHost &&
 		currentTimePosition > 0;
 	useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { socket } from '../../socket/socket';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -10,7 +10,7 @@ import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
-import { getRoom, leaveRoom, fetchUsers } from '../../store';
+import { leaveRoom, fetchUsers, hostLeaveAndDeleteRoom, fetchRooms } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -26,19 +26,21 @@ const joinRoom = id => {
 const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { id } = useParams();
 	const user = useSelector(state => state.auth);
-	const room = useSelector(state => state.room);
 	// use this to display list of users
-	const users = useSelector(state => state.userRoom);
-
+	const allRooms = useSelector(state => state.allRooms);
+	const roomAndUsers = useSelector(state => state.userRoom);
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
 	useEffect(() => {
-		dispatch(getRoom(id));
 		dispatch(fetchUsers(id));
-		return () => dispatch(leaveRoom(id, user.id));
+		dispatch(fetchRooms());
+		return () => {
+			dispatch(leaveRoom(id, user.id));
+		};
 	}, []);
 
 	// CALL THESE INSIDE A USEEFFECT:
@@ -56,20 +58,20 @@ const Room = props => {
 	// }
 
 	useEffect(() => {
-		if (room.id) {
-			joinRoom(room.id);
-			if (user.id === room.hostId) {
+		if (roomAndUsers.id) {
+			joinRoom(roomAndUsers.id);
+			if (user.id === roomAndUsers.hostId) {
 				setIsHost(true);
 			} else {
 				console.log('joined the room');
 			}
 		}
-		return () => {};
-	}, [room, user]);
+		// return () => {};
+	}, [roomAndUsers, user]);
 
 	useEffect(() => {
 		getTimePosition();
-		return () => {};
+		// return () => {};
 	}, []);
 
 	const startSong = () => {
@@ -105,6 +107,7 @@ const Room = props => {
 							{isHost && 'I am the host'}
 							{!isHost && 'I am not the host'}
 							<button onClick={startSong}>Start Song</button>
+							{isHost && <button onClick={() => dispatch(hostLeaveAndDeleteRoom(id, user.id, allRooms, history))}>Delete Room</button>}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
