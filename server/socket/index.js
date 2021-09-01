@@ -1,6 +1,7 @@
 const { Socket } = require('socket.io');
 
 let users = [];
+let roomCounters = { 1: { counter: 0 }, 2: { counter: 0 } };
 // export const trackQueueOrder = {};
 
 const startSocket = io => {
@@ -33,20 +34,35 @@ const startSocket = io => {
 			console.log(counter);
 		});
 
+		socket.on('reset-counter', (id, duration) => {
+			console.log('inside reset counter server side');
+			console.log(roomCounters);
+			console.log('id in server is ', id);
+			roomCounters[id].counter = 0;
+			const counterInterval = setInterval(() => {
+				roomCounters[id].counter += 100;
+			}, 100);
+		});
+
+		// join the room on the server side
 		socket.on('join-room', room => {
 			socket.join(room);
 			console.log(`${socket.id} joined room ${room}`);
-
-			// console.log(`Counter from server: ${counter}`);
-			// socket.emit('time-position', counter);
-			// fetch new trackqueue list = updatedTrackQueue
-			// socket.emit('trackqueueUpdated', updatedTrackQueue)
 		});
 
+		//tell all other users in the room to refresh tracks when a new song gets added
 		socket.on('track-added', room => {
-			console.log('a track has been added');
-			console.log(room);
 			socket.to(room).emit('refresh-tracks', room);
+		});
+
+		//create a room counter whenever a new room is created
+		socket.on('create-counter', roomId => {
+			roomCounters[roomId] = { counter: 0 };
+			console.log(roomCounters);
+		});
+
+		socket.on('seek', roomId => {
+			console.log('in seek on server side');
 		});
 
 		socket.on('disconnect', () => {

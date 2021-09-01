@@ -21,7 +21,7 @@ const Player = props => {
 
 	// console.log('currentTrack: ', currentTrack);
 
-	const user = useSelector(state => state.user);
+	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
@@ -53,7 +53,7 @@ const Player = props => {
 			}
 		}
 		return () => {};
-	}, [room.id]);
+	}, [room.id, user]);
 
 	useEffect(() => {
 		//set the current track if tracks exist and are greater than 0
@@ -68,7 +68,6 @@ const Player = props => {
 
 	//start playing automatically if a song ends
 	useEffect(() => {
-		console.log('in start playing use effect');
 		//when the track ends remove it from the db and queue
 		if (trackEnded && currentTrack.id) {
 			dispatch(removeTrack(currentTrack.id, id));
@@ -83,6 +82,24 @@ const Player = props => {
 
 		return () => {};
 	}, [trackEnded]);
+
+	//whenever is playing is set to true by the host start the counter for the room
+	useEffect(() => {
+		// console.log('is playing use effect triggered');
+		// console.log('is host ', isHost);
+		// console.log('is playing ', isPlaying);
+
+		// if the host presses play reset the counter
+		if (isHost && isPlaying) {
+			console.log('in if statement for is playing');
+			socket.emit('reset-counter', room.id, currentTrack.duration);
+		}
+
+		// if not the host grab the time from the host
+		if (!isHost && isPlaying) {
+			socket.emit('seek', room.id);
+		}
+	}, [isPlaying]);
 
 	//check if accesstoken is available
 	useEffect(() => {
@@ -166,6 +183,7 @@ const Player = props => {
 					if (state.error) setPlayerError(state.error);
 					if (state.status) setIsReady(state.status);
 					if (!state.isPlaying) setIsPlaying(false);
+					if (state.isPlaying) setIsPlaying(true);
 					if (
 						state.progressMs === 0 &&
 						!state.isPlaying &&
