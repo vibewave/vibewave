@@ -6,6 +6,9 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 import { getRoom, removeTrack } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
+//try including this into the non host seek useeffect
+const getTimeAndSeek = () => {};
+
 const Player = props => {
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -45,43 +48,68 @@ const Player = props => {
 	}, []);
 
 	//check if host and set host
+	//consider refactoring and checking if redundant with Room
 	useEffect(() => {
 		if (room.id) {
-			joinRoom();
 			if (room?.id && user?.id === room?.hostId) {
 				setIsHost(true);
 			}
 		}
 		return () => {};
-	}, [room.id]);
+	}, [room.id, user]);
 
-	//monitor if the track has ended
 	useEffect(() => {
+		//set the current track if tracks exist and are greater than 0
+		if (tracks.length > 0) {
+			setCurrentTrack(tracks[0]);
+		}
+		//if tracks are empty set the current track to empty and the player is ready. Is ready ensures that we do not set a null track when the initializing (causes player crash)
+		else if (tracks.length === 0 && isReady === 'READY') {
+			setCurrentTrack(null);
+		}
+	}, [tracks]);
+
+	//start playing automatically if a song ends
+	useEffect(() => {
+		//when the track ends remove it from the db and queue
 		if (trackEnded && currentTrack.id) {
 			dispatch(removeTrack(currentTrack.id, id));
 		}
-	}, [trackEnded]);
-
-	//set new track
-	useEffect(() => {
-		if (tracks.length > 0) {
-			setCurrentTrack(tracks[0]);
-			setTrackEnded(false);
-		}
-	}, [tracks, trackEnded]);
-
-	//start playing
-	useEffect(() => {
+		//automatically start playing the next song if the last track ended, and there are tracks
 		if (trackEnded && tracks.length > 1) {
-			console.log('in if statement');
-			setIsPlaying(true);
-		} else {
-			setCurrentTrack({});
+			//set timeout is required to make sure we don't start the previous song again
+			setTimeout(() => setIsPlaying(true), 100);
 		}
+
+		setTrackEnded(false);
+
 		return () => {};
 	}, [trackEnded]);
 
-	console.log(tracks);
+	//whenever is playing is set to true by the host start the counter for the room
+	useEffect(() => {
+		// console.log('is playing use effect triggered');
+		// console.log('is host ', isHost);
+		// console.log('is playing ', isPlaying);
+
+		// if the host presses play reset the counter
+		if (isHost && isPlaying) {
+			console.log('in if statement for is playing');
+			socket.emit('reset-counter', room.id, currentTrack.duration);
+		}
+
+		// if not the host grab the time from the host
+		if (!isHost && isPlaying) {
+			console.log('in non host user isPlaying');
+			socket.emit('seek', room.id, socket.id);
+			socket.on('time-position-test', (counter, socketId) => {
+				console.log('time position emit received by client');
+				console.log(socketId);
+				console.log(counter);
+			});
+		}
+	}, [isPlaying]);
+
 	//check if accesstoken is available
 	useEffect(() => {
 		if (!accessToken) {
@@ -135,10 +163,6 @@ const Player = props => {
 		return () => {};
 	}, [playerError]);
 
-	const joinRoom = () => {
-		socket.emit('join-room');
-	};
-
 	const redirectLogin = () => {
 		window.alert(
 			`Spotify Authentication Failed. Your Spotify login credentials may have expired. Please login with Spotify again.`
@@ -154,35 +178,41 @@ const Player = props => {
 	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<>
-		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} room={room} user={user} />
-		<SpotifyPlayer
-			token={accessToken}
-			showSaveIcon
-			callback={state => {
-				if (state.error) setPlayerError(state.error);
-				if (state.status) setIsReady(state.status);
-				if (!state.isPlaying) setIsPlaying(false);
-				if (
-					state.progressMs === 0 &&
-					!state.isPlaying &&
-					state.status === 'READY' &&
-					state.type === 'player_update'
-				) {
-					setTrackEnded(true);
-				}
-			}}
-			play={isPlaying}
-			uris={currentTrack.trackUri}
-			styles={{
-				activeColor: '#1DB954',
-				bgColor: '#27343A',
-				color: '#fff',
-				loaderColor: '#fff',
-				sliderColor: '#1DB954',
-				trackArtistColor: '#ccc',
-				trackNameColor: '#fff',
-			}}
-		/>
+			<RoomPopupDialog
+				isDialogOpen={isDialogOpen}
+				closeRoomPopupDialog={closeRoomPopupDialog}
+				room={room}
+				user={user}
+			/>
+			<SpotifyPlayer
+				token={accessToken}
+				showSaveIcon
+				callback={state => {
+					if (state.error) setPlayerError(state.error);
+					if (state.status) setIsReady(state.status);
+					if (!state.isPlaying) setIsPlaying(false);
+					if (state.isPlaying) setIsPlaying(true);
+					if (
+						state.progressMs === 0 &&
+						!state.isPlaying &&
+						state.status === 'READY' &&
+						state.type === 'player_update'
+					) {
+						setTrackEnded(true);
+					}
+				}}
+				play={isPlaying}
+				uris={currentTrack ? currentTrack.trackUri : null}
+				styles={{
+					activeColor: '#1DB954',
+					bgColor: '#27343A',
+					color: '#fff',
+					loaderColor: '#fff',
+					sliderColor: '#1DB954',
+					trackArtistColor: '#ccc',
+					trackNameColor: '#fff',
+				}}
+			/>
 		</>
 	);
 };

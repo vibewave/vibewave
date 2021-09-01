@@ -16,6 +16,13 @@ const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
 });
 
+const joinRoom = id => {
+	id = parseInt(id, 10);
+	if (Number.isInteger(id)) {
+		socket.emit('join-room', id);
+	}
+};
+
 const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
@@ -23,11 +30,8 @@ const Room = props => {
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 
-
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
-
-
 
 	useEffect(() => {
 		dispatch(getRoom(id));
@@ -50,7 +54,7 @@ const Room = props => {
 
 	useEffect(() => {
 		if (room.id) {
-			// joinRoom();
+			joinRoom(room.id);
 			if (user.id === room.hostId) {
 				setIsHost(true);
 			} else {
@@ -70,10 +74,7 @@ const Room = props => {
 		socket.emit('song-started', true);
 	};
 
-	// const joinRoom = () => {
-	// 	socket.emit('join-room');
-	// };
-
+	// testing this in player
 	const getTimePosition = () => {
 		socket.on('time-position', counter => {
 			console.log('inside time-position client for user ', socket.id);
@@ -101,7 +102,6 @@ const Room = props => {
 							{isHost && 'I am the host'}
 							{!isHost && 'I am not the host'}
 							<button onClick={startSong}>Start Song</button>
-							{/* <button onClick={joinRoom}>Join Room</button> */}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
