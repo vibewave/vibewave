@@ -1,17 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import useStyles from './RoomPopupDialogStyle';;
 
 const RoomPopupDialog = (props) => {
   const {
     isDialogOpen,
     closeRoomPopupDialog,
-    room
+    room,
+    user
   } = props;
+
+  const classes = useStyles();
+
+  const currentTimeOfDay = new Date().getHours();
+  const showWelcomeMessage = () => {
+    let message = '';
+    if (currentTimeOfDay > 22 && currentTimeOfDay > 0 && currentTimeOfDay < 5) {
+      message = 'Happy Late Night';
+    }
+    else if (currentTimeOfDay < 12) {
+      message = 'Good Morning';
+    }
+    else if (currentTimeOfDay < 18) {
+      message = 'Good Afternoon';
+    }
+    else {
+      message = 'Good Evening';
+    }
+    return message;
+  }
 
   return (
     <div>
@@ -21,9 +43,14 @@ const RoomPopupDialog = (props) => {
         onClose={closeRoomPopupDialog}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{`You have entered ${room.title}!`}</DialogTitle>
-        <DialogContent>
+        >
+        <DialogTitle id="alert-dialog-slide-title" className={classes.dialogTitle}>
+          <p>{`${showWelcomeMessage()} ${user.username}.`}</p>
+        </DialogTitle>
+        <DialogTitle className={classes.dialogTitle}>
+          {`You entered ${room.title}!`}
+        </DialogTitle>
+        {/* <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {`- You can enjoy listening to the tracks hosted by HOST-NAME with all other users in this room.`}</DialogContentText>
           <DialogContentText id="alert-dialog-slide-description">
@@ -37,10 +64,10 @@ const RoomPopupDialog = (props) => {
           <DialogContentText id="alert-dialog-slide-description">
             {`- To start partying, click the button below and off you go~`}
           </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeRoomPopupDialog} color="primary">
-            Got it. Let's Party!
+        </DialogContent> */}
+        <DialogActions className={classes.dialogActions}>
+          <Button onClick={closeRoomPopupDialog} color='primary' className={classes.dialogButton}>
+            Join the Party
           </Button>
         </DialogActions>
       </Dialog>

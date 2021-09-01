@@ -21,7 +21,7 @@ const Player = props => {
 
 	// console.log('currentTrack: ', currentTrack);
 
-	const user = useSelector(state => state.user);
+	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
@@ -146,10 +146,6 @@ const Player = props => {
 		history.push('/spotify-login');
 	};
 
-	const openRoomPopupDialog = () => {
-    setIsDialogOpen(true);
-  };
-
 	const closeRoomPopupDialog = () => {
 		setIsDialogOpen(false);
 		setIsPlaying(true);
@@ -158,7 +154,7 @@ const Player = props => {
 	if (!accessToken || !currentTrack) return <></>;
 	return (
 		<>
-		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} room={room} />
+		<RoomPopupDialog isDialogOpen={isDialogOpen} closeRoomPopupDialog={closeRoomPopupDialog} room={room} user={user} />
 		<SpotifyPlayer
 			token={accessToken}
 			showSaveIcon

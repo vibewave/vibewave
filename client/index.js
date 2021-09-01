@@ -8,16 +8,25 @@ import '../src/style.css';
 import store from './store';
 import App from './App';
 
-const muiTheme = createTheme({
+const darkTheme = createTheme({
 	palette: {
-		type:'dark'
+		type: 'dark',
+		primary: {
+			light: '#ADE8F4',
+			main: '#012F41'
+		},
+		secondary: {
+			white: '#FFFFFF',
+			light: '#44494B',
+			main: '#151A1C'
+		}
 	}
 });
 
 ReactDOM.render(
 	<Provider store={store}>
 		<Router>
-			<ThemeProvider theme={muiTheme}>
+			<ThemeProvider theme={darkTheme}>
 				<CssBaseline />
 				<App />
 			</ThemeProvider>
