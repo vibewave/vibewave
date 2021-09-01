@@ -6,6 +6,13 @@ import { addTrack } from '../../store/track';
 import { fetchTracks } from '../../store/trackQueue';
 import { useParams } from 'react-router-dom';
 import useStyles from './TrackSearchStyle';
+import { socket } from '../../socket/socket';
+
+const trackAddedEmit = id => {
+	console.log('on track added in the front end');
+	id = parseInt(id, 10);
+	socket.emit('track-added', id);
+};
 
 const TrackSearch = ({ spotifyApi }) => {
 	const classes = useStyles();
@@ -23,14 +30,15 @@ const TrackSearch = ({ spotifyApi }) => {
 		await dispatch(addTrack(track, id));
 		dispatch(fetchTracks(id));
 		setSearchSongName('');
+		trackAddedEmit(id);
+		console.log(id);
+		console.log('in choose track');
 	};
 
 	// const emitTrackAdded = () => {
-		// socket emit trackAdded event
-		// socket.on ('trackqueue updated), update the trackqueue local state
+	// socket emit trackAdded event
+	// socket.on ('trackqueue updated), update the trackqueue local state
 	// }
-
-
 
 	useEffect(() => {
 		if (!accessToken) return;
