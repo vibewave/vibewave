@@ -93,6 +93,7 @@ const TrackSearch = ({ spotifyApi }) => {
 						track={track}
 						key={track.uri}
 						chooseTrack={chooseTrack}
+						className={classes.songListItem}
 					/>
 				))}
 			</div>

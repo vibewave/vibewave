@@ -8,19 +8,16 @@ const TrackSearchResult = ({ chooseTrack, track }) => {
     chooseTrack(track);
   }
   return (
-    <div 
+    <div
       className={classes.searchResultItemsContainer}
       onClick={handlePlay}
     >
-      <div className={classes.searchResultItems}>
-        <div>
-          <img src={track.albumUrl} />
-        </div>
-        <div className={classes.trackDescription}>
-          Title: {track.title}
-          <br />
-          Artist: {track.artist}
-        </div>
+      <div className={classes.albumImgContainer}>
+        <img src={track.albumUrl} className={classes.albumImg} />
+      </div>
+      <div className={classes.trackDescription}>
+        <h4>{track.title}</h4>
+        <h5>{track.artist}</h5>
       </div>
     </div>
   )
