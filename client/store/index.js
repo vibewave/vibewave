@@ -8,6 +8,7 @@ import allRooms from './allRooms';
 import spotifyAuth from './spotifyAuth';
 import track from './track';
 import trackQueue from './trackQueue';
+import userRoom from './userRoom';
 
 // const reducer = combineReducers({ auth })
 const reducer = combineReducers({
@@ -17,6 +18,7 @@ const reducer = combineReducers({
 	spotifyAuth,
 	track,
 	trackQueue,
+	userRoom,
 });
 const middleware = composeWithDevTools(
 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
@@ -30,3 +32,4 @@ export * from './room';
 export * from './allRooms';
 export * from './trackQueue';
 export * from './track';
+export * from './userRoom';

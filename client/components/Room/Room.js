@@ -10,7 +10,7 @@ import TrackSearch from '../TrackSearch/TrackSearch';
 import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
-import { getRoom, removeTrack } from '../../store';
+import { getRoom, leaveRoom, fetchUsers } from '../../store';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -22,16 +22,15 @@ const Room = props => {
 	const { id } = useParams();
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
-
-
+	// use this to display list of users
+	const users = useSelector(state => state.userRoom);
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
-
-
 	useEffect(() => {
 		dispatch(getRoom(id));
-		return () => {};
+		dispatch(fetchUsers(id));
+		return () => dispatch(leaveRoom(id, user.id));
 	}, []);
 
 	// CALL THESE INSIDE A USEEFFECT:
@@ -49,7 +48,7 @@ const Room = props => {
 	// }
 
 	useEffect(() => {
-		if (room.id) {
+		if (room) {
 			// joinRoom();
 			if (user.id === room.hostId) {
 				setIsHost(true);
@@ -58,7 +57,7 @@ const Room = props => {
 			}
 		}
 		return () => {};
-	}, [room.id]);
+	}, [room, user]);
 
 	useEffect(() => {
 		getTimePosition();
