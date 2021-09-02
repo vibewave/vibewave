@@ -110,10 +110,10 @@ const Room = props => {
 							{isHost && <TrackSearch spotifyApi={spotifyApi} />}
 						</div>
 						<div className={classes.playerDiv}>
-							<Player
+							{/* <Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-							/>
+							/> */}
 						</div>
 					</div>
 				</Grid>
