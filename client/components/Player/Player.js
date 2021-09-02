@@ -6,6 +6,8 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 import { fetchTracks, getRoom, removeTrack } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
+// MOVING OVER TO YOUTUBE API.
+
 //try including this into the non host seek useeffect
 const getTimeAndSeek = () => {};
 
