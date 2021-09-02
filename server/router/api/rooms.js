@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-	models: { Room },
+	models: { Room, User },
 } = require('../../db');
 
 //GET /api/rooms return all rooms
@@ -23,11 +23,30 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
-// GET /api/rooms/:id return a specific room
-router.get('/:id', async (req, res, next) => {
+// GET /api/rooms/:id return a specific room and users of that room
+router.get('/:roomId', async (req, res, next) => {
 	try {
-		const room = await Room.findByPk(req.params.id);
-		res.send(room);
+		const roomAndUsers = await Room.findOne({
+			include: [{
+				model: User,
+				where: {
+					roomId: req.params.roomId,
+				},
+			}],
+		});
+		
+		res.send(roomAndUsers);
+	} catch (err) {
+		next(err);
+	}
+});
+
+// DELETE /api/rooms/:id
+router.delete('/:roomId', async (req, res, next) => {
+	try {
+		const room = await Room.findByPk(req.params.roomId);
+		await room.destroy();
+		res.sendStatus(204);
 	} catch (err) {
 		next(err);
 	}

@@ -3,7 +3,7 @@ import { socket } from '../../socket/socket';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { fetchTracks, getRoom, removeTrack } from '../../store';
+import { fetchUsers, removeTrack, fetchTracks } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
 // MOVING OVER TO YOUTUBE API.
@@ -27,7 +27,7 @@ const Player = props => {
 	// console.log('currentTrack: ', currentTrack);
 
 	const user = useSelector(state => state.auth);
-	const room = useSelector(state => state.room);
+	const roomAndUsers = useSelector(state => state.userRoom);
 	const spotifyAuth = useSelector(state => state.spotifyAuth);
 	const accessToken = spotifyAuth?.accessToken;
 
@@ -49,20 +49,20 @@ const Player = props => {
 	}, []);
 
 	useEffect(() => {
-		dispatch(getRoom(id));
+		dispatch(fetchUsers(id));
 		return () => {};
 	}, []);
 
 	//check if host and set host
 	//consider refactoring and checking if redundant with Room
 	useEffect(() => {
-		if (room.id) {
-			if (room?.id && user?.id === room?.hostId) {
+		if (roomAndUsers.id) {
+			if (roomAndUsers?.id && user?.id === roomAndUsers?.hostId) {
 				setIsHost(true);
 			}
 		}
 		return () => {};
-	}, [room.id, user]);
+	}, [roomAndUsers.id, user]);
 
 	useEffect(() => {
 		//set the current track if tracks exist and are greater than 0
@@ -101,7 +101,7 @@ const Player = props => {
 		// if the host presses play reset the counter
 		if (isHost && isPlaying) {
 			console.log('in if statement for is playing');
-			socket.emit('reset-counter', room.id, progressMs, currentTrack.duration);
+			socket.emit('reset-counter', roomAndUsers.id, progressMs, currentTrack.duration);
 		}
 
 		// if not the host grab the time from the host
@@ -139,7 +139,7 @@ const Player = props => {
 		(isReady === 'READY' ||
 			(isReady === 'ERROR' && playerError !== browserAutoplayError)) &&
 		accessToken &&
-		room?.id &&
+		roomAndUsers?.id &&
 		!isHost &&
 		currentTimePosition > 0;
 	useEffect(() => {
@@ -191,7 +191,7 @@ const Player = props => {
 			<RoomPopupDialog
 				isDialogOpen={isDialogOpen}
 				closeRoomPopupDialog={closeRoomPopupDialog}
-				room={room}
+				room={roomAndUsers}
 				user={user}
 			/>
 			<SpotifyPlayer
