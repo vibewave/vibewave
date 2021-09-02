@@ -3,7 +3,7 @@ import { socket } from '../../socket/socket';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import SpotifyPlayer from 'react-spotify-web-playback';
-import { fetchUsers, removeTrack, fetchTracks, removeTrack } from '../../store';
+import { fetchUsers, removeTrack, fetchTracks } from '../../store';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 
 //try including this into the non host seek useeffect
@@ -99,7 +99,7 @@ const Player = props => {
 		// if the host presses play reset the counter
 		if (isHost && isPlaying) {
 			console.log('in if statement for is playing');
-			socket.emit('reset-counter', room.id, progressMs, currentTrack.duration);
+			socket.emit('reset-counter', roomAndUsers.id, progressMs, currentTrack.duration);
 		}
 
 		// if not the host grab the time from the host
@@ -189,7 +189,7 @@ const Player = props => {
 			<RoomPopupDialog
 				isDialogOpen={isDialogOpen}
 				closeRoomPopupDialog={closeRoomPopupDialog}
-				room={room}
+				room={roomAndUsers}
 				user={user}
 			/>
 			<SpotifyPlayer
