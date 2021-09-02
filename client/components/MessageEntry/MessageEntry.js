@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { writeMessage } from '../../store';
+import { writeMessage, fetchMessages } from '../../store';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
@@ -18,7 +18,7 @@ const MessageEntry = props => {
 	const handleSumbit = async event => {
 		event.preventDefault();
 		console.log(message);
-		await dispatch(writeMessage(message, roomId, user.id));
+		dispatch(writeMessage(message, roomId, user.id));
 		setMessage('');
 	};
 

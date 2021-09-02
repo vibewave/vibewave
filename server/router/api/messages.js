@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-	models: { Message },
+	models: { Message, User },
 } = require('../../db');
 
 module.exports = router;
@@ -20,8 +20,10 @@ router.get('/:roomId', async (req, res, next) => {
 	try {
 		const messages = await Message.findAll({
 			where: { roomId: req.params.roomId },
+			include: User,
 		});
-		res.send(messages);
+		sortedMessages = messages.sort((a, b) => a.id - b.id);
+		res.send(sortedMessages);
 	} catch (e) {
 		next(e);
 	}

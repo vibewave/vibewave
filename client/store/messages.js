@@ -25,7 +25,7 @@ export const writeMessage = (message, roomId, userId) => {
 				roomId,
 				userId,
 			});
-			dispatch(_writeMessage(dbMessage.message));
+			dispatch(fetchMessages(roomId));
 		} catch (err) {
 			console.log(err);
 		}
