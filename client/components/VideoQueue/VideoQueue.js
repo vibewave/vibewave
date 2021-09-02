@@ -19,7 +19,7 @@ const VideoQueue = () => {
 		<div className={classes.videoQueueContainer}>
 			<h4>Video Queue</h4>
 			{videos.map(video => (
-				<div key={video.videoId} className={classes.videoQueueItemsContainer}>
+				<div key={video.id} className={classes.videoQueueItemsContainer}>
 					<div>
 						<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
 					</div>
