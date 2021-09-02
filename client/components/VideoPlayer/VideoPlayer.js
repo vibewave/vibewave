@@ -7,7 +7,7 @@ const VideoPlayer = props => {
 			<ReactPlayer
 				width="100%"
 				height="29vw"
-				controls
+				// controls
 				url="https://www.youtube.com/watch?v=kTJczUoc26U&ab_channel=TheKidLAROIVEVO"
 			/>
 		</div>
