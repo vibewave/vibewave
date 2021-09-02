@@ -11,6 +11,7 @@ import TrackQueue from '../TrackQueue/TrackQueue';
 import Player from '../Player/Player';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import { getRoom, removeTrack } from '../../store';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -105,13 +106,14 @@ const Room = props => {
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
+							<VideoPlayer />
 							{isHost && <TrackSearch spotifyApi={spotifyApi} />}
 						</div>
 						<div className={classes.playerDiv}>
-							<Player
+							{/* <Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-							/>
+							/> */}
 						</div>
 					</div>
 				</Grid>
