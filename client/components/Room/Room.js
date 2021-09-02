@@ -9,8 +9,14 @@ import useStyles from './RoomStyle';
 import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
-import { leaveRoom, fetchUsers, hostLeaveAndDeleteRoom, fetchRooms } from '../../store';
+import {
+	leaveRoom,
+	fetchUsers,
+	hostLeaveAndDeleteRoom,
+	fetchRooms,
+} from '../../store';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Chat from '../Chat/Chat';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -107,7 +113,17 @@ const Room = props => {
 							{isHost && 'I am the host'}
 							{!isHost && 'I am not the host'}
 							<button onClick={startSong}>Start Song</button>
-							{isHost && <button onClick={() => dispatch(hostLeaveAndDeleteRoom(id, user.id, allRooms, history))}>Delete Room</button>}
+							{isHost && (
+								<button
+									onClick={() =>
+										dispatch(
+											hostLeaveAndDeleteRoom(id, user.id, allRooms, history)
+										)
+									}
+								>
+									Delete Room
+								</button>
+							)}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.playerDiv}>
@@ -119,7 +135,9 @@ const Room = props => {
 					</div>
 				</Grid>
 				<Grid item xs={3} className={classes.roomRight}>
-					<div className={classes.chatContainer}></div>
+					<div className={classes.chatContainer}>
+						<Chat />
+					</div>
 				</Grid>
 			</Grid>
 		</Container>

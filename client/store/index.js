@@ -9,6 +9,7 @@ import spotifyAuth from './spotifyAuth';
 import video from './video';
 import videoQueue from './videoQueue';
 import userRoom from './userRoom';
+import messages from './messages';
 
 // const reducer = combineReducers({ auth })
 const reducer = combineReducers({
@@ -19,6 +20,7 @@ const reducer = combineReducers({
 	video,
 	videoQueue,
 	userRoom,
+	messages,
 });
 
 // const middlewares = [
@@ -42,3 +44,4 @@ export * from './allRooms';
 export * from './videoQueue';
 export * from './video';
 export * from './userRoom';
+export * from './messages';
