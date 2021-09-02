@@ -10,7 +10,7 @@ import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import { leaveRoom, fetchUsers, hostLeaveAndDeleteRoom, fetchRooms } from '../../store';
-// import Player from '../Player/Player';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -110,15 +110,11 @@ const Room = props => {
 							{isHost && <button onClick={() => dispatch(hostLeaveAndDeleteRoom(id, user.id, allRooms, history))}>Delete Room</button>}
 							<div>{currentTimePosition}</div>
 						</div>
-						<div className={classes.mainArea}>
-							{/* {isHost && <YouTubeSearch spotifyApi={spotifyApi} />} */}
-							<YouTubeSearch />
-						</div>
 						<div className={classes.playerDiv}>
-							{/* <Player
-								spotifyApi={spotifyApi}
-								currentTimePosition={currentTimePosition}
-							/> */}
+							<VideoPlayer />
+						</div>
+						<div className={classes.mainArea}>
+							<YouTubeSearch />
 						</div>
 					</div>
 				</Grid>
