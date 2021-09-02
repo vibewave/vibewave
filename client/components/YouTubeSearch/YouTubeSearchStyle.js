@@ -11,9 +11,6 @@ const useStyles = makeStyles(theme => ({
 		background: '#012F41',
 		width: '100%',
 	},
-	videoSearchText: {
-		color: 'white',
-	},
 	songList: {
 		height: '30em',
 		width: '100%',

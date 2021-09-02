@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
 import youtube from '../../store/youtubeAxios';
 import { API_KEY } from '../../store/youtubeAxios'
 import useStyles from './YouTubeSearchStyle';
 import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
+import { addVideo, fetchVideos } from '../../store';
 
 const YouTubeSearch = () => {
   const classes = useStyles();
@@ -12,6 +15,8 @@ const YouTubeSearch = () => {
   const [selectedVideo, setSelectedVideo] = useState({});
   const [duration, setDuration] = useState(0);
   const [durationPt, setDurationPt] = useState('');
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   const convertPtToSec = (pt) => {
     const tIndex = pt.indexOf('T');
@@ -22,6 +27,15 @@ const YouTubeSearch = () => {
     const minutesToSec = mIndex !== -1 ? parseInt(pt.substr(tIndex+1, mIndex), 10) * 60 : 0;
     const seconds = sIndex !== -1 ? parseInt(pt.substr(mIndex+1, sIndex), 10) : 0;
     const duration = hoursToSec + minutesToSec + seconds;
+
+    // console.log('tIndex: ', tIndex);
+    // console.log('hIndex: ', hIndex);
+    // console.log('mIndex: ', mIndex);
+    // console.log('sIndex: ', sIndex);
+    // console.log('hoursToSec: ', hoursToSec);
+    // console.log('minutesToSec: ', minutesToSec);
+    // console.log('seconds: ', seconds);
+    // console.log('duration: ', duration);
 
     return duration;
   }
@@ -38,28 +52,31 @@ const YouTubeSearch = () => {
     });
     const filteredVideoList = videoList.data.items.filter(video => video.id.videoId !== undefined);
     setSearchResult(filteredVideoList);
-    // const videoDetails = await youtube.get('/videos', {
-    //   params: {
-    //     part: 'snippet,contentDetails,statistics,status',
-    //     key: API_KEY,
-    //     id: videoList.data.items[0].id.videoId,
-    //   }
-    // });
-    // setSelectedVideo(videoDetails);
-    // setDurationPt(videoDetails.data.items[0].contentDetails.duration);
   }
 
   useEffect(() => {
-    console.log('searchResult: ', searchResult);
-    console.log("selectedVideo: ", selectedVideo);
-    console.log('durationPt: ', durationPt);
-    console.log('duration: ', duration);
-
     setDuration(convertPtToSec(durationPt));
   }, [durationPt])
+  
 
-  const chooseVideo = (video) => {
-    setSelectedVideo(video);
+  // console.log('searchResult: ', searchResult);
+  // console.log("selectedVideo: ", selectedVideo);
+  // console.log('durationPt: ', durationPt);
+  // console.log('duration: ', duration);
+
+  const chooseVideo = async (video) => {
+    const { data: { items: { 0: videoDetails } } } = await youtube.get('/videos', {
+      params: {
+        part: 'snippet,contentDetails,statistics,status',
+        key: API_KEY,
+        id: video.id.videoId,
+      }
+    });
+    setSelectedVideo(videoDetails);
+    setDurationPt(videoDetails.contentDetails.duration);
+    await dispatch(addVideo(videoDetails, id, convertPtToSec(videoDetails.contentDetails.duration)));
+    dispatch(fetchVideos(id));
+    setSearch('');
     setSearchResult([]);
   }
 
@@ -67,7 +84,7 @@ const YouTubeSearch = () => {
     <div className={classes.videoSearchContainer}>
       <form onSubmit={handleSubmit}>
 				<TextField
-          className={classes.videoSearchText}
+          className={classes.videoSearchInput}
 					inputProps={{}}
 					label="Search a song."
 					variant="outlined"

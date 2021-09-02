@@ -6,12 +6,11 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import SpotifyWebApi from 'spotify-web-api-node';
 import useStyles from './RoomStyle';
-import TrackSearch from '../TrackSearch/TrackSearch';
-import TrackQueue from '../TrackQueue/TrackQueue';
-import Player from '../Player/Player';
+import VideoQueue from '../VideoQueue/VideoQueue';
+import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import { leaveRoom, fetchUsers, hostLeaveAndDeleteRoom, fetchRooms } from '../../store';
-import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
+// import Player from '../Player/Player';
 
 const spotifyApi = new SpotifyWebApi({
 	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
@@ -98,8 +97,8 @@ const Room = props => {
 		>
 			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={2} className={classes.roomLeft}>
-					<div className={classes.trackQueueContainer}>
-						<TrackQueue />
+					<div className={classes.videoQueueContainer}>
+						<VideoQueue />
 					</div>
 				</Grid>
 				<Grid item xs={7} className={classes.roomCenter}>
@@ -112,7 +111,7 @@ const Room = props => {
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.mainArea}>
-							{/* {isHost && <TrackSearch spotifyApi={spotifyApi} />} */}
+							{/* {isHost && <YouTubeSearch spotifyApi={spotifyApi} />} */}
 							<YouTubeSearch />
 						</div>
 						<div className={classes.playerDiv}>

@@ -1,7 +1,7 @@
 const db = require('./db');
 const User = require('./models/User');
 const Room = require('./models/Room');
-const Track = require('./models/Track');
+const Video = require('./models/Video');
 const Message = require('./models/Message');
 const FriendList = require('./models/FriendList');
 
@@ -15,8 +15,8 @@ Message.belongsTo(User, { foreignKey: 'userId' });
 Room.hasMany(Message);
 Message.belongsTo(Room, { foreignKey: 'roomId' });
 
-Room.hasMany(Track);
-Track.belongsTo(Room);
+Room.hasMany(Video);
+Video.belongsTo(Room);
 
 User.belongsToMany(User, {
 	through: FriendList,
@@ -34,7 +34,7 @@ module.exports = {
 	models: {
 		User,
 		Room,
-		Track,
+		Video,
 		Message,
 		FriendList,
 	},
