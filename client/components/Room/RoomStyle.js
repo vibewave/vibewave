@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 		width: '90%',
 		height: '80%',
 		border: '1px solid #44494B',
+		overflow: 'auto',
 	},
 	playerDiv: {
 		width: '80%',

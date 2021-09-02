@@ -116,10 +116,10 @@ const Room = props => {
 							<YouTubeSearch />
 						</div>
 						<div className={classes.playerDiv}>
-							<Player
+							{/* <Player
 								spotifyApi={spotifyApi}
 								currentTimePosition={currentTimePosition}
-							/>
+							/> */}
 						</div>
 					</div>
 				</Grid>
