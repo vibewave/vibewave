@@ -1,8 +1,8 @@
 const {
 	db,
-	models: { User, Room, Message, Track, FriendList },
+	models: { User, Room, Message, Video, FriendList },
 } = require('./db');
-const { users, rooms, tracks, messages, friendLists } = require('./seedData');
+const { users, rooms, videos, messages, friendLists } = require('./seedData');
 
 const seed = async () => {
 	try {
@@ -13,7 +13,7 @@ const seed = async () => {
 		}
 		const userInstances = [];
 		const roomInstances = [];
-		const trackInstances = [];
+		const videoInstances = [];
 		const messageInstances = [];
 		const friendListInstances = [];
 
@@ -47,11 +47,11 @@ const seed = async () => {
 			}
 		}
 
-		// create track
-		for (const trackInstance of tracks) {
+		// create video
+		for (const videoInstance of videos) {
 			try {
-				const newTrackInstance = await Track.create(trackInstance);
-				trackInstances.push(newTrackInstance);
+				const newVideoInstance = await Video.create(videoInstance);
+				videoInstances.push(newVideoInstance);
 			} catch (err) {
 				console.log(err);
 			}
@@ -78,9 +78,9 @@ const seed = async () => {
 		} catch (err) {
 			console.log(err);
 		}
-		//room-track associations
+		//room-video associations
 		try {
-			await roomInstances[1].setTracks([trackInstances[0], trackInstances[1]]);
+			await roomInstances[1].setVideos([videoInstances[0], videoInstances[1]]);
 		} catch (err) {
 			console.log(err);
 		}

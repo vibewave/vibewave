@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import store, { fetchTracks } from '../store';
+import store, { fetchVideos } from '../store';
 
 export let socket;
 
@@ -15,7 +15,7 @@ socket.on('connect', () => {
 
 socket.on('refresh-tracks', room => {
 	console.log('inside of refresh tracks');
-	store.dispatch(fetchTracks(room));
+	store.dispatch(fetchVideos(room));
 });
 
 // function

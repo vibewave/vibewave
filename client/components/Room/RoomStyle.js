@@ -4,8 +4,8 @@ const useStyles = makeStyles(theme => ({
 	roomContainer: {
 		margin: '0',
 		padding: '1em',
-		width: '100%',
-		height: '90%',
+		width: '100vw',
+		height: '90vh',
 	},
 	mainGridContainer: {
 		margin: '0',
@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
 		'justify-content': 'center',
 		'align-items': 'center'
 	},
+	roomCenter: {
+		height: '100%',
+	},
 	roomInfoDiv: {
 		width: '90%',
 		height: '12%',
@@ -34,20 +37,25 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainArea: {
 		width: '90%',
-		height: '80%',
+		height: '35%',
 		border: '1px solid #44494B',
+		overflow: 'auto',
 	},
 	playerDiv: {
-		width: '80%',
+		width: '90%',
 		border: '1px solid #44494B',
 	},
 	roomRight: {
 		borderLeft: '1.5px solid white',
+		height: '100%',
 	},
 	chatContainer: {
 		width: '100%',
 		height: '100%',
-	}
+	},
+	// youTubeSearchDiv: {
+	// 	height: '50%',
+	// },
 }));
 
 export default useStyles;
