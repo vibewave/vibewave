@@ -2,31 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { TextField } from '@material-ui/core';
 import youtube from '../../store/youtubeAxios';
 import { API_KEY } from '../../store/youtubeAxios'
+import useStyles from './YouTubeSearchStyle';
+import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
 
 const YouTubeSearch = () => {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [search, setSearch] = useState('');
   const [searchResult, setSearchResult] = useState([]);
-  const [videoInfo, setVideoInfo] = useState({});
-  const [durationMs, setDurationMs] = useState(0);
+  const [selectedVideo, setSelectedVideo] = useState({});
+  const [duration, setDuration] = useState(0);
   const [durationPt, setDurationPt] = useState('');
 
-  const convertPtToMs = (pt) => {
+  const convertPtToSec = (pt) => {
     const tIndex = pt.indexOf('T');
+    const hIndex = pt.indexOf('H');
     const mIndex = pt.indexOf('M');
     const sIndex = pt.indexOf('S');
-    const minutesMs = parseInt(pt.substr(tIndex+1, mIndex), 10) * 60 * 1000;
-    const secondsMs = parseInt(pt.substr(mIndex+1, sIndex), 10) * 1000;
-    const durationMs = minutesMs + secondsMs;
+    const hoursToSec = hIndex !== -1 ? parseInt(pt.substr(tIndex+1, mIndex), 10) * 60 * 60 : 0;
+    const minutesToSec = mIndex !== -1 ? parseInt(pt.substr(tIndex+1, mIndex), 10) * 60 : 0;
+    const seconds = sIndex !== -1 ? parseInt(pt.substr(mIndex+1, sIndex), 10) : 0;
+    const duration = hoursToSec + minutesToSec + seconds;
 
-    console.log('pt: ', pt);
-    console.log('tIndex: ', tIndex);
-    console.log('mIndex: ', mIndex);
-    console.log('sIndex: ', sIndex);
-    console.log('minutesMs: ', minutesMs);
-    console.log('secondsMs: ', secondsMs);
-    console.log('durationMS: ', durationMs);
-    return durationMs;
+    return duration;
   }
 
   const handleSubmit =  async (event) => {
@@ -34,37 +31,43 @@ const YouTubeSearch = () => {
     const videoList = await youtube.get('/search', {
       params: {
         part: 'snippet',
-        maxResults: 20,
+        maxResults: 30,
         q: search,
         key: API_KEY
       }
     });
-    setSearchResult(videoList);
-    const videoDetails = await youtube.get('/videos', {
-      params: {
-        part: 'snippet,contentDetails,statistics,status',
-        key: API_KEY,
-        id: videoList.data.items[0].id.videoId,
-      }
-    });
-    setVideoInfo(videoDetails);
-    setDurationPt(videoDetails.data.items[0].contentDetails.duration);
+    const filteredVideoList = videoList.data.items.filter(video => video.id.videoId !== undefined);
+    setSearchResult(filteredVideoList);
+    // const videoDetails = await youtube.get('/videos', {
+    //   params: {
+    //     part: 'snippet,contentDetails,statistics,status',
+    //     key: API_KEY,
+    //     id: videoList.data.items[0].id.videoId,
+    //   }
+    // });
+    // setSelectedVideo(videoDetails);
+    // setDurationPt(videoDetails.data.items[0].contentDetails.duration);
   }
 
   useEffect(() => {
     console.log('searchResult: ', searchResult);
-    console.log("videoInfo: ", videoInfo);
+    console.log("selectedVideo: ", selectedVideo);
     console.log('durationPt: ', durationPt);
-    console.log('durationMs: ', durationMs);
+    console.log('duration: ', duration);
 
-    setDurationMs(convertPtToMs(durationPt));
+    setDuration(convertPtToSec(durationPt));
   }, [durationPt])
 
+  const chooseVideo = (video) => {
+    setSelectedVideo(video);
+    setSearchResult([]);
+  }
+
   return (
-    <div>
+    <div className={classes.videoSearchContainer}>
       <form onSubmit={handleSubmit}>
 				<TextField
-					className=''
+          className={classes.videoSearchText}
 					inputProps={{}}
 					label="Search a song."
 					variant="outlined"
@@ -72,6 +75,15 @@ const YouTubeSearch = () => {
 					onChange={e => setSearch(e.target.value)}
 				></TextField>
 			</form>
+      <div className={classes.songList}>
+				{searchResult.map(video => (
+          <YouTubeSearchList
+            video={video}
+            key={video.id.videoId}
+            chooseVideo={chooseVideo}
+          />
+				))}
+			</div>
     </div>
   );
 }
