@@ -6,6 +6,10 @@ const Video = db.define('video', {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
+	videoUrl: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
 	title: {
 		type: Sequelize.STRING,
 		allowNull: false,

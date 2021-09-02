@@ -19,6 +19,7 @@ export const addVideo = (video, roomId, duration) => {
 	return async dispatch => {
 		const { data: dbVideo } = await axios.post(`/api/videos`, {
 			videoId: video.id,
+			videoUrl: 'https://www.youtube.com/watch?v=' + video.id,
 			title: video.snippet.title,
 			thumbnailUrl: video.snippet.thumbnails.default.url,
 			duration: duration,

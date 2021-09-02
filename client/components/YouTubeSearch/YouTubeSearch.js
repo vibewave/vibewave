@@ -72,6 +72,7 @@ const YouTubeSearch = () => {
         id: video.id.videoId,
       }
     });
+    console.log('videoDetails: ', videoDetails);
     setSelectedVideo(videoDetails);
     setDurationPt(videoDetails.contentDetails.duration);
     await dispatch(addVideo(videoDetails, id, convertPtToSec(videoDetails.contentDetails.duration)));
