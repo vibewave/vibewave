@@ -107,7 +107,7 @@ const Player = props => {
 		// if not the host grab the time from the host
 		if (!isHost && isPlaying && !trackUpdate) {
 			dispatch(fetchTracks(id));
-			socket.emit('seek', room.id, socket.id);
+			socket.emit('seek', roomAndUsers.id, socket.id);
 			socket.on('time-position-test', (counter, socketId) => {
 				console.log(counter);
 				if (socketId === socket.id) {
