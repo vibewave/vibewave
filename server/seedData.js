@@ -46,20 +46,20 @@ const messages = [
 	},
 ];
 
-const tracks = [
+const videos = [
 	{
-		trackUri: 'spotify:track:4ZtFanR9U6ndgddUvNcjcG',
-		title: 'good 4 u',
-		artist: 'Olivia Rodrigo',
-		albumUrl: 'https://i.scdn.co/image/ab67616d00004851a91c10fe9472d9bd89802e5a',
-		duration: '178146',
+		videoId: 'oiNkumxPVzU',
+		videoUrl: 'https://www.youtube.com/watch?v=oiNkumxPVzU',
+		title: "RED VELVET - 'FUTURE' (미래) [Start-Up OST Part.1] Lyrics [Color Coded_Han_Rom_Eng]",
+		thumbnailUrl: 'https://i.ytimg.com/vi/oiNkumxPVzU/maxresdefault.jpg',
+		duration: '235',
 	},
 	{
-		trackUri: 'spotify:track:5HCyWlXZPP0y6Gqq8TgA20',
-		title: 'STAY (with Justin Bieber)',
-		artist: 'The Kid LA ROI',
-		albumUrl: 'https://i.scdn.co/image/ab67616d0000485141e31d6ea1d493dd77933ee5',
-		duration: '141805',
+		videoId: 'kTJczUoc26U',
+		videoUrl: 'https://www.youtube.com/watch?v=kTJczUoc26U',
+		title: 'The Kid LAROI, Justin Bieber - STAY (Official Video)',
+		thumbnailUrl: 'https://themusicnetwork.com/wp-content/uploads/The-Kid-LAROI-and-Justin-Bieber-Stay-1024x657.png',
+		duration: '157',
 	},
 ];
 
@@ -85,6 +85,6 @@ module.exports = {
 	users,
 	rooms,
 	messages,
-	tracks,
+	videos,
 	friendLists,
 };

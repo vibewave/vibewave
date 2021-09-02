@@ -1,14 +1,14 @@
 const router = require('express').Router();
 const {
-	models: { Track },
+	models: { Video },
 } = require('../../db');
 
 router.get('/:roomId', async (req, res, next) => {
 	try {
-		const tracks = await Track.findAll({
+		const videos = await Video.findAll({
 			where: { roomId: req.params.roomId },
 		});
-		res.send(tracks);
+		res.send(videos);
 	} catch (error) {
 		next(error);
 	}
@@ -16,18 +16,18 @@ router.get('/:roomId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 	try {
-		const track = await Track.create(req.body);
-		res.send(track);
+		const video = await Video.create(req.body);
+		res.send(video);
 	} catch (error) {
 		next(error);
 	}
 });
 
-router.delete('/:trackId', async (req, res, next) => {
+router.delete('/:videoId', async (req, res, next) => {
 	try {
-		await Track.destroy({
+		await Video.destroy({
 			where: {
-				id: req.params.trackId
+				id: req.params.videoId
 			}
 		});
 		res.sendStatus(204);
