@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { socket } from '../../socket/socket';
 import { fetchVideos, removeVideo, fetchRoom } from '../../store';
 
 const testVideos = [
@@ -65,16 +66,41 @@ const VideoPlayer = props => {
 	};
 
 	const handleOnPlay = () => {
-		console.log('on play');
-		if (!seeked) {
-			console.log('in seeked conditional');
-			player.seekTo(30);
-			setSeeked(true);
-
-			//if handle pause to complicated with host/non-host then consider using this setTimeout
-			// setTimeout(() => setPlaying(true), 100);
+		if (isHost) {
+			// const currentTime = player.getCurrentTime();
+			sendCurrentTime(roomId);
 		}
+		else {
+			socket.emit('request-currentTime', roomId, user.id);
+			getCurrentTimeFromHost();
+			// setPlaying(false);
+			setPlaying(true);
+		}
+		console.log('on play');
+		// if (!seeked) {
+		// 	console.log('in seeked conditional');
+		// 	// player.seekTo(30);
+		// 	setSeeked(true);
+
+		// 	//if handle pause to complicated with host/non-host then consider using this setTimeout
+		// 	// setTimeout(() => setPlaying(true), 100);
+		// }
 	};
+
+	const sendCurrentTime = (roomId) => {
+		socket.on('get-currentTime-from-host', userId => {
+			const currentTime = player.getCurrentTime();
+			socket.emit('send-currentTime', roomId, userId, currentTime);
+		});
+	};
+
+	const getCurrentTimeFromHost = () => {
+		socket.on('currentTime', (userId, currentTime) => {
+			if (user.id === userId) {
+				player.seekTo(currentTime);
+			}
+		});
+	}
 
 	const handleEnded = () => {
 		console.log('in ended');
