@@ -8,7 +8,7 @@ const Video = db.define('video', {
 	},
 	videoUrl: {
 		type: Sequelize.STRING,
-		allowNull: false
+		allowNull: false,
 	},
 	title: {
 		type: Sequelize.STRING,
@@ -20,7 +20,7 @@ const Video = db.define('video', {
 	},
 	duration: {
 		type: Sequelize.INTEGER,
-		allowNull: false,
+		// allowNull: false,
 	},
 	order: {
 		type: Sequelize.INTEGER,
