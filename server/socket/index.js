@@ -6,7 +6,7 @@ let roomIntervals = {};
 // const clearRoomInterval = id => {
 // 	clearInterval();
 // };
-// export const trackQueueOrder = {};
+// export const videoQueueOrder = {};
 
 const startSocket = io => {
 	let counter = 0;
@@ -59,9 +59,9 @@ const startSocket = io => {
 			console.log(`${socket.id} joined room ${room}`);
 		});
 
-		//tell all other users in the room to refresh tracks when a new song gets added
-		socket.on('track-added', room => {
-			socket.to(room).emit('refresh-tracks', room);
+		//tell all other users in the room to refresh videos when a new song gets added
+		socket.on('video-added', room => {
+			socket.to(room).emit('refresh-videos', room);
 		});
 
 		//create a room counter whenever a new room is created
@@ -80,20 +80,6 @@ const startSocket = io => {
 			users = users.filter(user => user !== socket.id);
 			console.log('users after dc ', users);
 		});
-
-		// SOCKET LISTENERS FOR TRACKQUEUE UPDATES:
-
-		//socket.on('trackAdded', () => {
-		// add track to database
-		// fetch new trackqueue list = updatedTrackQueue
-		// socket.emit('trackqueueUpdated', updatedTrackQueue) -> emit to the room updatedTrackQueue (trackqueue updated event)
-		//})
-
-		//socket.on('trackPopped', () => {
-		// remove the track (by id) in database
-		// fetch new trackqueue list = updatedTrackQueue
-		// socket.emit('trackqueueUpdated', updatedTrackQueue) -> emit to the room updatedTrackQueue (trackqueue updated event)
-		//})
 	});
 };
 

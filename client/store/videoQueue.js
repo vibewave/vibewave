@@ -16,9 +16,9 @@ export const fetchVideos = roomId => {
 	};
 };
 
-export const removeTrack = (trackId, roomId) => {
+export const removeVideo = (videoId, roomId) => {
 	return async (dispatch) => {
-		await axios.delete(`/api/videos/${trackId}`);
+		await axios.delete(`/api/videos/${videoId}`);
 		dispatch(fetchVideos(roomId));
 	}
 }

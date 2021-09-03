@@ -14,7 +14,6 @@ app.use(express.urlencoded({ extended: false }));
 // ROUTES
 app.use('/api', require('./router/api'));
 app.use('/auth', require('./router/auth'));
-app.use('/spotify', require('./router/spotify'));
 
 app.get('/', async (req, res, next) => {
 	try {

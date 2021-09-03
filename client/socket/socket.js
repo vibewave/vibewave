@@ -13,8 +13,8 @@ socket.on('connect', () => {
 	console.log(`Connected with id: ${socket.id}`);
 });
 
-socket.on('refresh-tracks', room => {
-	console.log('inside of refresh tracks');
+socket.on('refresh-videos', room => {
+	console.log('inside of refresh videos');
 	store.dispatch(fetchVideos(room));
 });
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 
-const testTracks = [
+const testVideos = [
 	'https://www.youtube.com/watch?v=kTJczUoc26U&ab_channel=TheKidLAROIVEVO',
 	'https://www.youtube.com/watch?v=XCyIcifbOWE&ab_channel=MeekMill',
 	'https://www.youtube.com/watch?v=7Azv0G85lh8&ab_channel=HalseyVEVO',
@@ -39,7 +39,7 @@ const VideoPlayer = props => {
 
 	const handleEnded = () => {
 		console.log('in ended');
-		testTracks.shift();
+		testVideos.shift();
 		setPlaying(false);
 		setPlaying(true);
 	};
@@ -66,7 +66,7 @@ const VideoPlayer = props => {
 				onPlay={handleOnPlay}
 				onSeek={handleSeek}
 				onPause={handleOnPause}
-				url={testTracks[0]}
+				url={testVideos[0]}
 			/>
 		</div>
 	);
