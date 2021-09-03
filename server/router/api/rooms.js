@@ -24,17 +24,18 @@ router.post('/', async (req, res, next) => {
 });
 
 // GET /api/rooms/:id return a specific room and users of that room
+
 router.get('/:roomId', async (req, res, next) => {
 	try {
 		const roomAndUsers = await Room.findOne({
-			include: [{
+			include: {
 				model: User,
-				where: {
-					roomId: req.params.roomId,
-				},
-			}],
+			},
+			where: {
+				id: req.params.roomId,
+			},
 		});
-		
+
 		res.send(roomAndUsers);
 	} catch (err) {
 		next(err);

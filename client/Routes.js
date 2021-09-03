@@ -10,7 +10,6 @@ import CreateRoom from './components/CreateRoom/CreateRoom';
 import Room from './components/Room/Room';
 import Fallback from './Fallback';
 
-
 const Routes = () => {
 	const dispatch = useDispatch();
 	const auth = useSelector(state => state.auth);
@@ -23,8 +22,6 @@ const Routes = () => {
 	useEffect(async () => {
 		setIsLoggedIn(!!auth.id);
 	}, [auth]);
-
-	console.log('is logged in?', isLoggedIn);
 
 	return (
 		<>

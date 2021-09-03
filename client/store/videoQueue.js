@@ -16,12 +16,12 @@ export const fetchVideos = roomId => {
 	};
 };
 
-export const removeTrack = (trackId, roomId) => {
-	return async (dispatch) => {
-		await axios.delete(`/api/videos/${trackId}`);
+export const removeVideo = (videoId, roomId) => {
+	return async dispatch => {
+		await axios.delete(`/api/videos/${videoId}`);
 		dispatch(fetchVideos(roomId));
-	}
-}
+	};
+};
 
 export default function (state = [], action) {
 	switch (action.type) {
