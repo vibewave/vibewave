@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import SpotifyWebApi from 'spotify-web-api-node';
 import useStyles from './RoomStyle';
 import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
@@ -18,9 +17,6 @@ import {
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import Chat from '../Chat/Chat';
 
-const spotifyApi = new SpotifyWebApi({
-	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
-});
 
 const joinRoom = id => {
 	id = parseInt(id, 10);
@@ -48,20 +44,6 @@ const Room = props => {
 			dispatch(leaveRoom(id, user.id));
 		};
 	}, []);
-
-	// CALL THESE INSIDE A USEEFFECT:
-
-	// const emitTrackPopped = () => {
-	// 	socket.emit('trackPopped');
-	// }
-
-	// const updateTracks = () => {
-	// 	socket.on('trackQueueUpdated', (updatedTrackQueue) => {
-	// 		if (updatedTrackQueue !== trackQueue) {
-	//			setTrackQueue(updatedTrackQueue);
-	//    }
-	//  });
-	// }
 
 	useEffect(() => {
 		if (roomAndUsers.id) {

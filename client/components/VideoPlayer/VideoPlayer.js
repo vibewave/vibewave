@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { fetchVideos, removeVideo, fetchRoom } from '../../store';
 
-const testTracks = [
+const testVideos = [
 	'https://www.youtube.com/watch?v=kTJczUoc26U&ab_channel=TheKidLAROIVEVO',
 	'https://www.youtube.com/watch?v=XCyIcifbOWE&ab_channel=MeekMill',
 	'https://www.youtube.com/watch?v=7Azv0G85lh8&ab_channel=HalseyVEVO',

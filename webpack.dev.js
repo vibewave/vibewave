@@ -29,10 +29,6 @@ module.exports = merge(common, {
 				target: `http://localhost:${expressServerPORT}`,
 				secure: false,
 			},
-			'/spotify/': {
-				target: `http://localhost:${expressServerPORT}`,
-				secure: false,
-			},
 		},
 		publicPath: '/'
 	},

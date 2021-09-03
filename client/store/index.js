@@ -5,7 +5,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import room from './room';
 import auth from './auth';
 import allRooms from './allRooms';
-import spotifyAuth from './spotifyAuth';
 import video from './video';
 import videoQueue from './videoQueue';
 import userRoom from './userRoom';
@@ -16,7 +15,6 @@ const reducer = combineReducers({
 	auth,
 	room,
 	allRooms,
-	spotifyAuth,
 	video,
 	videoQueue,
 	userRoom,
