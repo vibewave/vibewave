@@ -50,6 +50,16 @@ const VideoPlayer = props => {
 		}
 	}, [room]);
 
+	useEffect(() => {
+		console.log('inside handleOnPlay useEffect');
+		if (playing) {
+			handleOnPlay();
+		}
+		else {
+			handleOnPause();
+		}
+	}, [playing]);
+
 	//handlers for the player
 
 	const handleOnReady = () => {
@@ -135,9 +145,9 @@ const VideoPlayer = props => {
 						playing={playing}
 						onReady={handleOnReady}
 						onEnded={handleEnded}
-						onPlay={handleOnPlay}
+						onPlay={() => setPlaying(true)}
 						onSeek={handleSeek}
-						onPause={handleOnPause}
+						onPause={() => setPlaying(false)}
 						onError={e => console.log('onError', e)}
 						url={currentVideo.videoUrl}
 					/>
