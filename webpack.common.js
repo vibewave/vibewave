@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const appDir = fs.realpathSync(process.cwd());
 const pk = require(path.resolve(appDir, 'package.json'));
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
 	entry: {
@@ -60,6 +59,5 @@ module.exports = {
 			title: pk.name,
 			favicon: pk.favicon,
 		}),
-		new Dotenv(),
 	],
 };
