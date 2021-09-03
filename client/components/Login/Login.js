@@ -30,7 +30,7 @@ const Login = () => {
 			password: e.target.password.value,
 		};
 		await dispatch(authenticate(method, userInfo));
-		history.push('/spotify-login');
+		history.push('/');
 	};
 
 	return (
