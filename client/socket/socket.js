@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import store, { fetchVideos } from '../store';
+import store, { fetchVideos, fetchMessages } from '../store';
 
 export let socket;
 
@@ -16,6 +16,12 @@ socket.on('connect', () => {
 socket.on('refresh-videos', room => {
 	console.log('inside of refresh videos');
 	store.dispatch(fetchVideos(room));
+});
+
+socket.on('refresh-message-list', (room, userId) => {
+	console.log('inside of refresh messages', userId);
+
+	store.dispatch(fetchMessages(room));
 });
 
 // function
