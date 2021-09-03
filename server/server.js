@@ -1,9 +1,13 @@
-if (process.env.NODE_ENV !== 'production') { require('dotenv').config(); };
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
 const app = require('./app');
 const HOST = process.env.HOST ?? '127.0.0.1';
 const PORT = process.env.PORT ?? 8086;
 const initSocket = require('./socket');
 const { db } = require('./db');
+require('dotenv').config();
+const { API_KEY } = process.env;
 
 const startServer = async () => {
 	// START EXPRESS SERVER
