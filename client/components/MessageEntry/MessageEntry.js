@@ -12,12 +12,8 @@ const MessageEntry = props => {
 	const roomId = parseInt(useParams().id, 10);
 	const dispatch = useDispatch();
 
-	console.log('user id is ', user.id);
-	console.log('roomId is ', roomId);
-
 	const handleSumbit = async event => {
 		event.preventDefault();
-		console.log(message);
 		dispatch(writeMessage(message, roomId, user.id));
 		setMessage('');
 	};

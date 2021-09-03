@@ -2,11 +2,19 @@ import axios from 'axios';
 
 // Action Types
 const CREATE_ROOM = 'CREATE_ROOM';
+const FETCH_ROOM = 'FETCH_ROOM';
 
 // Action Creators
 const _createRoom = room => {
 	return {
 		type: CREATE_ROOM,
+		room,
+	};
+};
+
+const _fetchRoom = room => {
+	return {
+		type: FETCH_ROOM,
 		room,
 	};
 };
@@ -21,9 +29,23 @@ export const createRoom = room => {
 	};
 };
 
+export const fetchRoom = roomId => {
+	return async dispatch => {
+		try {
+			const { data: room } = await axios.get(`/api/rooms/${roomId}`);
+			const action = _fetchRoom(room);
+			dispatch(action);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+};
+
 export default function (state = {}, action) {
 	switch (action.type) {
 		case CREATE_ROOM:
+			return action.room;
+		case FETCH_ROOM:
 			return action.room;
 		default:
 			return state;
