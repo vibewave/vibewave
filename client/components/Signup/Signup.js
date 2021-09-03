@@ -30,7 +30,7 @@ const Signup = () => {
 			username: e.target.username.value,
 		};
 		await dispatch(authenticate(method, userInfo));
-		history.push('/spotify-login');
+		history.push('/');
 	};
 
 	return (

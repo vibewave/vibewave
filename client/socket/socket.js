@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import store, { fetchVideos, fetchMessages } from '../store';
 
 export let socket;
 
@@ -10,6 +11,17 @@ if (process.env.NODE_ENV === 'production') {
 
 socket.on('connect', () => {
 	console.log(`Connected with id: ${socket.id}`);
+});
+
+socket.on('refresh-videos', room => {
+	console.log('inside of refresh videos');
+	store.dispatch(fetchVideos(room));
+});
+
+socket.on('refresh-message-list', (room, userId) => {
+	console.log('inside of refresh messages', userId);
+
+	store.dispatch(fetchMessages(room));
 });
 
 // function

@@ -1,21 +1,19 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-	trackSearchContainer: {
+	videoSearchContainer: {
 		marginLeft: '0.5em',
 		marginTop: '0.5em',
+		width: '60%',
 	},
-	trackSearchInput: {
+	videoSearchInput: {
 		borderRadius: '0.5em',
 		background: '#012F41',
-		width: '20em',
-	},
-	trackSearchText: {
-		color: 'white',
+		width: '100%',
 	},
 	songList: {
-		height: '20em',
-		width: '28em',
+		height: '30em',
+		width: '100%',
 		overflow: 'auto',
 	}
 }));

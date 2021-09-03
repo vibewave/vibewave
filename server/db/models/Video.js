@@ -1,20 +1,20 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Track = db.define('track', {
-	trackUri: {
+const Video = db.define('video', {
+	videoId: {
 		type: Sequelize.STRING,
 		allowNull: false,
+	},
+	videoUrl: {
+		type: Sequelize.STRING,
+		allowNull: false
 	},
 	title: {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
-	artist: {
-		type: Sequelize.STRING,
-		allowNull: false,
-	},
-	albumUrl: {
+	thumbnailUrl: {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
@@ -27,4 +27,4 @@ const Track = db.define('track', {
 	},
 });
 
-module.exports = Track;
+module.exports = Video;

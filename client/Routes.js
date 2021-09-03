@@ -5,11 +5,9 @@ import { me } from './store';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
-import SpotifyLogin from './components/SpotifyLogin/SpotifyLogin';
 import CreateRoom from './components/CreateRoom/CreateRoom';
 import Room from './components/Room/Room';
 import Fallback from './Fallback';
-
 
 const Routes = () => {
 	const dispatch = useDispatch();
@@ -24,14 +22,12 @@ const Routes = () => {
 		setIsLoggedIn(!!auth.id);
 	}, [auth]);
 
-	console.log('is logged in?', isLoggedIn);
-
 	return (
 		<>
 			{isLoggedIn ? (
 				<Switch>
-					<Route exact path="/spotify-login">
-						<SpotifyLogin />
+					<Route exact path="/">
+						<Home />
 					</Route>
 					<Route exact path="/createroom">
 						<CreateRoom />
@@ -40,12 +36,11 @@ const Routes = () => {
 						<Room />
 					</Route>
 					<Route exact path="/home">
-						<Home />
+						<Redirect to="/" />
 					</Route>
-					<Redirect to="/home" />
-					{/* <Route>
+					<Route>
 						<Fallback />
-					</Route> */}
+					</Route>
 				</Switch>
 			) : (
 				<Switch>
@@ -57,6 +52,9 @@ const Routes = () => {
 					</Route>
 					<Route exact path="/signup">
 						<Signup />
+					</Route>
+					<Route>
+						<Fallback />
 					</Route>
 				</Switch>
 			)}
