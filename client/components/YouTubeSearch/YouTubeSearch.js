@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
 import youtube from '../../store/youtubeAxios';
-import { API_KEY } from '../../store/youtubeAxios'
+import { API_KEY } from '../../store/youtubeAxios';
 import useStyles from './YouTubeSearchStyle';
 import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
 import { addVideo, fetchVideos } from '../../store';
