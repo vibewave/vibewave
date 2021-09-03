@@ -49,10 +49,6 @@ const VideoPlayer = props => {
 		}
 	}, [room]);
 
-	useEffect(() => {}, [isHost]);
-
-	console.log('isHost ', isHost);
-
 	//handlers for the player
 
 	const handleOnReady = () => {
@@ -103,20 +99,23 @@ const VideoPlayer = props => {
 	return (
 		<div>
 			{
-				<ReactPlayer
-					ref={ref}
-					width="100%"
-					height="29vw"
-					controls={isHost}
-					playing={playing}
-					onReady={handleOnReady}
-					onEnded={handleEnded}
-					onPlay={handleOnPlay}
-					onSeek={handleSeek}
-					onPause={handleOnPause}
-					onError={e => console.log('onError', e)}
-					url={currentVideo.videoUrl}
-				/>
+				//room conditional is required to set the host
+				room.id && (
+					<ReactPlayer
+						ref={ref}
+						width="100%"
+						height="29vw"
+						controls={isHost}
+						playing={playing}
+						onReady={handleOnReady}
+						onEnded={handleEnded}
+						onPlay={handleOnPlay}
+						onSeek={handleSeek}
+						onPause={handleOnPause}
+						onError={e => console.log('onError', e)}
+						url={currentVideo.videoUrl}
+					/>
+				)
 			}
 		</div>
 	);
