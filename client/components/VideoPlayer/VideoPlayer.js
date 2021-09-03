@@ -54,8 +54,7 @@ const VideoPlayer = props => {
 		console.log('inside handleOnPlay useEffect');
 		if (playing) {
 			handleOnPlay();
-		}
-		else {
+		} else {
 			handleOnPause();
 		}
 	}, [playing]);
@@ -68,53 +67,28 @@ const VideoPlayer = props => {
 
 	const handleOnPause = () => {
 		console.log('on pause');
-
-		//this conditional should only apply to non-host
-		if (seeked) {
-			setPlaying(true);
-		}
 	};
 
 	const handleOnPlay = () => {
 		if (isHost) {
-			// const currentTime = player.getCurrentTime();
 			sendCurrentTime(roomId);
-		}
-		else {
+		} else {
+			dispatch(fetchVideos(roomId));
 			socket.emit('request-currentTime', roomId, user.id);
 			getCurrentTimeFromHost();
 			// setPlaying(false);
 			setPlaying(true);
 		}
-		console.log('on play');
-		// if (!seeked) {
-		// 	console.log('in seeked conditional');
-		// 	// player.seekTo(30);
-		// 	setSeeked(true);
-
-		// 	//if handle pause to complicated with host/non-host then consider using this setTimeout
-		// 	// setTimeout(() => setPlaying(true), 100);
-		// }
 	};
-
-	const sendCurrentTime = (roomId) => {
-		socket.on('get-currentTime-from-host', userId => {
-			const currentTime = player.getCurrentTime();
-			socket.emit('send-currentTime', roomId, userId, currentTime);
-		});
-	};
-
-	const getCurrentTimeFromHost = () => {
-		socket.on('currentTime', (userId, currentTime) => {
-			if (user.id === userId) {
-				player.seekTo(currentTime);
-			}
-		});
-	}
 
 	const handleEnded = () => {
 		console.log('in ended');
-		dispatch(removeVideo(currentVideo.id, roomId));
+		if (isHost) {
+			dispatch(removeVideo(currentVideo.id, roomId));
+		} else {
+			dispatch(fetchVideos(roomId));
+		}
+
 		if (videoQueue.length === 1) {
 			setPlaying(false);
 		} else {
@@ -130,6 +104,21 @@ const VideoPlayer = props => {
 
 	const ref = player => {
 		setPlayer(player);
+	};
+
+	const sendCurrentTime = roomId => {
+		socket.on('get-currentTime-from-host', userId => {
+			const currentTime = player.getCurrentTime();
+			socket.emit('send-currentTime', roomId, userId, currentTime);
+		});
+	};
+
+	const getCurrentTimeFromHost = () => {
+		socket.on('currentTime', (userId, currentTime) => {
+			if (user.id === userId) {
+				player.seekTo(currentTime);
+			}
+		});
 	};
 
 	return (
