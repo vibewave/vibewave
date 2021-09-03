@@ -7,11 +7,11 @@ import useStyles from './VideoQueueStyle';
 const VideoQueue = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const { id } = useParams();
+	const { id: roomId } = useParams();
 	let videos = useSelector(state => state.videoQueue);
 
 	useEffect(() => {
-		dispatch(fetchVideos(id));
+		dispatch(fetchVideos(roomId));
 	}, []);
 
 	if (!videos) return <></>;

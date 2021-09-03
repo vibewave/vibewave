@@ -18,10 +18,12 @@ const useStyles = makeStyles(theme => ({
 		height: '5.5em',
 		backgroundColor: '#151A1C',
 		color: 'white',
-    overflowX: 'auto',
+    overflow: 'hidden',
 	},
   videoQueueDescription: {
+    marginTop: '0.5em',
     marginLeft: '0.5em',
+    'align-self': 'flex-start',
   },
   videoThumbnail: {
     width: '4em',

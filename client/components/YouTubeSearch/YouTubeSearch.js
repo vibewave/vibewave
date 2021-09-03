@@ -1,3 +1,4 @@
+import { socket } from '../../socket/socket';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,7 +16,7 @@ const YouTubeSearch = () => {
   const [selectedVideo, setSelectedVideo] = useState({});
   const [duration, setDuration] = useState(0);
   const [durationPt, setDurationPt] = useState('');
-  const { id } = useParams();
+  const { id: roomId } = useParams();
   const dispatch = useDispatch();
 
   const convertPtToSec = (pt) => {
@@ -57,7 +58,7 @@ const YouTubeSearch = () => {
   useEffect(() => {
     setDuration(convertPtToSec(durationPt));
   }, [durationPt])
-  
+
 
   // console.log('searchResult: ', searchResult);
   // console.log("selectedVideo: ", selectedVideo);
@@ -72,13 +73,13 @@ const YouTubeSearch = () => {
         id: video.id.videoId,
       }
     });
-    console.log('videoDetails: ', videoDetails);
     setSelectedVideo(videoDetails);
     setDurationPt(videoDetails.contentDetails.duration);
-    await dispatch(addVideo(videoDetails, id, convertPtToSec(videoDetails.contentDetails.duration)));
-    dispatch(fetchVideos(id));
+    await dispatch(addVideo(videoDetails, roomId, convertPtToSec(videoDetails.contentDetails.duration)));
+    dispatch(fetchVideos(roomId));
     setSearch('');
     setSearchResult([]);
+    socket.emit('video-added', parseInt(roomId, 10));
   }
 
   return (

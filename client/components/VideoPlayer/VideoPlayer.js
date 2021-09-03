@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { socket } from '../../socket/socket';
 import { fetchVideos, removeVideo, fetchRoom } from '../../store';
 
 const testVideos = [
@@ -49,9 +50,14 @@ const VideoPlayer = props => {
 		}
 	}, [room]);
 
-	useEffect(() => {}, [isHost]);
-
-	console.log('isHost ', isHost);
+	useEffect(() => {
+		console.log('inside handleOnPlay useEffect');
+		if (playing) {
+			handleOnPlay();
+		} else {
+			handleOnPause();
+		}
+	}, [playing]);
 
 	//handlers for the player
 
@@ -61,28 +67,28 @@ const VideoPlayer = props => {
 
 	const handleOnPause = () => {
 		console.log('on pause');
-
-		//this conditional should only apply to non-host
-		if (seeked) {
-			setPlaying(true);
-		}
 	};
 
 	const handleOnPlay = () => {
-		console.log('on play');
-		if (!seeked) {
-			console.log('in seeked conditional');
-			player.seekTo(30);
-			setSeeked(true);
-
-			//if handle pause to complicated with host/non-host then consider using this setTimeout
-			// setTimeout(() => setPlaying(true), 100);
+		if (isHost) {
+			sendCurrentTime(roomId);
+		} else {
+			dispatch(fetchVideos(roomId));
+			socket.emit('request-currentTime', roomId, user.id);
+			getCurrentTimeFromHost();
+			// setPlaying(false);
+			setPlaying(true);
 		}
 	};
 
 	const handleEnded = () => {
 		console.log('in ended');
-		dispatch(removeVideo(currentVideo.id, roomId));
+		if (isHost) {
+			dispatch(removeVideo(currentVideo.id, roomId));
+		} else {
+			dispatch(fetchVideos(roomId));
+		}
+
 		if (videoQueue.length === 1) {
 			setPlaying(false);
 		} else {
@@ -100,23 +106,41 @@ const VideoPlayer = props => {
 		setPlayer(player);
 	};
 
+	const sendCurrentTime = roomId => {
+		socket.on('get-currentTime-from-host', userId => {
+			const currentTime = player.getCurrentTime();
+			socket.emit('send-currentTime', roomId, userId, currentTime);
+		});
+	};
+
+	const getCurrentTimeFromHost = () => {
+		socket.on('currentTime', (userId, currentTime) => {
+			if (user.id === userId) {
+				player.seekTo(currentTime);
+			}
+		});
+	};
+
 	return (
 		<div>
 			{
-				<ReactPlayer
-					ref={ref}
-					width="100%"
-					height="29vw"
-					controls={isHost}
-					playing={playing}
-					onReady={handleOnReady}
-					onEnded={handleEnded}
-					onPlay={handleOnPlay}
-					onSeek={handleSeek}
-					onPause={handleOnPause}
-					onError={e => console.log('onError', e)}
-					url={currentVideo.videoUrl}
-				/>
+				//room conditional is required to set the host
+				room.id && (
+					<ReactPlayer
+						ref={ref}
+						width="100%"
+						height="29vw"
+						controls={isHost}
+						playing={playing}
+						onReady={handleOnReady}
+						onEnded={handleEnded}
+						onPlay={() => setPlaying(true)}
+						onSeek={handleSeek}
+						onPause={() => setPlaying(false)}
+						onError={e => console.log('onError', e)}
+						url={currentVideo.videoUrl}
+					/>
+				)
 			}
 		</div>
 	);
