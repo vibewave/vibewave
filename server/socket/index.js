@@ -88,6 +88,12 @@ const startSocket = io => {
 			users = users.filter(user => user !== socket.id);
 			console.log('users after dc ', users);
 		});
+		//new message being sent
+		socket.on('new-message', (room, userId) => {
+			console.log('inside new message');
+			console.log('userId', userId);
+			socket.to(room).emit('refresh-message-list', room, userId);
+		});
 	});
 };
 

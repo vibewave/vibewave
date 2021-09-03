@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { socket } from '../../socket/socket';
 
 const MessageEntry = props => {
 	const [message, setMessage] = useState('');
@@ -14,8 +15,9 @@ const MessageEntry = props => {
 
 	const handleSumbit = async event => {
 		event.preventDefault();
-		dispatch(writeMessage(message, roomId, user.id));
+		await dispatch(writeMessage(message, roomId, user.id));
 		setMessage('');
+		socket.emit('new-message', roomId, user.id);
 	};
 
 	return (
