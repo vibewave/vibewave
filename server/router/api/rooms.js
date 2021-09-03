@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
 	models: { Room, User },
 } = require('../../db');
+const { newErr } = require('../../utils');
 
 //GET /api/rooms return all rooms
 router.get('/', async (req, res, next) => {
@@ -34,7 +35,10 @@ router.get('/:roomId', async (req, res, next) => {
 				},
 			}],
 		});
-		
+		if (!roomAndUsers) {
+			const err = newErr(404, `Page Not Found: Room ${req.params.roomId} is not available.`);
+			throw err;
+		}
 		res.send(roomAndUsers);
 	} catch (err) {
 		next(err);
