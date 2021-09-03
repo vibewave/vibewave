@@ -9,7 +9,6 @@ const MessageList = props => {
 	const messages = useSelector(state => state.messages);
 
 	useEffect(() => {
-		console.log('inside fetch useEffect ');
 		if (roomId) {
 			dispatch(fetchMessages(roomId));
 		}
