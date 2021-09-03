@@ -13,6 +13,7 @@ import {
 	fetchUsers,
 	hostLeaveAndDeleteRoom,
 	fetchRooms,
+	fetchRoom,
 } from '../../store';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import Chat from '../Chat/Chat';
@@ -29,33 +30,34 @@ const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { id } = useParams();
+	const { id: roomId } = useParams();
 	const user = useSelector(state => state.auth);
 	// use this to display list of users
 	const allRooms = useSelector(state => state.allRooms);
-	const roomAndUsers = useSelector(state => state.userRoom);
+	const room = useSelector(state => state.room);
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
 	useEffect(() => {
-		dispatch(fetchUsers(id));
+		dispatch(fetchUsers(roomId));
 		dispatch(fetchRooms());
+		dispatch(fetchRoom(roomId));
 		return () => {
-			dispatch(leaveRoom(id, user.id));
+			dispatch(leaveRoom(roomId, user.id));
 		};
 	}, []);
 
 	useEffect(() => {
-		if (roomAndUsers.id) {
-			joinRoom(roomAndUsers.id);
-			if (user.id === roomAndUsers.hostId) {
+		if (room.id) {
+			joinRoom(room.id);
+			if (user.id === room.hostId) {
 				setIsHost(true);
 			} else {
 				console.log('joined the room');
 			}
 		}
 		// return () => {};
-	}, [roomAndUsers, user]);
+	}, [room, user]);
 
 	useEffect(() => {
 		getTimePosition();

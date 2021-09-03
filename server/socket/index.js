@@ -29,46 +29,54 @@ const startSocket = io => {
 			}
 		});
 
-		socket.on('song-started', () => {
-			counter = 0;
-			console.log(`song started by ${socket.id}`);
-			const counterInterval = setInterval(() => {
-				counter += 100;
-			}, 100);
-			console.log(counter);
-		});
+		// socket.on('song-started', () => {
+		// 	counter = 0;
+		// 	console.log(`song started by ${socket.id}`);
+		// 	const counterInterval = setInterval(() => {
+		// 		counter += 100;
+		// 	}, 100);
+		// 	console.log(counter);
+		// });
 
-		socket.on('reset-counter', (id, progress = 0, duration) => {
-			if (roomIntervals[id]) {
-				clearInterval(roomIntervals[id]);
-			}
-			console.log('inside reset counter server side');
+		// socket.on('reset-counter', (id, progress = 0, duration) => {
+		// 	if (roomIntervals[id]) {
+		// 		clearInterval(roomIntervals[id]);
+		// 	}
+		// 	console.log('inside reset counter server side');
 
-			console.log('id in server is ', id);
-			roomCounters[id].counter = progress;
-			console.log(roomCounters);
-			console.log(duration);
-			roomIntervals[id] = setInterval(() => {
-				roomCounters[id].counter += 100;
-			}, 100);
-		});
+		// 	console.log('id in server is ', id);
+		// 	roomCounters[id].counter = progress;
+		// 	console.log(roomCounters);
+		// 	console.log(duration);
+		// 	roomIntervals[id] = setInterval(() => {
+		// 		roomCounters[id].counter += 100;
+		// 	}, 100);
+		// });
 
 		// join the room on the server side
-		socket.on('join-room', room => {
-			socket.join(room);
-			console.log(`${socket.id} joined room ${room}`);
+		socket.on('join-room', roomId => {
+			socket.join(roomId);
+			console.log(`${socket.id} joined room ${roomId}`);
 		});
 
 		//tell all other users in the room to refresh videos when a new song gets added
-		socket.on('video-added', room => {
-			socket.to(room).emit('refresh-videos', room);
+		socket.on('video-added', roomId => {
+			socket.to(roomId).emit('refresh-videos', roomId);
+		});
+
+		socket.on('request-currentTime', (roomId, userId) => {
+			socket.to(roomId).emit('get-currentTime-from-host', userId);
+		});
+
+		socket.on('send-currentTime', (roomId, userId, currentTime) => {
+			socket.to(roomId).emit('currentTime', userId, currentTime);
 		});
 
 		//create a room counter whenever a new room is created
-		socket.on('create-counter', roomId => {
-			roomCounters[roomId] = { counter: 0 };
-			console.log(roomCounters);
-		});
+		// socket.on('create-counter', roomId => {
+		// 	roomCounters[roomId] = { counter: 0 };
+		// 	console.log('roomCounters inside create-counter socket:', roomCounters);
+		// });
 
 		//a non-host user is seeking the time
 		socket.on('seek', (roomId, socketId) => {
