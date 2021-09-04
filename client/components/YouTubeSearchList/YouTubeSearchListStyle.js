@@ -10,15 +10,15 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
     cursor: 'pointer',
 	},
-  albumImgContainer: {
+  thumbnailImgContainer: {
     height: '4.5em',
     marginLeft: '0.2em'
   },
-  albumImg: {
+  thumbnailImg: {
     width: '100%',
     height: '100%'
   },
-  trackDescription: {
+  videoDescription: {
     marginLeft: '0.5em',
   },
 }));

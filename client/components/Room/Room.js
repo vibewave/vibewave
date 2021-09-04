@@ -4,25 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import SpotifyWebApi from 'spotify-web-api-node';
 import useStyles from './RoomStyle';
-import TrackSearch from '../TrackSearch/TrackSearch';
-import TrackQueue from '../TrackQueue/TrackQueue';
-import Player from '../Player/Player';
+import VideoQueue from '../VideoQueue/VideoQueue';
+import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
-import { getRoom, removeTrack } from '../../store';
-import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import {
 	leaveRoom,
 	fetchUsers,
 	hostLeaveAndDeleteRoom,
 	fetchRooms,
+	fetchRoom,
 } from '../../store';
-import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
-
-const spotifyApi = new SpotifyWebApi({
-	clientId: 'a28a1d73e5f8400485afaff5e584ca32',
-});
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Chat from '../Chat/Chat';
 
 const joinRoom = id => {
 	id = parseInt(id, 10);
@@ -35,47 +29,34 @@ const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { id } = useParams();
+	const { id: roomId } = useParams();
 	const user = useSelector(state => state.auth);
 	// use this to display list of users
 	const allRooms = useSelector(state => state.allRooms);
-	const roomAndUsers = useSelector(state => state.userRoom);
+	const room = useSelector(state => state.room);
 	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
 	useEffect(() => {
-		dispatch(fetchUsers(id));
+		dispatch(fetchUsers(roomId));
 		dispatch(fetchRooms());
+		dispatch(fetchRoom(roomId));
 		return () => {
-			dispatch(leaveRoom(id, user.id));
+			dispatch(leaveRoom(roomId, user.id));
 		};
 	}, []);
 
-	// CALL THESE INSIDE A USEEFFECT:
-
-	// const emitTrackPopped = () => {
-	// 	socket.emit('trackPopped');
-	// }
-
-	// const updateTracks = () => {
-	// 	socket.on('trackQueueUpdated', (updatedTrackQueue) => {
-	// 		if (updatedTrackQueue !== trackQueue) {
-	//			setTrackQueue(updatedTrackQueue);
-	//    }
-	//  });
-	// }
-
 	useEffect(() => {
-		if (roomAndUsers.id) {
-			joinRoom(roomAndUsers.id);
-			if (user.id === roomAndUsers.hostId) {
+		if (room.id) {
+			joinRoom(room.id);
+			if (user.id === room.hostId) {
 				setIsHost(true);
 			} else {
 				console.log('joined the room');
 			}
 		}
 		// return () => {};
-	}, [roomAndUsers, user]);
+	}, [room, user]);
 
 	useEffect(() => {
 		getTimePosition();
@@ -105,8 +86,8 @@ const Room = props => {
 		>
 			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={2} className={classes.roomLeft}>
-					<div className={classes.trackQueueContainer}>
-						<TrackQueue />
+					<div className={classes.videoQueueContainer}>
+						<VideoQueue />
 					</div>
 				</Grid>
 				<Grid item xs={7} className={classes.roomCenter}>
@@ -128,21 +109,18 @@ const Room = props => {
 							)}
 							<div>{currentTimePosition}</div>
 						</div>
-						<div className={classes.mainArea}>
-							<VideoPlayer />
-							{/* {isHost && <TrackSearch spotifyApi={spotifyApi} />} */}
-							<YouTubeSearch />
-						</div>
 						<div className={classes.playerDiv}>
-							<Player
-								spotifyApi={spotifyApi}
-								currentTimePosition={currentTimePosition}
-							/>
+							<VideoPlayer />
+						</div>
+						<div className={classes.mainArea}>
+							<YouTubeSearch />
 						</div>
 					</div>
 				</Grid>
 				<Grid item xs={3} className={classes.roomRight}>
-					<div className={classes.chatContainer}></div>
+					<div className={classes.chatContainer}>
+						<Chat />
+					</div>
 				</Grid>
 			</Grid>
 		</Container>

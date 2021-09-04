@@ -16,12 +16,25 @@ export const fetchTracks = roomId => {
 	};
 };
 
+export const fetchAllTracks = async allRooms => {
+	let trackOfRooms = [];
+	console.log('allRooms', allRooms);
+	for (let i = 0; i < allRooms.length; i++) {
+		const { data: allTracks } = await axios.get(
+			`/api/tracks/${allRooms[i].id}`
+		);
+		console.log('inside thunk', allTracks);
+		trackOfRooms.push(allTracks[0]);
+	}
+	return trackOfRooms;
+};
+
 export const removeTrack = (trackId, roomId) => {
-	return async (dispatch) => {
+	return async dispatch => {
 		await axios.delete(`/api/tracks/${trackId}`);
 		dispatch(fetchTracks(roomId));
-	}
-}
+	};
+};
 
 export default function (state = [], action) {
 	switch (action.type) {

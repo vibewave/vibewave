@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 // ROUTES
 app.use('/api', require('./router/api'));
 app.use('/auth', require('./router/auth'));
-app.use('/spotify', require('./router/spotify'));
+app.use('/youtube', require('./router/youtube'));
 
 app.get('/', async (req, res, next) => {
 	try {
@@ -31,14 +31,14 @@ app.use(express.static(path.resolve(appDir, 'src')));
 
 // any remaining requests with an extension (.js, .css, etc.) send 404
 app.use((req, res, next) => {
-  if (path.extname(req.path).length) {
-    const err = new Error('Not found')
-    err.status = 404
-    next(err)
-  } else {
-    next()
-  }
-})
+	if (path.extname(req.path).length) {
+		const err = new Error('Not found');
+		err.status = 404;
+		next(err);
+	} else {
+		next();
+	}
+});
 
 // FALLBACK HANDLER
 app.get('*', (req, res) => {
