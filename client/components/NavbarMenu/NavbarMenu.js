@@ -6,17 +6,20 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import { StyledMenu, StyledMenuItem } from './NavbarMenuStyle';
 import { logout } from '../../store';
+import { hostLeaveAndDeleteRoom } from '../../store';
+import { socket } from '../../socket/socket';
 
 const NavbarMenu = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const auth = useSelector(state => state.auth);
+	const user = useSelector(state => state.auth);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const room = useSelector(state => state.room);
 
 	useEffect(async () => {
-		setIsLoggedIn(!!auth.id);
-	}, [auth]);
+		setIsLoggedIn(!!user.id);
+	}, [user]);
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget);
@@ -29,7 +32,13 @@ const NavbarMenu = () => {
 	const handleCreateRoom = () => {
 		handleClose();
 		history.push('/createroom');
-	}
+	};
+
+	const handleCloseRoom = () => {
+		handleClose();
+		dispatch(hostLeaveAndDeleteRoom(room.id, history));
+		socket.emit('host-closed-room', room.id);
+	};
 
 	const handleLogout = async () => {
 		await dispatch(logout());
@@ -57,11 +66,13 @@ const NavbarMenu = () => {
 					onClose={handleClose}
 				>
 					<StyledMenuItem>
-						<ListItemText
-							onClick={handleCreateRoom}
-							primary="Create Room"
-						/>
+						<ListItemText onClick={handleCreateRoom} primary="Create Room" />
 					</StyledMenuItem>
+					{room.hostId === user.id && (
+						<StyledMenuItem>
+							<ListItemText onClick={handleCloseRoom} primary="Close Room" />
+						</StyledMenuItem>
+					)}
 					<StyledMenuItem>
 						<ListItemText onClick={handleLogout} primary="Logout" />
 					</StyledMenuItem>

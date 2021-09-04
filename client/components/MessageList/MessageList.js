@@ -6,13 +6,14 @@ import { useParams } from 'react-router';
 const MessageList = props => {
 	const dispatch = useDispatch();
 	const roomId = parseInt(useParams().id, 10);
+	const room = useSelector(state => state.room);
 	const messages = useSelector(state => state.messages);
 
 	useEffect(() => {
-		if (roomId) {
-			dispatch(fetchMessages(roomId));
+		if (room.id) {
+			dispatch(fetchMessages(room.id));
 		}
-	}, [roomId]);
+	}, [room]);
 
 	return (
 		<div>

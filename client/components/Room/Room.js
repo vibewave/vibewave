@@ -18,10 +18,17 @@ import {
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import Chat from '../Chat/Chat';
 
-const joinRoom = id => {
+const joinSocketRoom = id => {
 	id = parseInt(id, 10);
 	if (Number.isInteger(id)) {
 		socket.emit('join-room', id);
+	}
+};
+
+const leaveSocketRoom = id => {
+	id = parseInt(id, 10);
+	if (Number.isInteger(id)) {
+		socket.emit('leave-room', id);
 	}
 };
 
@@ -29,44 +36,37 @@ const Room = props => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { id: roomId } = useParams();
+	const roomId = parseInt(useParams().id, 10);
 	const user = useSelector(state => state.auth);
 	// use this to display list of users
-	const allRooms = useSelector(state => state.allRooms);
 	const room = useSelector(state => state.room);
-	const [isHost, setIsHost] = useState(false);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
+
+	const roomClosing = () => {
+		socket.on('room-closing', () => setTimeout(() => history.push('/'), 200));
+	};
 
 	useEffect(() => {
 		dispatch(fetchUsers(roomId));
-		dispatch(fetchRooms());
 		dispatch(fetchRoom(roomId));
+		roomClosing();
 		return () => {
+			console.log('in leave room');
 			dispatch(leaveRoom(roomId, user.id));
+			leaveSocketRoom(roomId);
 		};
 	}, []);
 
 	useEffect(() => {
 		if (room.id) {
-			joinRoom(room.id);
-			if (user.id === room.hostId) {
-				setIsHost(true);
-			} else {
-				console.log('joined the room');
-			}
+			joinSocketRoom(room.id);
 		}
-		// return () => {};
-	}, [room, user]);
+	}, [room]);
 
 	useEffect(() => {
 		getTimePosition();
 		// return () => {};
 	}, []);
-
-	const startSong = () => {
-		console.log('start song button clicked.');
-		socket.emit('song-started', true);
-	};
 
 	// testing this in player
 	const getTimePosition = () => {
@@ -93,20 +93,8 @@ const Room = props => {
 				<Grid item xs={7} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
-							{isHost && 'I am the host'}
-							{!isHost && 'I am not the host'}
-							<button onClick={startSong}>Start Song</button>
-							{isHost && (
-								<button
-									onClick={() =>
-										dispatch(
-											hostLeaveAndDeleteRoom(id, user.id, allRooms, history)
-										)
-									}
-								>
-									Delete Room
-								</button>
-							)}
+							{room.hostId === user.id && 'I am the host'}
+							{room.hostId !== user.id && 'I am not the host'}
 							<div>{currentTimePosition}</div>
 						</div>
 						<div className={classes.playerDiv}>

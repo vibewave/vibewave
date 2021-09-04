@@ -13,13 +13,8 @@ const startSocket = io => {
 	const hardValue = 5;
 
 	io.on('connection', socket => {
-		console.log(socket.id);
-
+		console.log(socket.id, 'has connected');
 		users.push(socket.id);
-
-		if (users.length === 1) {
-			io.emit('isHost');
-		}
 
 		socket.on('send-message', (message, room) => {
 			if (room === '') {
@@ -29,34 +24,15 @@ const startSocket = io => {
 			}
 		});
 
-		// socket.on('song-started', () => {
-		// 	counter = 0;
-		// 	console.log(`song started by ${socket.id}`);
-		// 	const counterInterval = setInterval(() => {
-		// 		counter += 100;
-		// 	}, 100);
-		// 	console.log(counter);
-		// });
-
-		// socket.on('reset-counter', (id, progress = 0, duration) => {
-		// 	if (roomIntervals[id]) {
-		// 		clearInterval(roomIntervals[id]);
-		// 	}
-		// 	console.log('inside reset counter server side');
-
-		// 	console.log('id in server is ', id);
-		// 	roomCounters[id].counter = progress;
-		// 	console.log(roomCounters);
-		// 	console.log(duration);
-		// 	roomIntervals[id] = setInterval(() => {
-		// 		roomCounters[id].counter += 100;
-		// 	}, 100);
-		// });
-
 		// join the room on the server side
 		socket.on('join-room', roomId => {
 			socket.join(roomId);
 			console.log(`${socket.id} joined room ${roomId}`);
+		});
+
+		socket.on('leave-room', roomId => {
+			socket.leave(roomId);
+			console.log(`${socket.id} left room ${roomId}`);
 		});
 
 		//tell all other users in the room to refresh videos when a new song gets added
@@ -64,6 +40,7 @@ const startSocket = io => {
 			socket.to(roomId).emit('refresh-videos', roomId);
 		});
 
+		//current time related sockets
 		socket.on('request-currentTime', (roomId, userId) => {
 			socket.to(roomId).emit('get-currentTime-from-host', userId);
 		});
@@ -72,16 +49,9 @@ const startSocket = io => {
 			socket.to(roomId).emit('currentTime', userId, currentTime);
 		});
 
-		//create a room counter whenever a new room is created
-		// socket.on('create-counter', roomId => {
-		// 	roomCounters[roomId] = { counter: 0 };
-		// 	console.log('roomCounters inside create-counter socket:', roomCounters);
-		// });
-
-		//a non-host user is seeking the time
-		socket.on('seek', (roomId, socketId) => {
-			console.log('in seek on server side');
-			socket.emit('time-position-test', roomCounters[roomId].counter, socketId);
+		//handling closing room
+		socket.on('host-closed-room', roomId => {
+			socket.to(roomId).emit('room-closing');
 		});
 
 		socket.on('disconnect', () => {

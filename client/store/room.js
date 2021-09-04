@@ -3,6 +3,7 @@ import axios from 'axios';
 // Action Types
 const CREATE_ROOM = 'CREATE_ROOM';
 const FETCH_ROOM = 'FETCH_ROOM';
+const LEAVE_ROOM = 'LEAVE_ROOM';
 
 // Action Creators
 const _createRoom = room => {
@@ -17,6 +18,10 @@ const _fetchRoom = room => {
 		type: FETCH_ROOM,
 		room,
 	};
+};
+
+const _leaveRoom = () => {
+	return { type: LEAVE_ROOM };
 };
 
 // Thunks
@@ -41,12 +46,21 @@ export const fetchRoom = roomId => {
 	};
 };
 
+export const leaveRoom = (roomId, userId) => {
+	return async dispatch => {
+		await axios.put(`/api/users/${userId}`, { roomId: null });
+		dispatch(_leaveRoom());
+	};
+};
+
 export default function (state = {}, action) {
 	switch (action.type) {
 		case CREATE_ROOM:
 			return action.room;
 		case FETCH_ROOM:
 			return action.room;
+		case LEAVE_ROOM:
+			return {};
 		default:
 			return state;
 	}
