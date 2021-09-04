@@ -13,13 +13,8 @@ const startSocket = io => {
 	const hardValue = 5;
 
 	io.on('connection', socket => {
-		console.log(socket.id);
-
+		console.log(socket.id, 'has connected');
 		users.push(socket.id);
-
-		if (users.length === 1) {
-			io.emit('isHost');
-		}
 
 		socket.on('send-message', (message, room) => {
 			if (room === '') {

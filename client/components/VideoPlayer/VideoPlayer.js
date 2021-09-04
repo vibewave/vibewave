@@ -13,10 +13,8 @@ const testVideos = [
 
 const VideoPlayer = props => {
 	//state variables
-	const [isHost, setIsHost] = useState(false);
 	const [playing, setPlaying] = useState(false);
 	const [player, setPlayer] = useState(null);
-	const [seeked, setSeeked] = useState(false);
 	const [currentVideo, setCurrentVideo] = useState('');
 
 	//params variables
@@ -44,11 +42,6 @@ const VideoPlayer = props => {
 	}, [videoQueue]);
 
 	//set the host when roomId is available
-	useEffect(() => {
-		if (room.id && room.hostId === user.id) {
-			setIsHost(true);
-		}
-	}, [room]);
 
 	useEffect(() => {
 		console.log('inside handleOnPlay useEffect');
@@ -70,7 +63,7 @@ const VideoPlayer = props => {
 	};
 
 	const handleOnPlay = () => {
-		if (isHost) {
+		if (room.hostId === user.id) {
 			sendCurrentTime(roomId);
 		} else {
 			dispatch(fetchVideos(roomId));
@@ -83,7 +76,7 @@ const VideoPlayer = props => {
 
 	const handleEnded = () => {
 		console.log('in ended');
-		if (isHost) {
+		if (room.hostId === user.id) {
 			dispatch(removeVideo(currentVideo.id, roomId));
 		} else {
 			dispatch(fetchVideos(roomId));
@@ -125,12 +118,12 @@ const VideoPlayer = props => {
 		<div>
 			{
 				//room conditional is required to set the host
-				room.id && (
+				room.id === roomId && (
 					<ReactPlayer
 						ref={ref}
 						width="100%"
 						height="29vw"
-						controls={isHost}
+						controls={room.hostId === user.id}
 						playing={playing}
 						onReady={handleOnReady}
 						onEnded={handleEnded}
