@@ -18,10 +18,7 @@ const Video = db.define('video', {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
-	duration: {
-		type: Sequelize.INTEGER,
-		// allowNull: false,
-	},
+
 	order: {
 		type: Sequelize.INTEGER,
 	},
