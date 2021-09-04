@@ -15,14 +15,13 @@ const _addVideo = video => {
 
 //Thunks
 
-export const addVideo = (video, roomId, duration) => {
+export const addVideo = (video, roomId) => {
 	return async dispatch => {
 		const { data: dbVideo } = await axios.post(`/api/videos`, {
-			videoId: video.id,
-			videoUrl: 'https://www.youtube.com/watch?v=' + video.id,
+			videoId: video.id.videoId,
+			videoUrl: 'https://www.youtube.com/watch?v=' + video.id.videoId,
 			title: video.snippet.title,
 			thumbnailUrl: video.snippet.thumbnails.default.url,
-			duration: duration,
 			roomId,
 		});
 		const action = _addVideo(video);

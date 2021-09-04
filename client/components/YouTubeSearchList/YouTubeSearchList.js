@@ -6,6 +6,7 @@ const YouTubeSearchList = ({chooseVideo, video}) => {
 
   const handlePlay = () => {
     chooseVideo(video);
+    console.log('video title: ', video.snippet.title);
   }
 
   return (

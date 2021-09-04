@@ -29,8 +29,12 @@ module.exports = merge(common, {
 				target: `http://localhost:${expressServerPORT}`,
 				secure: false,
 			},
+			'/youtube/': {
+				target: `http://localhost:${expressServerPORT}`,
+				secure: false,
+			},
 		},
-		publicPath: '/'
+		publicPath: '/',
 	},
 	output: {
 		path: path.resolve(appDir, 'dist'),

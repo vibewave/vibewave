@@ -18,7 +18,6 @@ import {
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import Chat from '../Chat/Chat';
 
-
 const joinRoom = id => {
 	id = parseInt(id, 10);
 	if (Number.isInteger(id)) {
