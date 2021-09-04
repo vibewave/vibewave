@@ -6,8 +6,8 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import MenuIcon from '@material-ui/icons/Menu';
 import { StyledMenu, StyledMenuItem } from './NavbarMenuStyle';
 import { logout } from '../../store';
-import { useParams } from 'react-router-dom';
 import { hostLeaveAndDeleteRoom } from '../../store';
+import { socket } from '../../socket/socket';
 
 const NavbarMenu = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
@@ -37,6 +37,7 @@ const NavbarMenu = () => {
 	const handleCloseRoom = () => {
 		handleClose();
 		dispatch(hostLeaveAndDeleteRoom(room.id, history));
+		socket.emit('host-closed-room', room.id);
 	};
 
 	const handleLogout = async () => {
