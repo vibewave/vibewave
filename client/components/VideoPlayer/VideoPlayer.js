@@ -118,7 +118,7 @@ const VideoPlayer = props => {
 		<div>
 			{
 				//room conditional is required to set the host
-				room.id === roomId && (
+				room.id && (
 					<ReactPlayer
 						ref={ref}
 						width="100%"

@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './RoomStyle';
 import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
+import RoomHeader from '../RoomHeader/RoomHeader';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import RoomClosingPopup from '../RoomClosingPopup/RoomClosingPopup';
 import {
@@ -95,9 +96,7 @@ const Room = props => {
 				<Grid item xs={7} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
-							{room.hostId === user.id && 'I am the host'}
-							{room.hostId !== user.id && 'I am not the host'}
-							<div>{currentTimePosition}</div>
+							<RoomHeader />
 						</div>
 						<div className={classes.playerDiv}>
 							<VideoPlayer />

@@ -9,6 +9,7 @@ import video from './video';
 import videoQueue from './videoQueue';
 import users from './users';
 import messages from './messages';
+import host from './host';
 import thumbnails from './thumbnails';
 
 // const reducer = combineReducers({ auth })
@@ -20,6 +21,7 @@ const reducer = combineReducers({
 	videoQueue,
 	users,
 	messages,
+	host,
 	thumbnails,
 });
 
@@ -45,4 +47,5 @@ export * from './videoQueue';
 export * from './video';
 export * from './users';
 export * from './messages';
+export * from './host';
 export * from './thumbnails';

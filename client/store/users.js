@@ -17,7 +17,6 @@ export const fetchUsers = roomId => {
 	return async dispatch => {
 		const { data: { users: users } } = await axios.get(`/api/rooms/${roomId}`);
 		const action = _fetchUsers(users);
-		console.log('users: ', users);
 		dispatch(action);
 	};
 };
