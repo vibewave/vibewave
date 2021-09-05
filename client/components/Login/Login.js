@@ -16,7 +16,6 @@ import { authenticate } from '../../store';
 import Copyright from '../Copyright/Copyright';
 import useStyles from './LoginStyle';
 
-
 const Login = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
@@ -38,7 +37,11 @@ const Login = () => {
 			<CssBaseline />
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}>
-					<img src="/vibewave-logo.png" alt="vibewave logo" className={classes.logo}/>
+					<img
+						src="/vibewave-logo.png"
+						alt="vibewave logo"
+						className={classes.logo}
+					/>
 				</Avatar>
 				<Typography component="h1" variant="h5">
 					Login
@@ -86,9 +89,7 @@ const Login = () => {
 							</Link>
 						</Grid> */}
 						<Grid item>
-							<Link href={'/signup'}>
-								{"Don't have an account? Sign Up"}
-							</Link>
+							<Link href={'/signup'}>{"Don't have an account? Sign Up"}</Link>
 						</Grid>
 					</Grid>
 				</form>
@@ -98,6 +99,6 @@ const Login = () => {
 			</Box>
 		</Container>
 	);
-}
+};
 
 export default Login;
