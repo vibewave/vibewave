@@ -6,8 +6,8 @@ const useStyles = makeStyles(theme => ({
 		flexWrap: 'wrap',
 		flexDirection: 'row',
 		alignItems: 'space-around',
-		justifyContent: 'space-around',
-		padding: '50px',
+		justifyContent: 'flex-start',
+		padding: '25px',
 		alignContent: 'space-around',
 		backgroundColor: '#151A1C',
 	},
@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
 		margin: '1em',
 	},
 	thumbnail: {
-		height: '100%',
-		width: '100%',
+		height: '160.6px',
+		width: '250px',
 	},
 }));
 
