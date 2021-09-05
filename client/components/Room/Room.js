@@ -40,7 +40,6 @@ const Room = props => {
 	const history = useHistory();
 	const roomId = parseInt(useParams().id, 10);
 	const user = useSelector(state => state.auth);
-	const users = useSelector(state => state.userRoom).users;
 	// use this to display list of users
 	const room = useSelector(state => state.room);
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
@@ -97,7 +96,7 @@ const Room = props => {
 				<Grid item xs={7} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
-							<RoomHeader room={room} user={user} users={users} host={host} />
+							<RoomHeader />
 						</div>
 						<div className={classes.playerDiv}>
 							<VideoPlayer />

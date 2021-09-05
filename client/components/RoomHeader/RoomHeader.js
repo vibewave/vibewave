@@ -14,7 +14,7 @@ const RoomHeader = (props) => {
   const roomId = parseInt(useParams().id, 10);
   const room = useSelector(state => state.room);
   const user = useSelector(state => state.auth);
-	const users = useSelector(state => state.userRoom).users;
+	const users = useSelector(state => state.users);
   const host = useSelector(state => state.host);
 
   useEffect(() => {

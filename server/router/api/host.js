@@ -12,7 +12,6 @@ module.exports = router;
 router.get('/:roomId', async (req, res, next) => {
 	try {
     const room = await Room.findByPk(req.params.roomId);
-    console.log('ROOM: ', room);
 		const user = await User.findByPk(room.hostId);
 		res.json(user);
 	} catch (err) {
