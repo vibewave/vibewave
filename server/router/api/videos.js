@@ -3,6 +3,7 @@ const {
 	models: { Video },
 } = require('../../db');
 
+// GET /api/videos/:roomId
 router.get('/:roomId', async (req, res, next) => {
 	try {
 		const videos = await Video.findAll({
@@ -14,6 +15,7 @@ router.get('/:roomId', async (req, res, next) => {
 	}
 });
 
+// POST /api/videos
 router.post('/', async (req, res, next) => {
 	try {
 		const video = await Video.create(req.body);
@@ -23,6 +25,7 @@ router.post('/', async (req, res, next) => {
 	}
 });
 
+// DELETE /api/videos/:videoId
 router.delete('/:videoId', async (req, res, next) => {
 	try {
 		await Video.destroy({

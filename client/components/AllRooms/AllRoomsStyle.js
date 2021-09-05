@@ -11,7 +11,16 @@ const useStyles = makeStyles(theme => ({
 		alignContent: 'space-around',
 	},
 	title: {
+		display: 'table-cell',
+		height: '60px',
 		textAlign: 'center',
+		verticalAlign: 'middle',
+	},
+	titleContainer: {
+		display: 'flex',
+		alignItems: 'center',
+		height: '90px',
+		padding: '0',
 	},
 	description: {
 		width: '185px',
@@ -20,10 +29,17 @@ const useStyles = makeStyles(theme => ({
 		margin: '1em',
 	},
 	singleCard: {
-		width: '200px',
-		height: '350px',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		width: '250px',
+		// height: '325px',
+		margin: '1em',
 	},
-	
+	thumbnail: {
+		height: '100%',
+		width: '100%',
+	},
 }));
 
 export default useStyles;
