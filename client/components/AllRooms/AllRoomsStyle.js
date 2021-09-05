@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: 'space-around',
 		padding: '50px',
 		alignContent: 'space-around',
+		backgroundColor: '#151A1C',
 	},
 	title: {
 		display: 'table-cell',
