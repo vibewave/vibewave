@@ -9,6 +9,7 @@ import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomHeader from '../RoomHeader/RoomHeader';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
+import RoomClosingPopup from '../RoomClosingPopup/RoomClosingPopup';
 import {
 	leaveRoom,
 	fetchUsers,
@@ -45,7 +46,7 @@ const Room = props => {
 	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
 	const roomClosing = () => {
-		socket.on('room-closing', () => setTimeout(() => history.push('/'), 200));
+		socket.on('room-closing', () => setTimeout(() => history.push('/'), 6000));
 	};
 
 	useEffect(() => {
@@ -86,6 +87,7 @@ const Room = props => {
 			maxWidth={false}
 			className={classes.roomContainer}
 		>
+			<RoomClosingPopup />
 			<Grid container className={classes.mainGridContainer}>
 				<Grid item xs={2} className={classes.roomLeft}>
 					<div className={classes.videoQueueContainer}>
@@ -101,7 +103,7 @@ const Room = props => {
 							<VideoPlayer />
 						</div>
 						<div className={classes.mainArea}>
-							<YouTubeSearch />
+							{room.hostId === user.id && <YouTubeSearch />}
 						</div>
 					</div>
 				</Grid>

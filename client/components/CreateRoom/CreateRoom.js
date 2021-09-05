@@ -50,7 +50,7 @@ const CreateRoom = () => {
 					value={roomTitle}
 					onChange={e => setRoomTitle(e.target.value)}
 					className={classes.titleInput}
-					inputProps={{ maxLength: 20 }}
+					inputProps={{ maxLength: 40 }}
 					required
 				/>
 				<div>
@@ -66,7 +66,7 @@ const CreateRoom = () => {
 						minRows={5}
 						maxRows={10}
 						className={classes.descriptionInput}
-						inputProps={{ maxLength: 40 }}
+						inputProps={{ maxLength: 75 }}
 						required
 					/>
 				</div>

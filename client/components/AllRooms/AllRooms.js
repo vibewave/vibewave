@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import { fetchRooms, handleEnterRoom } from '../../store';
+import { fetchRooms, handleEnterRoom, fetchThumbnails } from '../../store';
 import useStyles from './AllRoomsStyle';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -16,52 +16,41 @@ const AllRooms = () => {
 	const history = useHistory();
 	const user = useSelector(state => state.auth);
 	const rooms = useSelector(state => state.allRooms);
+	const thumbnails = useSelector(state => state.thumbnails);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchRooms());
+		dispatch(fetchThumbnails());
 	}, []);
 
 	return (
 		<div className={classes.allCards}>
-			{rooms.map(room => (
+			{rooms.map((room) => (
 				<div key={room.id} onClick={() => dispatch(handleEnterRoom(room.id, user.id, history))}>
 					<Card className={classes.singleCard}>
-							<CardContent>
-								<Typography
-									gutterBottom
-									variant="h5"
-									color="textSecondary"
-									component="h2"
-									className={classes.title}
-								>
-									<div>{room.title}</div>
-								</Typography>
-							</CardContent>
-							<CardActionArea>
-								<img
-									src="/darkMusicIcon.jpg"
-									alt="defaultRoomIcon"
-									className={classes.roomIcon}
-								/>
-							</CardActionArea>
-
-							{/* <CardActions>
-							<Button size="small" color="primary">
-								Share
-							</Button>
-							<Button size="small" color="primary">
-								Like Room
-							</Button>
-						</CardActions> */}
+						<CardContent className={classes.titleContainer}>
 							<Typography
-								variant="body2"
+								// gutterBottom
+								variant="h6"
 								color="textSecondary"
-								component="p"
-								className={classes.description}
+								component="h2"
+								className={classes.title}
 							>
-								{room.description}
+								{room.title}
 							</Typography>
+						</CardContent>
+						<CardActionArea>
+							<img src={thumbnails[room.id] ? thumbnails[room.id] : 'darkmusiciconwide.png'} className={classes.thumbnail}/>
+						</CardActionArea>
+						<Typography
+							variant="body2"
+							color="textSecondary"
+							component="p"
+							className={classes.description}
+						>
+							{room.description}
+						</Typography>
 					</Card>
 				</div>
 			))}

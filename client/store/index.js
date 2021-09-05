@@ -7,9 +7,10 @@ import auth from './auth';
 import allRooms from './allRooms';
 import video from './video';
 import videoQueue from './videoQueue';
-import userRoom from './userRoom';
+import users from './users';
 import messages from './messages';
 import host from './host';
+import thumbnails from './thumbnails';
 
 // const reducer = combineReducers({ auth })
 const reducer = combineReducers({
@@ -18,9 +19,10 @@ const reducer = combineReducers({
 	allRooms,
 	video,
 	videoQueue,
-	userRoom,
+	users,
 	messages,
 	host,
+	thumbnails,
 });
 
 // const middlewares = [
@@ -43,6 +45,7 @@ export * from './room';
 export * from './allRooms';
 export * from './videoQueue';
 export * from './video';
-export * from './userRoom';
+export * from './users';
 export * from './messages';
 export * from './host';
+export * from './thumbnails';
