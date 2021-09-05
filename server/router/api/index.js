@@ -6,6 +6,7 @@ router.use('/user', require('./routes/user'));
 */
 
 router.use('/users', require('./users'));
+router.use('/host', require('./host'));
 router.use('/rooms', require('./rooms'));
 router.use('/videos', require('./videos'));
 router.use('/messages', require('./messages'));
