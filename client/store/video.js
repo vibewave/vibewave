@@ -1,11 +1,9 @@
 import axios from 'axios';
 
 //Action types
-
 const ADD_VIDEO = 'ADD_VIDEO';
 
 //Action creators
-
 const _addVideo = video => {
 	return {
 		type: ADD_VIDEO,
@@ -14,7 +12,6 @@ const _addVideo = video => {
 };
 
 //Thunks
-
 export const addVideo = (video, roomId) => {
 	return async dispatch => {
 		const { data: dbVideo } = await axios.post(`/api/videos`, {
@@ -29,6 +26,8 @@ export const addVideo = (video, roomId) => {
 		return dbVideo;
 	};
 };
+
+
 
 export default function (state = {}, action) {
 	switch (action.type) {

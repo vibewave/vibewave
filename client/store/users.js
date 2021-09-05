@@ -15,8 +15,9 @@ const _fetchUsers = users => {
 // Thunks
 export const fetchUsers = roomId => {
 	return async dispatch => {
-		const { data: usersAndRoom } = await axios.get(`/api/rooms/${roomId}`);
-		const action = _fetchUsers(usersAndRoom);
+		const { data: { users: users } } = await axios.get(`/api/rooms/${roomId}`);
+		const action = _fetchUsers(users);
+		console.log('users: ', users);
 		dispatch(action);
 	};
 };
@@ -28,13 +29,6 @@ export const handleEnterRoom = (roomId, userId, history) => {
 		dispatch(fetchUsers(roomId));
 	};
 };
-
-// export const leaveRoom = (roomId, userId) => {
-// 	return async dispatch => {
-// 		await axios.put(`/api/users/${userId}`, { roomId: null });
-// 		// dispatch(fetchUsers(roomId));
-// 	};
-// };
 
 export const hostLeaveAndDeleteRoom = (roomId, history) => {
 	return async dispatch => {
