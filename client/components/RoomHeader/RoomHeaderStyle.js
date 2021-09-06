@@ -8,20 +8,30 @@ const useStyles = makeStyles(theme => ({
     height: '100%'
   },
   roomImgContainer: {
+    width: '15%',
     height: '60px',
   },
   roomImg: {
-    height: '100%',
+    width: '100%',
     overflow: 'hidden'
   },
   roomDescriptionContainer: {
     padding: '0 2em',
     display: 'flex',
     flexDirection: 'column',
-    width: '60%'
+    width: '50%'
   },
   liveUsersContainer: {
-    margin: '3em'
+    height: '100%',
+    width: '35%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '0 1em'
+  },
+  liveUsersText: {
+    padding: '0.5em',
+    width: '88%'
   }
 }));
 

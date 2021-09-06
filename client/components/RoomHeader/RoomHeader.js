@@ -48,7 +48,7 @@ const RoomHeader = (props) => {
           </h4>
         </div>
         <div className={classes.liveUsersContainer}>
-          <h4>
+          <h4 className={classes.liveUsersText}>
             {users.length === 1
             ? `${users.length} user is currently enjoying ${room.title}.`
             : `${users.length} users are currently enjoying ${room.title}.`
