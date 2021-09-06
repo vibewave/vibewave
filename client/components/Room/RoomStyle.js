@@ -8,7 +8,6 @@ const useStyles = makeStyles(theme => ({
 		height: '90vh',
 	},
 	mainGridContainer: {
-		margin: '0',
 		height: '100%',
 	},
 	roomLeft: {
@@ -31,37 +30,35 @@ const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		'flex-direction': 'column',
 		'justify-content': 'center',
-		'align-items': 'center'
+		'align-items': 'center',
+		padding: '0 1em',
 	},
 	roomCenter: {
 		height: '100%',
 	},
 	roomInfoDiv: {
-		width: '90%',
-		height: '12%',
+		width: '100%',
+		height: '15%',
 		border: '1px solid #44494B',
 	},
 	mainArea: {
-		width: '90%',
-		height: '35%',
+		width: '100%',
+		height: '30%',
 		border: '1px solid #44494B',
 		overflow: 'auto',
 	},
 	playerDiv: {
-		width: '90%',
+		width: '100%',
 		border: '1px solid #44494B',
 	},
 	roomRight: {
-		borderLeft: '1.5px solid white',
+		// borderLeft: '1.5px solid white',
 		height: '100%',
 	},
 	chatContainer: {
 		width: '100%',
 		height: '100%',
 	},
-	// youTubeSearchDiv: {
-	// 	height: '50%',
-	// },
 }));
 
 export default useStyles;

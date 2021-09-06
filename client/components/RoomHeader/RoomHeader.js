@@ -20,8 +20,8 @@ const RoomHeader = (props) => {
   useEffect(() => {
     dispatch(fetchRoom(roomId));
     dispatch(fetchUsers(roomId));
-    roomId && dispatch(fetchHost(roomId));
-  }, [roomId]);
+    dispatch(fetchHost(roomId));
+  }, []);
 
   if (!room || !user || !users || !host) {
     return (
@@ -48,9 +48,11 @@ const RoomHeader = (props) => {
           </h4>
         </div>
         <div className={classes.liveUsersContainer}>
-          <h4>
-            {console.dir(users)}
-            {`${users.length} users are currently enjoying ${room.title}.`}
+          <h4 className={classes.liveUsersText}>
+            {users.length === 1
+            ? `${users.length} user is currently enjoying ${room.title}.`
+            : `${users.length} users are currently enjoying ${room.title}.`
+            }
           </h4>
         </div>
       </div>

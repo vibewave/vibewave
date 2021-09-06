@@ -27,10 +27,6 @@ const CreateRoom = () => {
 		const room = await dispatch(
 			createRoom({ title: roomTitle, description: roomDesc, hostId: user.id })
 		);
-		// Promise.resolve(room).then((roomObject) => {
-		// 	history.push(`/rooms/${roomObject.id}`)
-		// });
-		console.log('this is room: ', room);
 		history.push(`/rooms/${room.id}`);
 		createCounter(room.id);
 	};
@@ -50,7 +46,7 @@ const CreateRoom = () => {
 					value={roomTitle}
 					onChange={e => setRoomTitle(e.target.value)}
 					className={classes.titleInput}
-					inputProps={{ maxLength: 40 }}
+					inputProps={{ maxLength: 35 }}
 					required
 				/>
 				<div>

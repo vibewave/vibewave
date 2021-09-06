@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: '#151A1C',
 		color: 'white',
     overflow: 'hidden',
+    padding: '0.5em',
 	},
   videoQueueDescription: {
     marginTop: '0.5em',

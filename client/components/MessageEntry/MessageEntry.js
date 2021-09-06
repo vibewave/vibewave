@@ -23,22 +23,23 @@ const MessageEntry = props => {
 	};
 
 	return (
-		<form onSubmit={handleSumbit} className={classes.container}>
-			<TextField
-				id="outlined-basic"
-				label="message entry"
-				variant="outlined"
-				value={message}
-				onChange={e => setMessage(e.target.value)}
-				inputProps={{ maxLength: 30 }}
-				required
-				className={classes.input}
-			/>
-
-			<Button type="submit" variant="contained" className={classes.sendButton}>
-				<SendIcon />
-			</Button>
-		</form>
+		<div className={classes.messageEntryCountainer}>
+			<form onSubmit={handleSumbit} className={classes.messageEntry}>
+				<TextField
+					id="outlined-basic"
+					label="message entry"
+					variant="outlined"
+					value={message}
+					onChange={e => setMessage(e.target.value)}
+					inputProps={{ maxLength: 30 }}
+					required
+					className={classes.input}
+				/>
+				<Button type="submit" variant="contained" className={classes.sendButton}>
+					<SendIcon className={classes.sendIcon}/>
+				</Button>
+			</form>
+		</div>
 	);
 };
 

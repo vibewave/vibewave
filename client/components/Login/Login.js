@@ -28,8 +28,15 @@ const Login = () => {
 			email: e.target.email.value,
 			password: e.target.password.value,
 		};
-		await dispatch(authenticate(method, userInfo));
-		history.push('/');
+
+		const res = await dispatch(authenticate(method, userInfo));
+
+		if (!res) {
+			history.push('/');
+		}
+		else {
+			window.alert(res.auth.error.response.data);
+		}
 	};
 
 	return (
