@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 		// backgroundColor: theme.palette.secondary.mix,
 		borderRadius: '5px',
 	},
-	bubbleMe: {
+	bubble: {
 		backgroundColor: '#23494B',
 		border: '0.1em solid gray',
 		borderRadius: '0.75em',
@@ -26,14 +26,13 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		overflow: 'hidden',
 	},
-	bubbleThem: {
-		backgroundColor: '#83494B',
-		border: '0.1em solid gray',
+	bubbleMine: {
+		backgroundColor: '#30a2a9',
+		border: '0.1em solid #c3d3d4',
 		borderRadius: '0.75em',
 		margin: '0.1em',
 		padding: '0.5em',
 		width: '100%',
-		overflow: 'hidden',
 	},
 	last: {
 		overflowAnchor: 'auto',

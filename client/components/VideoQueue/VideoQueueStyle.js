@@ -22,9 +22,12 @@ const useStyles = makeStyles(theme => ({
     padding: '0.5em',
 	},
   videoQueueDescription: {
-    marginTop: '0.5em',
-    marginLeft: '0.5em',
+    padding: '0.3em',
+    height: '95%',
     'align-self': 'flex-start',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    scrollbarWidth: 'thin',
   },
   videoThumbnail: {
     width: '4em',
