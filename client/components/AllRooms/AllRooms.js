@@ -42,14 +42,16 @@ const AllRooms = () => {
 						<CardActionArea>
 							<img src={thumbnails[room.id] ? thumbnails[room.id] : 'darkmusiciconwide.png'} className={classes.thumbnail}/>
 						</CardActionArea>
-						<Typography
-							variant="body2"
-							color="textSecondary"
-							component="p"
-							className={classes.description}
-						>
-							{room.description}
-						</Typography>
+						<div className={classes.descriptionContainer}>
+							<Typography
+								variant="body2"
+								color="textSecondary"
+								component="p"
+								className={classes.description}
+							>
+								{room.description}
+							</Typography>
+						</div>
 					</Card>
 				</div>
 			))}

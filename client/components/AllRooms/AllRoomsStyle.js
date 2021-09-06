@@ -12,22 +12,30 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: '#151A1C',
 	},
 	title: {
-		display: 'table-cell',
-		height: '60px',
 		textAlign: 'center',
-		verticalAlign: 'middle',
+		width: '100%',
 	},
 	titleContainer: {
 		display: 'flex',
 		alignItems: 'center',
-		height: '90px',
-		padding: '0',
+		height: '6em',
+		width: '100%',
+	},
+	descriptionContainer: {
+		width: '100%',
+		height: '6em',
+		paddingTop: '1em',
+		paddingRight: '1em',
+		paddingLeft: '2em',
+		paddingBottom: '1em',
 	},
 	description: {
-		width: '185px',
-		height: '70px',
-		overflow: 'auto',
-		margin: '1em',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		textAlign: 'left',
+		width: '90%',
+		height: '100%',
 	},
 	singleCard: {
 		display: 'flex',
@@ -43,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 		cursor: 'pointer',
 	},
 	thumbnail: {
-		height: '160.6px',
+		height: '160px',
 		width: '250px',
 	},
 }));

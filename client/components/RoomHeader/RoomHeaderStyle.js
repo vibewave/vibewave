@@ -4,6 +4,10 @@ const useStyles = makeStyles(theme => ({
 	roomHeaderContainer: {
     display: 'flex',
     alignItems: 'center',
+    alignContent: 'space-evenly',
+    justifyContent: 'space-evenly',
+    height: '100%',
+    padding: '1em',
   },
   roomImgContainer: {
     height: '60px',
@@ -16,8 +20,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
   },
   liveUsersContainer: {
-    alignSelf: 'flex-start',
-    margin: '3em'
+    alignSelf: 'center',
   }
 }));
 

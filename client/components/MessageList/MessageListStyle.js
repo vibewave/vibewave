@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 	messageList: {
 		display: 'flex',
 		flexDirection: 'column',
-		width: '97%',
+		width: '99%',
 		scrollSnapAlign: 'end',
 	},
 	bubble: {
