@@ -15,8 +15,6 @@ const useStyles = makeStyles(theme => ({
 		width: '80%',
 	},
 	searchButton: {
-		// position: 'fixed',
-		// right: '',
 		padding: '0.2em',
 		width: '20%',
 		height: '4.2em',

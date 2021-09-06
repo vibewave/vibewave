@@ -40,17 +40,18 @@ const useStyles = makeStyles(theme => ({
 	roomInfoDiv: {
 		width: '100%',
 		height: '15%',
-		border: '1px solid #44494B',
+		// border: '1px solid #44494B',
 	},
 	mainArea: {
 		width: '100%',
 		height: '30%',
-		border: '1px solid #44494B',
+		border: `1.5px solid #df6b78`,
+		borderRadius: '0 0 0.25em 0.25em',
 		overflow: 'auto',
 	},
 	playerDiv: {
 		width: '100%',
-		border: '1px solid #44494B',
+		// border: '1px solid #44494B',
 	},
 	roomRight: {
 		// borderLeft: '1.5px solid white',

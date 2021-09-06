@@ -5,6 +5,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     border: `1px solid ${theme.palette.primary.light}`,
+    borderRadius: '0.25em 0.25em 0 0',
     height: '100%',
     overflow: 'hidden',
   },

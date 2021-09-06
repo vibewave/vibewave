@@ -6,7 +6,8 @@ const useStyles = makeStyles(theme => ({
     // minWidth: '180px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '0.1em',
   },
 	videoQueueItemsContainer: {
     border: '0.5px solid white',

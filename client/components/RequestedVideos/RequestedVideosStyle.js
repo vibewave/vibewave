@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     cursor: 'pointer',
     overflow: 'hidden',
     margin: '0.58em',
+    padding: '0.5em',
 	},
   requestedVideoDescription: {
     padding: '0.3em',
