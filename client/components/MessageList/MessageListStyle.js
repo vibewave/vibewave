@@ -14,6 +14,8 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		width: '99%',
 		scrollSnapAlign: 'end',
+		backgroundColor: theme.palette.secondary.mix,
+		borderRadius: '5px',
 	},
 	bubble: {
 		backgroundColor: '#23494B',

@@ -20,14 +20,18 @@ const setAuth = auth => ({ type: SET_AUTH, auth });
  * THUNK CREATORS
  */
 export const me = () => async dispatch => {
-	const token = window.localStorage.getItem(TOKEN);
-	if (token) {
-		const res = await axios.get(`/auth/me`, {
-			headers: {
-				authorization: token,
-			},
-		});
-		return dispatch(setAuth(res.data));
+	try {
+		const token = window.localStorage.getItem(TOKEN);
+		if (token) {
+			const res = await axios.get(`/auth/me`, {
+				headers: {
+					authorization: token,
+				},
+			});
+			return dispatch(setAuth(res.data));
+		}
+	} catch (err) {
+		return dispatch(setAuth({ error: err}));
 	}
 };
 
