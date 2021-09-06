@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchRequestedVideos } from '../../store';
 import useStyles from './RequestedVideosStyle';
 import he from 'he';
-import Popper from '@material-ui/core/popper';
 
 const RequestedVideos = () => {
 	const classes = useStyles();
@@ -24,7 +23,10 @@ const RequestedVideos = () => {
 				{requestedVideos.map(video => (
 					<div key={video.id} className={classes.requestedVideoItemsContainer}>
 						<div>
-							<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
+							<img
+								src={video.thumbnailUrl}
+								className={classes.videoThumbnail}
+							/>
 						</div>
 						<div className={classes.requestedVideoDescription}>
 							{he.decode(video.title)}
