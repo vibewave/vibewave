@@ -53,6 +53,7 @@ const videos = [
 		title:
 			"RED VELVET - 'FUTURE' (미래) [Start-Up OST Part.1] Lyrics [Color Coded_Han_Rom_Eng]",
 		thumbnailUrl: 'https://i.ytimg.com/vi/oiNkumxPVzU/maxresdefault.jpg',
+		isRequested: false
 	},
 	{
 		videoId: 'kTJczUoc26U',
@@ -60,6 +61,7 @@ const videos = [
 		title: 'The Kid LAROI, Justin Bieber - STAY (Official Video)',
 		thumbnailUrl:
 			'https://themusicnetwork.com/wp-content/uploads/The-Kid-LAROI-and-Justin-Bieber-Stay-1024x657.png',
+		isRequested: false
 	},
 ];
 

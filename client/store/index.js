@@ -11,6 +11,7 @@ import users from './users';
 import messages from './messages';
 import host from './host';
 import thumbnails from './thumbnails';
+import requestedVideos from './requestedVideos';
 
 // const reducer = combineReducers({ auth })
 const reducer = combineReducers({
@@ -23,6 +24,7 @@ const reducer = combineReducers({
 	messages,
 	host,
 	thumbnails,
+	requestedVideos,
 });
 
 // const middlewares = [
@@ -49,3 +51,4 @@ export * from './users';
 export * from './messages';
 export * from './host';
 export * from './thumbnails';
+export * from './requestedVideos';

@@ -3,11 +3,54 @@ const {
 	models: { Video },
 } = require('../../db');
 
+// GET /api/videos/?roomId={roomId}&isRequested=true
+router.get('/', async (req, res, next) => {
+	// query params
+	const roomId = req.query.roomId;
+	const isRequested = req.query.isRequested;
+
+	try {
+		const requestedVideos = await Video.findAll({
+			where: {
+				roomId,
+				isRequested
+			}
+		});
+		res.send(requestedVideos);
+	}
+	catch (error) {
+		next(error);
+	}
+});
+
+// DELETE /api/videos/?videoId={videoId}&isRequested=true
+router.delete('/', async (req, res, next) => {
+	// query params
+	const videoId = req.query.videoId;
+	const isRequested = req.query.isRequested;
+
+	try {
+		await Video.destroy({
+			where: {
+				id: videoId,
+				isRequested
+			}
+		});
+		res.sendStatus(204);
+	}
+	catch (error) {
+		next(error);
+	}
+});
+
 // GET /api/videos/:roomId
 router.get('/:roomId', async (req, res, next) => {
 	try {
 		const videos = await Video.findAll({
-			where: { roomId: req.params.roomId },
+			where: {
+				roomId: req.params.roomId,
+				isRequested: false
+			},
 		});
 		res.send(videos);
 	} catch (error) {

@@ -33,6 +33,15 @@ const YouTubeSearch = () => {
 		socket.emit('video-added', parseInt(roomId, 10));
 	};
 
+	const chooseRequestedVideo = async video => {
+		setSelectedVideo(video);
+		await dispatch(addRequestedVideo(video, roomId));
+		dispatch(fetchRequestedVideos(roomId));
+		setSearch('');
+		setSearchResult([]);
+		socket.emit('requested-video-added', parseInt(roomId, 10));
+	};
+
 	return (
 		<div className={classes.videoSearchContainer}>
 			<form onSubmit={handleSubmit}>
@@ -51,6 +60,7 @@ const YouTubeSearch = () => {
 						video={video}
 						key={video.id.videoId}
 						chooseVideo={chooseVideo}
+						chooseRequestedVideo={chooseRequestedVideo}
 					/>
 				))}
 			</div>

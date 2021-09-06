@@ -1,5 +1,9 @@
 import { io } from 'socket.io-client';
-import store, { fetchVideos, fetchMessages } from '../store';
+import store, {
+	fetchVideos,
+	fetchRequestedVideos,
+	fetchMessages
+} from '../store';
 
 export let socket;
 
@@ -16,6 +20,11 @@ socket.on('connect', () => {
 socket.on('refresh-videos', room => {
 	console.log('inside of refresh videos');
 	store.dispatch(fetchVideos(room));
+});
+
+socket.on('refresh-requested-videos', room => {
+	console.log('inside of refresh requested videos');
+	store.dispatch(fetchRequestedVideos(room));
 });
 
 socket.on('refresh-message-list', (room, userId) => {

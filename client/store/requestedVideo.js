@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 //Action types
-const ADD_VIDEO = 'ADD_VIDEO';
+const ADD_REQUESTED_VIDEO = 'ADD_REQUESTED_VIDEO';
 
 //Action creators
-const _addVideo = video => {
+const _addRequestedVideo = requestedVideo => {
 	return {
-		type: ADD_VIDEO,
-		video,
+		type: ADD_REQUESTED_VIDEO,
+		requestedVideo,
 	};
 };
 
 //Thunks
-export const addVideo = (video, roomId) => {
+export const addRequestedVideo = (requestedVideo, roomId) => {
 	return async dispatch => {
 		const { data: dbVideo } = await axios.post(`/api/videos`, {
 			videoId: video.id.videoId,
@@ -20,9 +20,9 @@ export const addVideo = (video, roomId) => {
 			title: video.snippet.title,
 			thumbnailUrl: video.snippet.thumbnails.default.url,
 			roomId,
-			isRequested: false
+      isRequested: true
 		});
-		const action = _addVideo(video);
+		const action = _addRequestedVideo(requestedVideo);
 		dispatch(action);
 		return dbVideo;
 	};
@@ -30,8 +30,8 @@ export const addVideo = (video, roomId) => {
 
 export default function (state = {}, action) {
 	switch (action.type) {
-		case ADD_VIDEO:
-			return action.video;
+		case ADD_REQUESTED_VIDEO:
+			return action.requestedVideo;
 		default:
 			return state;
 	}
