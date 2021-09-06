@@ -13,6 +13,7 @@ export const fetchVideos = roomId => {
 	return async dispatch => {
 		const { data: videos } = await axios.get(`/api/videos/${roomId}`);
 		dispatch(_fetchVideos(videos));
+		return videos;
 	};
 };
 

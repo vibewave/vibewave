@@ -9,6 +9,7 @@ router.get('/:roomId', async (req, res, next) => {
 		const videos = await Video.findAll({
 			where: { roomId: req.params.roomId },
 		});
+		sortedVideo = videos.sort((a, b) => a.id - b.id);
 		res.send(videos);
 	} catch (error) {
 		next(error);
@@ -30,8 +31,8 @@ router.delete('/:videoId', async (req, res, next) => {
 	try {
 		await Video.destroy({
 			where: {
-				id: req.params.videoId
-			}
+				id: req.params.videoId,
+			},
 		});
 		res.sendStatus(204);
 	} catch (error) {

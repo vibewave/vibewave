@@ -69,6 +69,7 @@ const VideoPlayer = props => {
 			sendCurrentTime(roomId);
 		} else {
 			dispatch(fetchVideos(roomId));
+
 			socket.emit('request-currentTime', roomId, user.id);
 			getCurrentTimeFromHost();
 			// setPlaying(false);
@@ -104,14 +105,21 @@ const VideoPlayer = props => {
 	const sendCurrentTime = roomId => {
 		socket.on('get-currentTime-from-host', userId => {
 			const currentTime = player.getCurrentTime();
-			socket.emit('send-currentTime', roomId, userId, currentTime);
+			const hostVideoId = currentVideo.id;
+			console.log(hostVideoId);
+			socket.emit('send-currentTime', roomId, userId, currentTime, hostVideoId);
 		});
 	};
 
 	const getCurrentTimeFromHost = () => {
-		socket.on('currentTime', (userId, currentTime) => {
+		socket.on('currentTime', (userId, currentTime, hostVideoId) => {
 			if (user.id === userId) {
-				player.seekTo(currentTime);
+				if (currentVideo.id === hostVideoId) {
+					console.log('in if conditional');
+					player.seekTo(currentTime);
+				} else {
+					setTimeout(() => player.seekTo(currentTime), 500);
+				}
 			}
 		});
 	};
