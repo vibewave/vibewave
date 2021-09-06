@@ -10,6 +10,7 @@ const MessageList = props => {
 	const room = useSelector(state => state.room);
 	const messages = useSelector(state => state.messages);
 	const classes = useStyles();
+	const user = useSelector(state => state.auth);
 
 	useEffect(() => {
 		dispatch(fetchRoom(roomId));
@@ -27,7 +28,7 @@ const MessageList = props => {
 				{messages &&
 					messages.map(message => {
 						return (
-							<div key={message.id} className={classes.bubble}>
+							<div key={message.id} className={message.userId === user.id ? classes.bubbleMe : classes.bubbleThem}>
 								{message.user.username}: {message.message}
 							</div>
 						);

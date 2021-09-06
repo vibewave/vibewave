@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchVideos } from '../../store';
 import useStyles from './VideoQueueStyle';
+import he from 'he';
 
 const VideoQueue = () => {
 	const classes = useStyles();
@@ -24,7 +25,7 @@ const VideoQueue = () => {
 						<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
 					</div>
 					<div className={classes.videoQueueDescription}>
-						{video.title}
+						{he.decode(video.title)}
 					</div>
 				</div>
 			))}

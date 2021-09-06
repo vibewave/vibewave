@@ -17,13 +17,23 @@ const useStyles = makeStyles(theme => ({
 		// backgroundColor: theme.palette.secondary.mix,
 		borderRadius: '5px',
 	},
-	bubble: {
+	bubbleMe: {
 		backgroundColor: '#23494B',
 		border: '0.1em solid gray',
 		borderRadius: '0.75em',
 		margin: '0.1em',
 		padding: '0.5em',
 		width: '100%',
+		overflow: 'hidden',
+	},
+	bubbleThem: {
+		backgroundColor: '#83494B',
+		border: '0.1em solid gray',
+		borderRadius: '0.75em',
+		margin: '0.1em',
+		padding: '0.5em',
+		width: '100%',
+		overflow: 'hidden',
 	},
 	last: {
 		overflowAnchor: 'auto',
