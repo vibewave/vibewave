@@ -36,7 +36,6 @@ const MessageList = props => {
 				{messages &&
 					messages.map(message => {
 						const isMine = message.user.id === user.id;
-						console.log('isMine?: ', isMine);
 						const messageClassName = isMine ? classes.bubbleMine : classes.bubble;
 						return (
 							<div key={message.id} className={messageClassName}>
