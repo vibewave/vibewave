@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 		border: '1px solid #44494B',
 	},
 	roomRight: {
-		borderLeft: '1.5px solid white',
+		// borderLeft: '1.5px solid white',
 		height: '100%',
 	},
 	chatContainer: {

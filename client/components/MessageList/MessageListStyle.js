@@ -6,6 +6,8 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		height: '90%',
 		overflow: 'auto',
+		backgroundColor: theme.palette.secondary.mix,
+		borderRadius: '5px',
 	},
 
 	bubble: {
