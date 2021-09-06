@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMessages, fetchRoom } from '../../store';
+import {
+	fetchMessages,
+	fetchRoom,
+	fetchUsers
+} from '../../store';
 import { useParams } from 'react-router';
 import useStyles from './MessageListStyle';
 
@@ -8,11 +12,13 @@ const MessageList = props => {
 	const dispatch = useDispatch();
 	const roomId = parseInt(useParams().id, 10);
 	const room = useSelector(state => state.room);
+	const user = useSelector(state => state.auth);
 	const messages = useSelector(state => state.messages);
 	const classes = useStyles();
 
 	useEffect(() => {
 		dispatch(fetchRoom(roomId));
+		dispatch(fetchUsers(roomId));
 	}, []);
 
 	useEffect(() => {
@@ -21,18 +27,23 @@ const MessageList = props => {
 		}
 	}, [room]);
 
+	if (!room || !user) return <></>;
+
 	return (
 		<div className={classes.messageListContainer}>
 			<div className={classes.messageList}>
+				{console.dir(messages)}
 				{messages &&
 					messages.map(message => {
+						const isMine = message.user.id === user.id;
+						console.log('isMine?: ', isMine);
+						const messageClassName = isMine ? classes.bubbleMine : classes.bubble;
 						return (
-							<div key={message.id} className={classes.bubble}>
+							<div key={message.id} className={messageClassName}>
 								{message.user.username}: {message.message}
 							</div>
 						);
 					})}
-				{/* <div className={classes.last}>End of Messages</div> */}
 			</div>
 		</div>
 	);
