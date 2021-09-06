@@ -106,7 +106,6 @@ const Room = props => {
 							<VideoPlayer />
 						</div>
 						<div className={classes.mainArea}>
-							{/* {room.hostId === user.id && <YouTubeSearch />} */}
 							<RequestedVideos />
 						</div>
 					</div>

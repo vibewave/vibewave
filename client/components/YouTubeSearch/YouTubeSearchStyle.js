@@ -2,18 +2,18 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	videoSearchContainer: {
-		marginLeft: '0.5em',
-		marginTop: '0.5em',
-		width: '100%',
+		width: '98%',
+		height: '100%',
 	},
 	videoSearchInput: {
 		borderRadius: '0.5em',
 		background: '#012F41',
-		width: '95%',
+		width: '100%',
 	},
 	songList: {
+		width: '100%',
 		height: '100%',
-		width: '95%',
+		borderRadius: '5px',
 		overflow: 'auto',
 	}
 }));

@@ -13,17 +13,17 @@ const useStyles = makeStyles(theme => ({
 	roomLeft: {
 		height: '100%',
 		// borderRight: '1.5px solid white',
-		overflowY: 'auto'
+		// overflowY: 'auto'
 	},
 	videoQueueContainer: {
-		height: '50%'
+		width: '95%',
+		height: '50%',
+		overflow: 'auto',
 	},
 	youTubeSearchContainer: {
-		height: '45%'
-	},
-	chatContainer: {
-		width: '100%',
-		height: '100%',
+		width: '95%',
+		height: '45%',
+		overflow: 'hidden',
 	},
 	roomCenterContainer: {
 		height: '100%',

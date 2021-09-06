@@ -9,6 +9,13 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: '#151A1C',
 		color: 'white',
     cursor: 'pointer',
+    overflow: 'hidden',
+    '&:first-child': {
+      borderRadius: '5px 5px 0 0'
+    },
+    '&:last-child': {
+      borderRadius: '0 0 5px 5px'
+    }
 	},
   thumbnailImgContainer: {
     height: '4.5em',
@@ -20,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   videoDescription: {
     marginLeft: '0.5em',
+    fontSize: '0.9em'
   },
 }));
 

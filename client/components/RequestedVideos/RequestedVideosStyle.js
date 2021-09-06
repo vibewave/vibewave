@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 		height: '5.5em',
 		backgroundColor: '#151A1C',
 		color: 'white',
+    cursor: 'pointer',
     overflow: 'hidden',
 	},
   requestedVideoDescription: {
