@@ -1,12 +1,6 @@
 const { Socket } = require('socket.io');
 
 let users = [];
-let roomCounters = { 1: { counter: 0 }, 2: { counter: 0 } };
-let roomIntervals = {};
-// const clearRoomInterval = id => {
-// 	clearInterval();
-// };
-// export const videoQueueOrder = {};
 
 const startSocket = io => {
 	let counter = 0;
@@ -45,9 +39,12 @@ const startSocket = io => {
 			socket.to(roomId).emit('get-currentTime-from-host', userId);
 		});
 
-		socket.on('send-currentTime', (roomId, userId, currentTime) => {
-			socket.to(roomId).emit('currentTime', userId, currentTime);
-		});
+		socket.on(
+			'send-currentTime',
+			(roomId, userId, currentTime, hostVideoId) => {
+				socket.to(roomId).emit('currentTime', userId, currentTime, hostVideoId);
+			}
+		);
 
 		//handling closing room
 		socket.on('host-closed-room', roomId => {
