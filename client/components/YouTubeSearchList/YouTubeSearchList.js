@@ -6,6 +6,7 @@ import {
   fetchUsers,
   fetchRoom,
 } from '../../store';
+import he from 'he';
 
 const YouTubeSearchList = (props) => {
   const classes = useStyles();
@@ -49,7 +50,7 @@ const YouTubeSearchList = (props) => {
         <img src={video.snippet.thumbnails.default.url} className={classes.thumbnailImg} />
       </div>
       <div className={classes.videoDescription}>
-        <h4>{video.snippet.title}</h4>
+        <h4>{he.decode(video.snippet.title)}</h4>
       </div>
     </div>
   )

@@ -31,7 +31,7 @@ const MessageEntry = props => {
 					variant="outlined"
 					value={message}
 					onChange={e => setMessage(e.target.value)}
-					inputProps={{ maxLength: 30 }}
+					inputProps={{ maxLength: 90 }}
 					required
 					className={classes.input}
 				/>

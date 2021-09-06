@@ -24,6 +24,15 @@ const useStyles = makeStyles(theme => ({
 		margin: '0.1em',
 		padding: '0.5em',
 		width: '100%',
+		overflow: 'hidden',
+	},
+	bubbleMine: {
+		backgroundColor: '#30a2a9',
+		border: '0.1em solid #c3d3d4',
+		borderRadius: '0.75em',
+		margin: '0.1em',
+		padding: '0.5em',
+		width: '100%',
 	},
 	last: {
 		overflowAnchor: 'auto',
