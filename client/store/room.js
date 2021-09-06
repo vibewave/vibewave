@@ -27,10 +27,14 @@ const _leaveRoom = () => {
 // Thunks
 export const createRoom = room => {
 	return async dispatch => {
-		const { data: dbRoom } = await axios.post('/api/rooms', room);
-		const action = _createRoom(dbRoom);
-		dispatch(action);
-		return dbRoom;
+		try {
+			const { data: dbRoom } = await axios.post('/api/rooms', room);
+			const action = _createRoom(dbRoom);
+			dispatch(action);
+			return dbRoom;
+		} catch (err) {
+			window.alert('This room already exists!');
+		}
 	};
 };
 

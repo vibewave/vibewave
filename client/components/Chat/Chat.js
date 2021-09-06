@@ -7,11 +7,10 @@ const Chat = props => {
 	const classes = useStyles();
 
 	return (
-		<>
+		<div className={classes.chatMessageContainer}>
 			<MessageList/>
-
 			<MessageEntry/>
-		</>
+		</div>
 	);
 };
 

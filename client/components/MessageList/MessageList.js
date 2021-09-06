@@ -22,16 +22,18 @@ const MessageList = props => {
 	}, [room]);
 
 	return (
-		<div className={classes.container}>
-			{messages &&
-				messages.map(message => {
-					return (
-						<div key={message.id} className={classes.bubble}>
-							{message.user.username}: {message.message}
-						</div>
-					);
-				})}
-			<div className={classes.last}>End of Messages</div>
+		<div className={classes.messageListContainer}>
+			<div className={classes.messageList}>
+				{messages &&
+					messages.map(message => {
+						return (
+							<div key={message.id} className={classes.bubble}>
+								{message.user.username}: {message.message}
+							</div>
+						);
+					})}
+				{/* <div className={classes.last}>End of Messages</div> */}
+			</div>
 		</div>
 	);
 };
