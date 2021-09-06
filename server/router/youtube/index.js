@@ -6,23 +6,13 @@ const youtube = axios.create({
 	baseURL: 'https://www.googleapis.com/youtube/v3/',
 });
 
-console.log('inside youtube routes');
-
-// const { data: { items: { 0: videoDetails } } } = await youtube.get('/videos', {
-//   params: {
-//     part: 'snippet,contentDetails,statistics,status',
-//     key: API_KEY,
-//     id: video.id.videoId,
-//   }
-// });
-
 //post /youtube/search
 router.post('/search', async (req, res, next) => {
 	try {
 		const videoList = await youtube.get('/search', {
 			params: {
 				part: 'snippet',
-				maxResults: 30,
+				maxResults: 20,
 				q: req.body.search,
 				key: process.env.API_KEY,
 			},
@@ -30,9 +20,6 @@ router.post('/search', async (req, res, next) => {
 		const filteredVideoList = videoList.data.items.filter(
 			video => video.id.videoId !== undefined
 		);
-
-		console.log('search on req body is ', req.body.search);
-
 		res.send(filteredVideoList);
 	} catch (err) {
 		next(err);

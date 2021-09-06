@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import history from '../history';
 
 const TOKEN = 'token';
 
@@ -12,9 +11,6 @@ const SET_AUTH = 'SET_AUTH';
  * ACTION CREATORS
  */
 const setAuth = auth => ({ type: SET_AUTH, auth });
-
-// const serverAddress = process.env.PORT ?? 8086
-// const serverAddress = 'http://localhost:8086';
 
 /**
  * THUNK CREATORS
@@ -31,7 +27,7 @@ export const me = () => async dispatch => {
 			return dispatch(setAuth(res.data));
 		}
 	} catch (err) {
-		return dispatch(setAuth({ error: err}));
+		return dispatch(setAuth({ error: err }));
 	}
 };
 

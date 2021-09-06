@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-	fetchMessages,
-	fetchRoom,
-	fetchUsers
-} from '../../store';
+import { fetchMessages, fetchRoom, fetchUsers } from '../../store';
 import { useParams } from 'react-router';
 import useStyles from './MessageListStyle';
 
@@ -32,11 +28,12 @@ const MessageList = props => {
 	return (
 		<div className={classes.messageListContainer}>
 			<div className={classes.messageList}>
-				{console.dir(messages)}
 				{messages &&
 					messages.map(message => {
 						const isMine = message.user.id === user.id;
-						const messageClassName = isMine ? classes.bubbleMine : classes.bubble;
+						const messageClassName = isMine
+							? classes.bubbleMine
+							: classes.bubble;
 						return (
 							<div key={message.id} className={messageClassName}>
 								{message.user.username}: {message.message}

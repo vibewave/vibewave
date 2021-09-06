@@ -41,9 +41,7 @@ const Room = props => {
 	const history = useHistory();
 	const roomId = parseInt(useParams().id, 10);
 	const user = useSelector(state => state.auth);
-	// use this to display list of users
 	const room = useSelector(state => state.room);
-	const [currentTimePosition, setCurrentTimePosition] = useState(0);
 
 	const roomClosing = () => {
 		socket.on('room-closing', () => setTimeout(() => history.push('/'), 6000));
@@ -54,7 +52,6 @@ const Room = props => {
 		dispatch(fetchRoom(roomId));
 		roomClosing();
 		return () => {
-			console.log('in leave room');
 			dispatch(leaveRoom(roomId, user.id));
 			leaveSocketRoom(roomId);
 		};
@@ -65,20 +62,6 @@ const Room = props => {
 			joinSocketRoom(room.id);
 		}
 	}, [room]);
-
-	useEffect(() => {
-		getTimePosition();
-		// return () => {};
-	}, []);
-
-	// testing this in player
-	const getTimePosition = () => {
-		socket.on('time-position', counter => {
-			console.log('inside time-position client for user ', socket.id);
-			console.log(`Current time: ${counter}`);
-			setCurrentTimePosition(counter);
-		});
-	};
 
 	return (
 		<Container

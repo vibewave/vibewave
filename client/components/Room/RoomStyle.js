@@ -5,13 +5,13 @@ const useStyles = makeStyles(theme => ({
 		margin: '0',
 		padding: '1em',
 		width: '100vw',
-		// height: '90vh',
+		height: '90vh',
 	},
 	mainGridContainer: {
 		height: '100%',
 	},
 	roomLeft: {
-		height: '100vh',
+		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 	roomInfoDiv: {
 		width: '100%',
 		height: '15%',
-		// border: '1px solid #44494B',
 	},
 	mainArea: {
 		width: '100%',
@@ -52,11 +51,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	playerDiv: {
 		width: '100%',
-		// border: '1px solid #44494B',
 	},
 	roomRight: {
-		// borderLeft: '1.5px solid white',
-		height: '100vh',
+		height: '100%',
 	},
 	chatContainer: {
 		width: '100%',
@@ -65,4 +62,3 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default useStyles;
-

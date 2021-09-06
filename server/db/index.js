@@ -5,8 +5,6 @@ const Video = require('./models/Video');
 const Message = require('./models/Message');
 const FriendList = require('./models/FriendList');
 
-//associations could go here!
-
 Room.hasMany(User);
 User.belongsTo(Room);
 

@@ -45,39 +45,24 @@ const VideoPlayer = props => {
 
 	//set the host when roomId is available
 	useEffect(() => {
-		console.log('inside handleOnPlay useEffect');
 		if (playing) {
 			handleOnPlay();
-		} else {
-			handleOnPause();
 		}
 	}, [playing]);
 
 	//handlers for the player
-
-	const handleOnReady = () => {
-		console.log('on ready');
-	};
-
-	const handleOnPause = () => {
-		console.log('on pause');
-	};
-
 	const handleOnPlay = () => {
 		if (room.hostId === user.id) {
 			sendCurrentTime(roomId);
 		} else {
 			dispatch(fetchVideos(roomId));
-
 			socket.emit('request-currentTime', roomId, user.id);
 			getCurrentTimeFromHost();
-			// setPlaying(false);
 			setPlaying(true);
 		}
 	};
 
 	const handleEnded = () => {
-		console.log('in ended');
 		if (room.hostId === user.id) {
 			dispatch(removeVideo(currentVideo.id, roomId));
 		} else {
@@ -92,11 +77,6 @@ const VideoPlayer = props => {
 		}
 	};
 
-	const handleSeek = e => {
-		console.log('in handle seek');
-		console.log(e);
-	};
-
 	const ref = player => {
 		setPlayer(player);
 	};
@@ -105,7 +85,6 @@ const VideoPlayer = props => {
 		socket.on('get-currentTime-from-host', userId => {
 			const currentTime = player.getCurrentTime();
 			const hostVideoId = currentVideo.id;
-			console.log(hostVideoId);
 			socket.emit('send-currentTime', roomId, userId, currentTime, hostVideoId);
 		});
 	};
@@ -114,7 +93,6 @@ const VideoPlayer = props => {
 		socket.on('currentTime', (userId, currentTime, hostVideoId) => {
 			if (user.id === userId) {
 				if (currentVideo.id === hostVideoId) {
-					console.log('in if conditional');
 					player.seekTo(currentTime);
 				} else {
 					setTimeout(() => player.seekTo(currentTime), 500);
@@ -134,10 +112,8 @@ const VideoPlayer = props => {
 						height="29vw"
 						controls={room.hostId === user.id}
 						playing={playing}
-						onReady={handleOnReady}
 						onEnded={handleEnded}
 						onPlay={() => setPlaying(true)}
-						onSeek={handleSeek}
 						onPause={() => setPlaying(false)}
 						onError={e => console.log('onError', e)}
 						url={currentVideo.videoUrl}
