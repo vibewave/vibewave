@@ -5,32 +5,33 @@ const useStyles = makeStyles(theme => ({
 		margin: '0',
 		padding: '1em',
 		width: '100vw',
-		height: '90vh',
+		// height: '90vh',
 	},
 	mainGridContainer: {
 		height: '100%',
 	},
 	roomLeft: {
-		height: '100%',
+		height: '100vh',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
 	videoQueueContainer: {
+		marginBottom: '1em',
 		width: '95%',
-		height: '50%',
+		height: '55%',
 		overflow: 'auto',
 	},
 	youTubeSearchContainer: {
 		width: '95%',
-		height: '45%',
+		height: '40%',
 		overflow: 'hidden',
 	},
 	roomCenterContainer: {
 		height: '100%',
 		display: 'flex',
 		'flex-direction': 'column',
-		'justify-content': 'center',
+		'justify-content': 'flex-start',
 		'align-items': 'center',
 		padding: '0 1em',
 	},
@@ -55,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	roomRight: {
 		// borderLeft: '1.5px solid white',
-		height: '100%',
+		height: '100vh',
 	},
 	chatContainer: {
 		width: '100%',

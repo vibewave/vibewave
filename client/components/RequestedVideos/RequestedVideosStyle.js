@@ -6,9 +6,11 @@ const useStyles = makeStyles(theme => ({
   },
   requestedVideosContainer: {
     height: '100%',
+    maxHeight: '20em',
     display: 'flex',
     flexWrap: 'wrap',
     padding: '0.1em',
+    overflow: 'auto',
   },
 	requestedVideoItemsContainer: {
     border: '0.5px solid white',
