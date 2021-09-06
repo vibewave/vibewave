@@ -18,9 +18,12 @@ const Video = db.define('video', {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
-
 	order: {
 		type: Sequelize.INTEGER,
+	},
+	isRequested: {
+		type: Sequelize.BOOLEAN,
+		allowNull: false,
 	},
 });
 

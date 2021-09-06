@@ -3,9 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './YouTubeSearchStyle';
 import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
-import { addVideo, fetchVideos } from '../../store';
+import {
+	addVideo,
+	fetchVideos,
+	addRequestedVideo,
+	fetchRequestedVideos
+} from '../../store';
 import axios from 'axios';
 
 const YouTubeSearch = () => {
@@ -33,9 +39,18 @@ const YouTubeSearch = () => {
 		socket.emit('video-added', parseInt(roomId, 10));
 	};
 
+	const chooseRequestedVideo = async video => {
+		setSelectedVideo(video);
+		await dispatch(addRequestedVideo(video, roomId));
+		dispatch(fetchRequestedVideos(roomId));
+		setSearch('');
+		setSearchResult([]);
+		socket.emit('requested-video-added', parseInt(roomId, 10));
+	};
+
 	return (
 		<div className={classes.videoSearchContainer}>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className={classes.videoSearchInputContainer}>
 				<TextField
 					className={classes.videoSearchInput}
 					inputProps={{}}
@@ -44,6 +59,9 @@ const YouTubeSearch = () => {
 					value={search}
 					onChange={e => setSearch(e.target.value)}
 				></TextField>
+				<button type="submit" className={classes.searchButton}>
+					<SearchIcon />
+				</button>
 			</form>
 			<div className={classes.songList}>
 				{searchResult.map(video => (
@@ -51,6 +69,7 @@ const YouTubeSearch = () => {
 						video={video}
 						key={video.id.videoId}
 						chooseVideo={chooseVideo}
+						chooseRequestedVideo={chooseRequestedVideo}
 					/>
 				))}
 			</div>

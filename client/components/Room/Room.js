@@ -10,6 +10,9 @@ import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomHeader from '../RoomHeader/RoomHeader';
 import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import RoomClosingPopup from '../RoomClosingPopup/RoomClosingPopup';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Chat from '../Chat/Chat';
+import RequestedVideos from '../RequestedVideos/RequestedVideos';
 import {
 	leaveRoom,
 	fetchUsers,
@@ -17,8 +20,6 @@ import {
 	fetchRooms,
 	fetchRoom,
 } from '../../store';
-import VideoPlayer from '../VideoPlayer/VideoPlayer';
-import Chat from '../Chat/Chat';
 
 const joinSocketRoom = id => {
 	id = parseInt(id, 10);
@@ -88,12 +89,15 @@ const Room = props => {
 		>
 			<RoomClosingPopup />
 			<Grid container className={classes.mainGridContainer}>
-				<Grid item xs={2} className={classes.roomLeft}>
+				<Grid item xs={3} className={classes.roomLeft}>
 					<div className={classes.videoQueueContainer}>
 						<VideoQueue />
 					</div>
+					<div className={classes.youTubeSearchContainer}>
+						<YouTubeSearch />
+					</div>
 				</Grid>
-				<Grid item xs={7} className={classes.roomCenter}>
+				<Grid item xs={6} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
 							<RoomHeader />
@@ -102,7 +106,7 @@ const Room = props => {
 							<VideoPlayer />
 						</div>
 						<div className={classes.mainArea}>
-							{room.hostId === user.id && <YouTubeSearch />}
+							<RequestedVideos />
 						</div>
 					</div>
 				</Grid>

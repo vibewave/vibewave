@@ -44,7 +44,6 @@ const VideoPlayer = props => {
 	}, [videoQueue]);
 
 	//set the host when roomId is available
-
 	useEffect(() => {
 		console.log('inside handleOnPlay useEffect');
 		if (playing) {

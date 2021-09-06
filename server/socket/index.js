@@ -34,6 +34,11 @@ const startSocket = io => {
 			socket.to(roomId).emit('refresh-videos', roomId);
 		});
 
+		//tell all other users in the room to refresh requested videos when a new song gets added
+		socket.on('requested-video-added', roomId => {
+			socket.to(roomId).emit('refresh-requested-videos', roomId);
+		});
+
 		//current time related sockets
 		socket.on('request-currentTime', (roomId, userId) => {
 			socket.to(roomId).emit('get-currentTime-from-host', userId);
@@ -55,6 +60,7 @@ const startSocket = io => {
 			users = users.filter(user => user !== socket.id);
 			console.log('users after dc ', users);
 		});
+
 		//new message being sent
 		socket.on('new-message', (room, userId) => {
 			console.log('inside new message');

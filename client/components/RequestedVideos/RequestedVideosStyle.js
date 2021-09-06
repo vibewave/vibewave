@@ -1,35 +1,40 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  videoQueueContainer: {
-    width: '100%',
-    // minWidth: '180px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '0.1em',
+  requestBoardHeader: {
+    textAlign: 'center',
   },
-	videoQueueItemsContainer: {
+  requestedVideosContainer: {
+    height: '100%',
+    maxHeight: '20em',
+    display: 'flex',
+    flexWrap: 'wrap',
+    padding: '0.1em',
+    overflow: 'auto',
+  },
+	requestedVideoItemsContainer: {
     border: '0.5px solid white',
     borderRadius: '5px',
     display: 'flex',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    width: '100%',
+    width: '30%',
 		height: '5.5em',
 		backgroundColor: '#151A1C',
 		color: 'white',
+    cursor: 'pointer',
     overflow: 'hidden',
+    margin: '0.58em',
     padding: '0.5em',
 	},
-  videoQueueDescription: {
+  requestedVideoDescription: {
     padding: '0.3em',
     height: '95%',
     'align-self': 'flex-start',
     overflowY: 'auto',
     overflowX: 'hidden',
     scrollbarWidth: 'thin',
-    fontSize: '0.9em',
+    fontSize: '0.8em',
   },
   videoThumbnail: {
     width: '4em',
