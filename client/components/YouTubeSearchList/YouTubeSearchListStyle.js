@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme => ({
 	},
   thumbnailImgContainer: {
     height: '4.5em',
-    marginLeft: '0.2em'
+    margin: '0.5em'
   },
   thumbnailImg: {
-    width: '100%',
-    height: '100%'
+    width: '4em',
+    height: '4em'
   },
   videoDescription: {
     marginLeft: '0.5em',

@@ -1,11 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
+  requestBoardHeader: {
+    textAlign: 'center',
+  },
   requestedVideosContainer: {
     height: '100%',
-    // minWidth: '180px',
     display: 'flex',
-    alignItems: 'center'
+    flexWrap: 'wrap',
+    padding: '0.1em',
   },
 	requestedVideoItemsContainer: {
     border: '0.5px solid white',
@@ -13,17 +16,22 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    width: '100%',
+    width: '30%',
 		height: '5.5em',
 		backgroundColor: '#151A1C',
 		color: 'white',
     cursor: 'pointer',
     overflow: 'hidden',
+    margin: '0.58em',
 	},
   requestedVideoDescription: {
-    marginTop: '0.5em',
-    marginLeft: '0.5em',
+    padding: '0.3em',
+    height: '95%',
     'align-self': 'flex-start',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    scrollbarWidth: 'thin',
+    fontSize: '0.8em',
   },
   videoThumbnail: {
     width: '4em',

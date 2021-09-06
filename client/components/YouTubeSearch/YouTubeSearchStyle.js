@@ -2,23 +2,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	videoSearchContainer: {
-		width: '99%',
+		width: '100%',
 		height: '100%',
+	},
+	videoSearchInputContainer: {
+		width: '100%',
+		overflow: 'hidden',
 	},
 	videoSearchInput: {
 		borderRadius: '0.5em',
 		background: '#012F41',
-		width: '100%',
+		width: '80%',
 	},
 	searchButton: {
-		position: 'fixed',
-		right: '',
+		// position: 'fixed',
+		// right: '',
 		padding: '0.2em',
-		width: '15px',
-		// '.MuiButton-label': {
-		// 	width: '50%',
-		// 	maxWidth: '5px'
-		// }
+		width: '20%',
+		height: '4.2em',
 	},
 	songList: {
 		width: '100%',

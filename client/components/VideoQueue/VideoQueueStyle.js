@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     overflowY: 'auto',
     overflowX: 'hidden',
     scrollbarWidth: 'thin',
+    fontSize: '0.9em',
   },
   videoThumbnail: {
     width: '4em',

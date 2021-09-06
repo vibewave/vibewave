@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchRequestedVideos } from '../../store';
 import useStyles from './RequestedVideosStyle';
+import he from 'he';
+import Popper from '@material-ui/core/popper';
 
 const RequestedVideos = () => {
 	const classes = useStyles();
@@ -17,7 +19,7 @@ const RequestedVideos = () => {
 	if (!requestedVideos) return <></>;
 	return (
 		<>
-			<h4>Request Board</h4>
+			<h4 className={classes.requestBoardHeader}>Request Board</h4>
 			<div className={classes.requestedVideosContainer}>
 				{requestedVideos.map(video => (
 					<div key={video.id} className={classes.requestedVideoItemsContainer}>
@@ -25,7 +27,7 @@ const RequestedVideos = () => {
 							<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
 						</div>
 						<div className={classes.requestedVideoDescription}>
-							{video.title}
+							{he.decode(video.title)}
 						</div>
 					</div>
 				))}
