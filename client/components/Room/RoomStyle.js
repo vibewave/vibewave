@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
 	roomInfoDiv: {
 		width: '100%',
 		height: '15%',
-		// border: '1px solid #44494B',
 	},
 	mainArea: {
 		width: '100%',
@@ -52,10 +51,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	playerDiv: {
 		width: '100%',
-		// border: '1px solid #44494B',
 	},
 	roomRight: {
-		// borderLeft: '1.5px solid white',
 		height: '100%',
 	},
 	chatContainer: {

@@ -11,19 +11,19 @@ const useStyles = makeStyles(theme => ({
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.main,
 	},
-  logo: {
-    width: '100%'
-  },
+	logo: {
+		width: '100%',
+	},
 	form: {
-		width: '100%', // Fix IE 11 issue.
+		width: '100%',
 		marginTop: theme.spacing(1),
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
 	inputError: {
-		color: '#d34051'
-	}
+		color: '#d34051',
+	},
 }));
 
 export default useStyles;

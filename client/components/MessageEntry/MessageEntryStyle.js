@@ -21,10 +21,6 @@ const useStyles = makeStyles(theme => ({
 		height: '3.9em',
 		width: '0em',
 	},
-	sendIcon: {
-		// height: '100%',
-		// width: '1em',
-	}
 }));
 
 export default useStyles;

@@ -8,11 +8,6 @@ import useStyles from './CreateroomStyle';
 import Typography from '@material-ui/core/Typography';
 import { socket } from '../../socket/socket';
 
-//create a room counter on the server side
-const createCounter = id => {
-	socket.emit('create-counter', id);
-};
-
 const CreateRoom = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
@@ -28,7 +23,6 @@ const CreateRoom = () => {
 			createRoom({ title: roomTitle, description: roomDesc, hostId: user.id })
 		);
 		history.push(`/rooms/${room.id}`);
-		createCounter(room.id);
 	};
 
 	return (

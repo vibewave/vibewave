@@ -14,7 +14,6 @@ import thumbnails from './thumbnails';
 import requestedVideo from './requestedVideo';
 import requestedVideos from './requestedVideos';
 
-// const reducer = combineReducers({ auth })
 const reducer = combineReducers({
 	auth,
 	room,

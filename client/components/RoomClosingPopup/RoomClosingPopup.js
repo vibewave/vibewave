@@ -28,7 +28,6 @@ const RoomClosingPopup = () => {
 
 	const hostClosedRoom = () => {
 		socket.on('room-closing', () => {
-			console.log('socket closing');
 			setOpen(true);
 		});
 	};
@@ -41,7 +40,6 @@ const RoomClosingPopup = () => {
 		<div>
 			<Dialog
 				open={open}
-				// onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
 			>
@@ -53,14 +51,6 @@ const RoomClosingPopup = () => {
 						Returning to the main room in {countdown}
 					</DialogContentText>
 				</DialogContent>
-				{/* <DialogActions>
-					<Button onClick={handleClose} color="primary">
-						Disagree
-					</Button>
-					<Button onClick={handleClose} color="primary" autoFocus>
-						Agree
-					</Button>
-				</DialogActions> */}
 			</Dialog>
 		</div>
 	);

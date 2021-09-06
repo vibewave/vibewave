@@ -18,12 +18,10 @@ export const fetchTracks = roomId => {
 
 export const fetchAllTracks = async allRooms => {
 	let trackOfRooms = [];
-	console.log('allRooms', allRooms);
 	for (let i = 0; i < allRooms.length; i++) {
 		const { data: allTracks } = await axios.get(
 			`/api/tracks/${allRooms[i].id}`
 		);
-		console.log('inside thunk', allTracks);
 		trackOfRooms.push(allTracks[0]);
 	}
 	return trackOfRooms;
