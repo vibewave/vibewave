@@ -13,7 +13,6 @@ const useStyles = makeStyles(theme => ({
 	},
 	createRoom: {
 		display: 'flex',
-
 		justifyContent: 'center',
 	},
 	name: {

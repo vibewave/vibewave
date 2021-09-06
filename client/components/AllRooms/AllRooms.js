@@ -31,7 +31,6 @@ const AllRooms = () => {
 					<Card className={classes.singleCard}>
 						<CardContent className={classes.titleContainer}>
 							<Typography
-								// gutterBottom
 								variant="h6"
 								color="textSecondary"
 								component="h2"
