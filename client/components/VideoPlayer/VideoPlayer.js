@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { socket } from '../../socket/socket';
-import store, { fetchVideos, removeVideo, fetchRoom } from '../../store';
+import { fetchVideos, removeVideo, fetchRoom } from '../../store';
 
 const testVideos = [
 	'https://www.youtube.com/watch?v=kTJczUoc26U&ab_channel=TheKidLAROIVEVO',
