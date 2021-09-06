@@ -12,7 +12,7 @@ const YouTubeSearchList = (props) => {
   const dispatch = useDispatch();
   const roomId = parseInt(useParams().id, 10);
   const room = useSelector(state => state.room);
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state.auth);
 
   const {
     video,
@@ -20,26 +20,30 @@ const YouTubeSearchList = (props) => {
     chooseRequestedVideo,
   } = props;
 
-  useEffect(() => {
-    dispatch(fetchRoom(roomId));
-    dispatch(fetchUsers(roomId));
-  }, [roomId]);
+  useEffect(async () => {
+    await dispatch(fetchRoom(roomId));
+    await dispatch(fetchUsers(roomId));
+  }, []);
 
-  const handlePlay = () => {
-    if (room?.hostId === user.id) {
+  const handleSelectedVideo = () => {
+    if (room?.hostId === user?.id) {
       chooseVideo(video);
     }
     else {
       chooseRequestedVideo(video);
     }
+    console.log('room Id: ', room?.hostId)
+    console.log('user Id: ', user?.id)
     console.log('video title: ', video.snippet.title);
-    console.log('isRequested Video: ', room?.hostId === user.id);
+    console.log('isRequested Video: ', room?.hostId === user?.id);
   }
+
+  // if (!room || !user) return <></>
 
   return (
     <div
       className={classes.searchResultItemsContainer}
-      onClick={handlePlay}
+      onClick={handleSelectedVideo}
     >
       <div className={classes.thumbnailImgContainer}>
         <img src={video.snippet.thumbnails.default.url} className={classes.thumbnailImg} />

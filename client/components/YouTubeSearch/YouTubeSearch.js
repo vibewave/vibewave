@@ -5,7 +5,12 @@ import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
 import useStyles from './YouTubeSearchStyle';
 import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
-import { addVideo, fetchVideos } from '../../store';
+import {
+	addVideo,
+	fetchVideos,
+	addRequestedVideo,
+	fetchRequestedVideos
+} from '../../store';
 import axios from 'axios';
 
 const YouTubeSearch = () => {

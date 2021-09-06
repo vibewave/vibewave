@@ -16,6 +16,12 @@ const useStyles = makeStyles(theme => ({
 		// borderRight: '1.5px solid white',
 		overflowY: 'auto'
 	},
+	videoQueueContainer: {
+		height: '50%'
+	},
+	youTubeSearchContainer: {
+		height: '45%'
+	},
 	chatContainer: {
 		width: '100%',
 		height: '100%',

@@ -12,7 +12,7 @@ const _addRequestedVideo = requestedVideo => {
 };
 
 //Thunks
-export const addRequestedVideo = (requestedVideo, roomId) => {
+export const addRequestedVideo = (video, roomId) => {
 	return async dispatch => {
 		const { data: dbVideo } = await axios.post(`/api/videos`, {
 			videoId: video.id.videoId,
@@ -22,7 +22,7 @@ export const addRequestedVideo = (requestedVideo, roomId) => {
 			roomId,
       isRequested: true
 		});
-		const action = _addRequestedVideo(requestedVideo);
+		const action = _addRequestedVideo(video);
 		dispatch(action);
 		return dbVideo;
 	};

@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-  videoQueueContainer: {
-    width: '100%',
+  requestedVideosContainer: {
+    height: '100%',
     // minWidth: '180px',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center'
   },
-	videoQueueItemsContainer: {
+	requestedVideoItemsContainer: {
     border: '0.5px solid white',
     borderRadius: '5px',
     display: 'flex',
@@ -20,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 		color: 'white',
     overflow: 'hidden',
 	},
-  videoQueueDescription: {
+  requestedVideoDescription: {
     marginTop: '0.5em',
     marginLeft: '0.5em',
     'align-self': 'flex-start',
