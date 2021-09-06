@@ -32,7 +32,6 @@ const MessageList = props => {
 							</div>
 						);
 					})}
-				{/* <div className={classes.last}>End of Messages</div> */}
 			</div>
 		</div>
 	);

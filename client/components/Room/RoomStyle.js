@@ -12,8 +12,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	roomLeft: {
 		height: '100%',
-		// borderRight: '1.5px solid white',
-		// overflowY: 'auto'
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	videoQueueContainer: {
 		width: '95%',

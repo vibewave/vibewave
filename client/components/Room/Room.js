@@ -97,7 +97,7 @@ const Room = props => {
 						<YouTubeSearch />
 					</div>
 				</Grid>
-				<Grid direction="column" item xs={6} className={classes.roomCenter}>
+				<Grid item xs={6} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
 							<RoomHeader />

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './YouTubeSearchStyle';
 import YouTubeSearchList from '../YouTubeSearchList/YouTubeSearchList';
 import {
@@ -58,6 +60,9 @@ const YouTubeSearch = () => {
 					value={search}
 					onChange={e => setSearch(e.target.value)}
 				></TextField>
+				<Button type="submit" variant="contained" className={classes.searchButton}>
+					<SearchIcon />
+				</Button>
 			</form>
 			<div className={classes.songList}>
 				{searchResult.map(video => (
