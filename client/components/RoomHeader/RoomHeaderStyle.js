@@ -5,7 +5,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     border: `1px solid ${theme.palette.primary.light}`,
-    height: '100%'
+    height: '100%',
+    overflow: 'hidden',
   },
   roomImgContainer: {
     width: '15%',
@@ -13,13 +14,13 @@ const useStyles = makeStyles(theme => ({
   },
   roomImg: {
     width: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   roomDescriptionContainer: {
     padding: '0 2em',
     display: 'flex',
     flexDirection: 'column',
-    width: '50%'
+    width: '50%',
   },
   liveUsersContainer: {
     height: '100%',
@@ -27,11 +28,11 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '0 1em'
+    padding: '0 1em',
   },
   liveUsersText: {
     padding: '0.5em',
-    width: '88%'
+    width: '88%',
   }
 }));
 
