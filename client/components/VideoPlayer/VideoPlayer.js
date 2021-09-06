@@ -30,14 +30,16 @@ const VideoPlayer = props => {
 
 	//component did mount - grab videos and room
 	useEffect(() => {
-		dispatch(fetchVideos(roomId));
 		dispatch(fetchRoom(roomId));
+		dispatch(fetchVideos(roomId));
 	}, []);
 
 	//when the queue is loaded set the first video on the player
 	useEffect(() => {
 		if (videoQueue.length > 0) {
 			setCurrentVideo(videoQueue[0]);
+		} else {
+			setCurrentVideo('');
 		}
 	}, [videoQueue]);
 
