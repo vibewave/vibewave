@@ -5,13 +5,13 @@ const useStyles = makeStyles(theme => ({
 		margin: '0',
 		padding: '1em',
 		width: '100vw',
-		// height: '90vh',
+		height: '90vh',
 	},
 	mainGridContainer: {
 		height: '100%',
 	},
 	roomLeft: {
-		height: '100vh',
+		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	roomRight: {
 		// borderLeft: '1.5px solid white',
-		height: '100vh',
+		height: '100%',
 	},
 	chatContainer: {
 		width: '100%',
@@ -65,4 +65,3 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default useStyles;
-
