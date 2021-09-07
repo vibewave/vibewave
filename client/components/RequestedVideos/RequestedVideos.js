@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchRequestedVideos } from '../../store';
+import { fetchRequestedVideos, addRequestedVideoToQueue } from '../../store';
 import useStyles from './RequestedVideosStyle';
 import he from 'he';
 
 const RequestedVideos = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const { id: roomId } = useParams();
+	const roomId = parseInt(useParams().id, 10);
 	let requestedVideos = useSelector(state => state.requestedVideos);
 
 	useEffect(() => {
@@ -21,7 +21,12 @@ const RequestedVideos = () => {
 			<h4 className={classes.requestBoardHeader}>Request Board</h4>
 			<div className={classes.requestedVideosContainer}>
 				{requestedVideos.map(video => (
-					<div key={video.id} className={classes.requestedVideoItemsContainer}>
+					<div 
+						key={video.id} 
+						className={classes.requestedVideoItemsContainer}
+						onClick={() => dispatch(addRequestedVideoToQueue(video, roomId))}
+					>
+						{console.log('video: ', video)}
 						<div>
 							<img
 								src={video.thumbnailUrl}

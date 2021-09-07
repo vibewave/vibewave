@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { fetchVideos, fetchRequestedVideos } from '../store';
 
 //Action types
 const ADD_REQUESTED_VIDEO = 'ADD_REQUESTED_VIDEO';
@@ -27,6 +28,17 @@ export const addRequestedVideo = (video, roomId) => {
 		return dbVideo;
 	};
 };
+
+export const addRequestedVideoToQueue = (video, roomId) => {
+	return async dispatch => {
+		await axios.put(`/api/videos/${roomId}`, {
+			id: video.id,
+      isRequested: false,
+		});
+		dispatch(fetchVideos(roomId));
+		dispatch(fetchRequestedVideos(roomId));
+	}
+}
 
 export default function (state = {}, action) {
 	switch (action.type) {

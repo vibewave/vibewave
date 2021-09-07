@@ -26,7 +26,7 @@ const RoomHeader = props => {
 			<div className={classes.roomHeaderContainer}>
 				<div className={classes.roomImgContainer}>
 					<img
-						src="/darkMusicIconWide.png"
+						src="/darkMusicIcon.jpg"
 						alt="default room image"
 						className={classes.roomImg}
 					/>

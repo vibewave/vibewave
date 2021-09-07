@@ -21,11 +21,16 @@ const useStyles = makeStyles(theme => ({
 		width: '95%',
 		height: '55%',
 		overflow: 'auto',
+		border: `1px solid ${theme.palette.primary.light}`,
+		borderRadius: '0.25em',
 	},
 	youTubeSearchContainer: {
 		width: '95%',
-		height: '40%',
+		height: '45%',
 		overflow: 'hidden',
+		border: `1px solid ${theme.palette.primary.light}`,
+		borderRadius: '0.25em',
+		padding: '2px',
 	},
 	roomCenterContainer: {
 		height: '100%',
@@ -51,6 +56,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	playerDiv: {
 		width: '100%',
+		borderLeft: `1px solid ${theme.palette.secondary.mix}`,
+		borderRight: `1px solid ${theme.palette.secondary.mix}`,
 	},
 	roomRight: {
 		height: '100%',
@@ -58,6 +65,10 @@ const useStyles = makeStyles(theme => ({
 	chatContainer: {
 		width: '100%',
 		height: '100%',
+		border: `1px solid ${theme.palette.primary.light}`,
+		borderRadius: '0.25em',
+		padding: '2px',
+		margin: '0 0 2px 2px',
 	},
 }));
 

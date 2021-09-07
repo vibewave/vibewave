@@ -10,11 +10,14 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
   },
   roomImgContainer: {
+    display: 'flex',
     width: '15%',
     height: '60px',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   roomImg: {
-    width: '100%',
+    width: '80%',
     overflow: 'hidden',
   },
   roomDescriptionContainer: {

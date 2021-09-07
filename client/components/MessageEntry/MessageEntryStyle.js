@@ -1,17 +1,13 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
-	messageEntryContainer: {
-		display: 'flex',
-		alignContent: 'flex-end',
-		height: '100%',
-		width: '100%',
-	},
 	messageEntry: {
 		display: 'flex',
 		flexDirection: 'row',
 		width: '100%',
 		height: '100%',
+		borderTop: `1px solid ${theme.palette.primary.light}`,
+		paddingTop: '2px',
 	},
 	input: {
 		height: '90%',

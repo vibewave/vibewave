@@ -55,6 +55,21 @@ router.get('/:roomId', async (req, res, next) => {
 	}
 });
 
+// PUT /api/videos/:roomId
+router.put('/:roomId', async (req, res, next) => {
+	try {
+		// Get single video
+		const video = await Video.findByPk(req.body.id);
+		// Update single video
+		await video.update({
+			isRequested: req.body.isRequested,
+		});
+		res.sendStatus(200);
+	} catch (error) {
+		next(error);
+	}
+});
+
 // POST /api/videos
 router.post('/', async (req, res, next) => {
 	try {
