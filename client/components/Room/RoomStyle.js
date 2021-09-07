@@ -32,6 +32,10 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: '0.25em',
 		padding: '2px',
 	},
+	roomCenter: {
+		height: '100%',
+		padding: '3em 0 3em 0',
+	},
 	roomCenterContainer: {
 		height: '100%',
 		display: 'flex',
@@ -40,24 +44,24 @@ const useStyles = makeStyles(theme => ({
 		'align-items': 'center',
 		padding: '0 1em',
 	},
-	roomCenter: {
-		height: '100%',
-	},
 	roomInfoDiv: {
 		width: '100%',
 		height: '15%',
+		minHeight: '7em',
 	},
 	mainArea: {
 		width: '100%',
 		height: '30%',
+		minHeight: '9em',
 		border: `1.5px solid #df6b78`,
 		borderRadius: '0 0 0.25em 0.25em',
-		overflow: 'auto',
+		overflow: 'hidden',
 	},
 	playerDiv: {
 		width: '100%',
 		borderLeft: `1px solid ${theme.palette.secondary.mix}`,
 		borderRight: `1px solid ${theme.palette.secondary.mix}`,
+		overflow: 'hidden',
 	},
 	roomRight: {
 		height: '100%',
