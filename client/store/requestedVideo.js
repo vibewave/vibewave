@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { socket } from '../socket/socket';
+import { fetchVideos, fetchRequestedVideos } from '../store';
 
 //Action types
 const ADD_REQUESTED_VIDEO = 'ADD_REQUESTED_VIDEO';
@@ -27,6 +29,27 @@ export const addRequestedVideo = (video, roomId) => {
 		return dbVideo;
 	};
 };
+
+export const addRequestedVideoToQueue = (video, roomId) => {
+	return async dispatch => {
+		await axios.delete(`/api/videos/${video.id}`, {
+			id: video.id,
+		});
+		const newVideo = {
+			videoId: video.videoId,
+			videoUrl: video.videoUrl,
+			title: video.title,
+			thumbnailUrl: video.thumbnailUrl,
+			roomId,
+			isRequested: false
+		};
+		const { data: dbVideo } = await axios.post(`/api/videos`, newVideo);
+		dispatch(fetchVideos(roomId));
+		dispatch(fetchRequestedVideos(roomId));
+		socket.emit('video-added', roomId);
+		socket.emit('requested-video-added', roomId);
+	}
+}
 
 export default function (state = {}, action) {
 	switch (action.type) {

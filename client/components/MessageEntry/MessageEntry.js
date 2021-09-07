@@ -23,7 +23,7 @@ const MessageEntry = props => {
 	};
 
 	return (
-		<div className={classes.messageEntryCountainer}>
+		<div className={classes.messageEntryContainer}>
 			<form onSubmit={handleSumbit} className={classes.messageEntry}>
 				<TextField
 					id="outlined-basic"

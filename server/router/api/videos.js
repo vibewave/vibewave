@@ -21,24 +21,6 @@ router.get('/', async (req, res, next) => {
 	}
 });
 
-// DELETE /api/videos/?videoId={videoId}&isRequested=true
-router.delete('/', async (req, res, next) => {
-	const videoId = req.query.videoId;
-	const isRequested = req.query.isRequested;
-
-	try {
-		await Video.destroy({
-			where: {
-				id: videoId,
-				isRequested,
-			},
-		});
-		res.sendStatus(204);
-	} catch (error) {
-		next(error);
-	}
-});
-
 // GET /api/videos/:roomId
 router.get('/:roomId', async (req, res, next) => {
 	try {
@@ -50,6 +32,21 @@ router.get('/:roomId', async (req, res, next) => {
 		});
 		sortedVideo = videos.sort((a, b) => a.id - b.id);
 		res.send(videos);
+	} catch (error) {
+		next(error);
+	}
+});
+
+// PUT /api/videos/:roomId
+router.put('/:roomId', async (req, res, next) => {
+	try {
+		// Get single video
+		const video = await Video.findByPk(req.body.id);
+		// Update single video
+		await video.update({
+			isRequested: req.body.isRequested,
+		});
+		res.sendStatus(200);
 	} catch (error) {
 		next(error);
 	}

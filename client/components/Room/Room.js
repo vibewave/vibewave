@@ -72,7 +72,7 @@ const Room = props => {
 		>
 			<RoomClosingPopup />
 			<Grid container className={classes.mainGridContainer}>
-				<Grid item xs={3} className={classes.roomLeft}>
+				<Grid item md={3} sm={4} xs={12} className={classes.roomLeft}>
 					<div className={classes.videoQueueContainer}>
 						<VideoQueue />
 					</div>
@@ -80,7 +80,7 @@ const Room = props => {
 						<YouTubeSearch />
 					</div>
 				</Grid>
-				<Grid item xs={6} className={classes.roomCenter}>
+				<Grid item md={6} sm={4} xs={12} className={classes.roomCenter}>
 					<div className={classes.roomCenterContainer}>
 						<div className={classes.roomInfoDiv}>
 							<RoomHeader />
@@ -93,7 +93,7 @@ const Room = props => {
 						</div>
 					</div>
 				</Grid>
-				<Grid item xs={3} className={classes.roomRight}>
+				<Grid item md={3} sm={4} xs={12} className={classes.roomRight}>
 					<div className={classes.chatContainer}>
 						<Chat />
 					</div>

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	searchResultItemsContainer: {
-    border: '1px solid white',
+    border: `1px solid ${theme.palette.secondary.light}`,
     display: 'flex',
     alignItems: 'center',
 		height: '5em',
@@ -26,8 +26,13 @@ const useStyles = makeStyles(theme => ({
     height: '4em'
   },
   videoDescription: {
-    marginLeft: '0.5em',
-    fontSize: '0.9em'
+		padding: '0.4em',
+		height: '95%',
+		'align-self': 'flex-start',
+		overflowY: 'auto',
+		overflowX: 'hidden',
+		scrollbarWidth: 'thin',
+		fontSize: '0.8em',
   },
 }));
 

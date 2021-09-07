@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
 		flexWrap: 'wrap',
 		flexDirection: 'row',
 		alignItems: 'space-around',
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 		padding: '25px',
 		alignContent: 'space-around',
 		backgroundColor: '#151A1C',
