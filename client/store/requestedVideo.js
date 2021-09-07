@@ -32,10 +32,18 @@ export const addRequestedVideo = (video, roomId) => {
 
 export const addRequestedVideoToQueue = (video, roomId) => {
 	return async dispatch => {
-		await axios.put(`/api/videos/${roomId}`, {
+		await axios.delete(`/api/videos/${video.id}`, {
 			id: video.id,
-      isRequested: false,
 		});
+		const newVideo = {
+			videoId: video.videoId,
+			videoUrl: video.videoUrl,
+			title: video.title,
+			thumbnailUrl: video.thumbnailUrl,
+			roomId,
+			isRequested: false
+		};
+		const { data: dbVideo } = await axios.post(`/api/videos`, newVideo);
 		dispatch(fetchVideos(roomId));
 		dispatch(fetchRequestedVideos(roomId));
 		socket.emit('video-added', roomId);

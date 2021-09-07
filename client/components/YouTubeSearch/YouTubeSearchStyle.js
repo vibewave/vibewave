@@ -18,10 +18,11 @@ const useStyles = makeStyles(theme => ({
 		padding: '0.2em',
 		width: '20%',
 		height: '4.2em',
+		cursor: 'pointer',
 	},
 	songList: {
 		width: '100%',
-		height: '100%',
+		height: '83%',
 		borderRadius: '5px',
 		overflow: 'auto',
 	}

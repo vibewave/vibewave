@@ -29,23 +29,29 @@ const RequestedVideos = () => {
 		<>
 			<h4 className={classes.requestBoardHeader}>Request Board</h4>
 			<div className={classes.requestedVideosContainer}>
-				{requestedVideos.map(video => (
-					<div 
-						key={video.id} 
-						className={classes.requestedVideoItemsContainer}
-						onClick={() => hostAddRequestedVideo(video, roomId)}
-					>
-						<div>
-							<img
-								src={video.thumbnailUrl}
-								className={classes.videoThumbnail}
-							/>
+				{requestedVideos.map(video => {
+					const isHost = room?.hostId === user?.id;
+					let requestedVideoItemClassName = isHost
+					? classes.requestedVideoItemsContainer
+					: classes.requestedVideoItemsContainerUser;
+					return (
+						<div
+							key={video.id}
+							className={requestedVideoItemClassName}
+							onClick={() => hostAddRequestedVideo(video, roomId)}
+						>
+							<div>
+								<img
+									src={video.thumbnailUrl}
+									className={classes.videoThumbnail}
+								/>
+							</div>
+							<div className={classes.requestedVideoDescription}>
+								{he.decode(video.title)}
+							</div>
 						</div>
-						<div className={classes.requestedVideoDescription}>
-							{he.decode(video.title)}
-						</div>
-					</div>
-				))}
+					);
+				})}
 			</div>
 		</>
 	);

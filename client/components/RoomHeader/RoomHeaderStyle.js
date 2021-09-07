@@ -10,36 +10,44 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
   },
   roomImgContainer: {
+    padding: '1em',
     display: 'flex',
     width: '15%',
-    height: '60px',
+    height: '70%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   roomImg: {
-    width: '80%',
     overflow: 'hidden',
   },
   roomDescriptionContainer: {
-    padding: '0 2em',
+    padding: '0 1em',
     display: 'flex',
     flexDirection: 'column',
     width: '50%',
     height: '70%',
-    overflow: 'auto',
-    marginTop: '1px',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+  },
+  hostedBy: {
+    color: theme.palette.primary.light
   },
   liveUsersContainer: {
+    padding: '0 0.5em',
     height: '70%',
     width: '35%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    overflow: 'auto',
+    overflowY: 'auto',
+    overflowX: 'hidden'
   },
   liveUsersText: {
-    padding: '0.5em',
-    width: '88%',
+    // width: '88%',
+    fontStyle: 'italic',
+  },
+  numUsers: {
+    color: theme.palette.primary.light
   }
 }));
 

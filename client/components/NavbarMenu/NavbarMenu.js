@@ -86,7 +86,9 @@ const NavbarMenu = () => {
 					onClose={handleClose}
 				>
 					<StyledMenuItem>
-						<ListItemText primary={'About Vibewave'} />
+						<a href="https://github.com/vibewave/vibewave" target="_blank">
+							<ListItemText primary={'About Vibewave'} />
+						</a>
 					</StyledMenuItem>
 				</StyledMenu>
 			)}

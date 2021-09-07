@@ -2,9 +2,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
 	messageListContainer: {
-		height: '90%',
+		height: '92%',
 		width: '100%',
-		marginBottom: '2%',
 		overflowY: 'scroll',
 		overScrollBehaviorY: 'contain',
 		scrollSnapType: 'y proximity',
@@ -14,7 +13,6 @@ const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		width: '99%',
 		scrollSnapAlign: 'end',
-		// backgroundColor: theme.palette.secondary.mix,
 		borderRadius: '5px',
 	},
 	bubble: {
@@ -45,12 +43,6 @@ const useStyles = makeStyles(theme => ({
 	messageSentDateMine: {
 		fontSize: '0.65em',
 		textAlign: 'right',
-	},
-	last: {
-		overflowAnchor: 'auto',
-		height: '1em',
-		textAlign: 'center',
-		position: 'absolute',
 	},
 }));
 
