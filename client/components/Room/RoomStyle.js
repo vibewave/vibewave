@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	playerDiv: {
 		width: '100%',
+		height: '50%',
 		borderLeft: `1px solid ${theme.palette.secondary.light}`,
 		borderRight: `1px solid ${theme.palette.secondary.light}`,
 		overflow: 'auto',
