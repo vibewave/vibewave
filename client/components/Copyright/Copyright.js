@@ -6,7 +6,7 @@ const Copyright = () => {
 	return (
 		<Typography variant="body2" color="textSecondary" align="center">
 			{'Copyright © '}
-			<Link color="inherit" href="https://vibewave.io/">
+			<Link color="inherit" href="https://vibewave.herokuapp.com/">
 				Vibewave
 			</Link>{' '}
 			{new Date().getFullYear()}

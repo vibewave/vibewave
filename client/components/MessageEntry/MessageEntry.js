@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { writeMessage, fetchMessages } from '../../store';
+import { writeMessage } from '../../store';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
@@ -31,7 +31,7 @@ const MessageEntry = props => {
 					variant="outlined"
 					value={message}
 					onChange={e => setMessage(e.target.value)}
-					inputProps={{ maxLength: 90 }}
+					inputProps={{ maxLength: 140 }}
 					required
 					className={classes.input}
 				/>

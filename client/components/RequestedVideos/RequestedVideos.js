@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchRoom, fetchUsers, fetchRequestedVideos, addRequestedVideoToQueue } from '../../store';
+import { fetchRoom, fetchRequestedVideos, addRequestedVideoToQueue } from '../../store';
 import useStyles from './RequestedVideosStyle';
 import he from 'he';
-import { socket } from '../../socket/socket';
 
 const RequestedVideos = () => {
 	const classes = useStyles();
+	const roomId = parseInt(useParams().id, 10);
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.auth);
 	const room = useSelector(state => state.room);
-	const roomId = parseInt(useParams().id, 10);
 	let requestedVideos = useSelector(state => state.requestedVideos);
 
 	useEffect(() => {

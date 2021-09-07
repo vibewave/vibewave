@@ -7,9 +7,9 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		padding: '0.8em',
-		height: '65px'
+		height: '65px',
+		boxShadow: '0 4px 2px -2px rgba(0,0,0,.2)',
 	},
-
 	logoContainer: {
 		color: 'white',
 		alignSelf: 'center',

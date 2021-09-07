@@ -21,8 +21,9 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: '0.5em',
 		margin: '0.1em',
 		padding: '0.5em',
-		width: '100%',
-		overflow: 'hidden',
+		alignSelf: 'flex-start',
+		width: 'fit-content',
+		maxWidth: '90%',
 	},
 	bubbleMine: {
 		backgroundColor: '#30a2a9',
@@ -30,7 +31,18 @@ const useStyles = makeStyles(theme => ({
 		borderRadius: '0.75em',
 		margin: '0.1em',
 		padding: '0.5em',
-		width: '100%',
+		alignSelf: 'flex-end',
+		width: 'fit-content',
+		maxWidth: '90%',
+	},
+	messageSentDate: {
+		fontSize: '0.65em',
+		textAlign: 'left',
+
+	},
+	messageSentDateMine: {
+		fontSize: '0.65em',
+		textAlign: 'right',
 	},
 }));
 

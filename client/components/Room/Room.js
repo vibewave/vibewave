@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { socket } from '../../socket/socket';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
@@ -8,7 +8,6 @@ import useStyles from './RoomStyle';
 import VideoQueue from '../VideoQueue/VideoQueue';
 import YouTubeSearch from '../YouTubeSearch/YouTubeSearch';
 import RoomHeader from '../RoomHeader/RoomHeader';
-import RoomPopupDialog from '../RoomPopupDialog/RoomPopupDialog';
 import RoomClosingPopup from '../RoomClosingPopup/RoomClosingPopup';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import Chat from '../Chat/Chat';
@@ -16,8 +15,6 @@ import RequestedVideos from '../RequestedVideos/RequestedVideos';
 import {
 	leaveRoom,
 	fetchUsers,
-	hostLeaveAndDeleteRoom,
-	fetchRooms,
 	fetchRoom,
 } from '../../store';
 

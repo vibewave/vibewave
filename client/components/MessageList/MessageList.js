@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMessages, fetchRoom, fetchUsers } from '../../store';
+import { fetchMessages, fetchRoom, fetchUsers, parseDate } from '../../store';
 import { useParams } from 'react-router';
 import useStyles from './MessageListStyle';
 
@@ -11,11 +11,18 @@ const MessageList = props => {
 	const user = useSelector(state => state.auth);
 	const messages = useSelector(state => state.messages);
 	const classes = useStyles();
+	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		dispatch(fetchRoom(roomId));
 		dispatch(fetchUsers(roomId));
 	}, []);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setCount(count+1);
+		}, 60000);
+	}, [count])
 
 	useEffect(() => {
 		if (room.id) {
@@ -24,7 +31,6 @@ const MessageList = props => {
 	}, [room]);
 
 	if (!room || !user) return <></>;
-
 	return (
 		<div className={classes.messageListContainer}>
 			<div className={classes.messageList}>
@@ -34,9 +40,15 @@ const MessageList = props => {
 						const messageClassName = isMine
 							? classes.bubbleMine
 							: classes.bubble;
+						const messageSentDateClassName = isMine
+							?	classes.messageSentDateMine
+							: classes.messageSentDate;
 						return (
 							<div key={message.id} className={messageClassName}>
 								{message.user.username}: {message.message}
+								<div className={messageSentDateClassName}>
+									{`Sent ${parseDate(message.createdAt)}`}
+								</div>
 							</div>
 						);
 					})}
