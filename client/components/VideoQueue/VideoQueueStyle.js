@@ -3,11 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   videoQueueHeader: {
     textAlign: 'center',
+		color: theme.palette.primary.light,
+		margin: '0.25em 0 0.25em 0'
   },
   videoQueueContainer: {
 		width: '100%',
-		height: '100%',
+		height: '95%',
 		overflow: 'auto',
+		paddingBottom: '1em'
 	},
 	videoQueue: {
 		width: '100%',
@@ -31,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     margin: '0 0 2.5% 2.5%',
 	},
 	videoQueueDescription: {
-		padding: '0.3em',
+		padding: '0.3em 0.3em 0.3em 0.8em',
 		height: '95%',
 		'align-self': 'flex-start',
 		overflowY: 'auto',
