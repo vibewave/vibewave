@@ -19,7 +19,7 @@ const MessageList = props => {
 	}, []);
 
 	useEffect(() => {
-		setInterval(() => {
+		setTimeout(() => {
 			setCount(count+1);
 		}, 60000);
 	}, [count])

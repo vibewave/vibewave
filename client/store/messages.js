@@ -44,12 +44,10 @@ export const fetchMessages = roomId => {
 };
 
 export const parseDate = messageDate => {
-	var systemDate = new Date(Date.parse(messageDate));
-	var userDate = new Date();
-	var diff = Math.floor((userDate - systemDate) / 1000);
+	let systemDate = new Date(Date.parse(messageDate));
+	let userDate = new Date();
+	let diff = Math.floor((userDate - systemDate) / 1000);
 	if (diff <= 1) {return 'just now';}
-	if (diff < 20) {return diff + ' seconds ago';}
-	if (diff < 40) {return 'half a minute ago';}
 	if (diff < 60) {return 'less than a minute ago';}
 	if (diff <= 90) {return 'one minute ago';}
 	if (diff <= 3540) {return Math.round(diff / 60) + ' minutes ago';}
