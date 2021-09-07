@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	mainArea: {
 		width: '100%',
-		height: '45%',
+		height: '35%',
 		minHeight: '10em',
 		border: `1.5px solid #df6b78`,
 		borderRadius: '0 0 0.25em 0.25em',
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		borderLeft: `1px solid ${theme.palette.secondary.light}`,
 		borderRight: `1px solid ${theme.palette.secondary.light}`,
-		overflow: 'hidden',
+		overflow: 'auto',
 	},
 	roomRight: {
 		height: '100%',
