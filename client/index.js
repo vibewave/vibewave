@@ -13,8 +13,10 @@ const darkTheme = createTheme({
 		type: 'dark',
 		primary: {
 			light: '#ADE8F4',
-			mid: '#012639',
+			mid: '#23494B',
 			main: '#012F41',
+			dark: '#012639',
+			mix: '#df6b78',
 		},
 		secondary: {
 			white: '#FFFFFF',
