@@ -18,7 +18,7 @@ export const fetchRequestedVideos = roomId => {
 
 export const removeRequestedVideo = (videoId, roomId) => {
 	return async dispatch => {
-		await axios.delete(`/api/videos/?videoId=${videoId}&isRequested=true`);
+		await axios.delete(`/api/videos/${videoId}`);
 		dispatch(fetchRequestedVideos(roomId));
 	};
 };
