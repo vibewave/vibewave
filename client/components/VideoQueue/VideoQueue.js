@@ -17,19 +17,23 @@ const VideoQueue = () => {
 
 	if (!videos) return <></>;
 	return (
-		<div className={classes.videoQueueContainer}>
-			<h4>Video Queue</h4>
-			{videos.map(video => (
-				<div key={video.id} className={classes.videoQueueItemsContainer}>
-					<div>
-						<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
-					</div>
-					<div className={classes.videoQueueDescription}>
-						{he.decode(video.title)}
-					</div>
+		<>
+			<h4 className={classes.videoQueueHeader}>Video Queue</h4>
+			<div className={classes.videoQueueContainer}>
+				<div className={classes.videoQueue}>
+					{videos.map(video => (
+						<div key={video.id} className={classes.videoQueueItemsContainer}>
+							<div>
+								<img src={video.thumbnailUrl} className={classes.videoThumbnail}/>
+							</div>
+							<div className={classes.videoQueueDescription}>
+								{he.decode(video.title)}
+							</div>
+						</div>
+					))}
 				</div>
-			))}
-		</div>
+			</div>
+		</>
 	);
 };
 

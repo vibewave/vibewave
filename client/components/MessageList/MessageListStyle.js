@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 	bubble: {
 		backgroundColor: '#23494B',
 		border: '0.1em solid gray',
-		borderRadius: '0.75em',
+		borderRadius: '0.5em',
 		margin: '0.1em',
 		padding: '0.5em',
 		width: '100%',

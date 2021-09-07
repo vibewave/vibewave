@@ -20,9 +20,9 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: '1em',
 		width: '95%',
 		height: '55%',
-		overflow: 'auto',
 		border: `1px solid ${theme.palette.primary.light}`,
 		borderRadius: '0.25em',
+		overflow: 'hidden',
 	},
 	youTubeSearchContainer: {
 		width: '95%',

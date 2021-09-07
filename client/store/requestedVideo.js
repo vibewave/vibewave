@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { socket } from '../socket/socket';
 import { fetchVideos, fetchRequestedVideos } from '../store';
 
 //Action types
@@ -37,6 +38,8 @@ export const addRequestedVideoToQueue = (video, roomId) => {
 		});
 		dispatch(fetchVideos(roomId));
 		dispatch(fetchRequestedVideos(roomId));
+		socket.emit('video-added', roomId);
+		socket.emit('requested-video-added', roomId);
 	}
 }
 
