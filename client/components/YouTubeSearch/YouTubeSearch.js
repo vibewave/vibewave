@@ -1,5 +1,5 @@
 import { socket } from '../../socket/socket';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { TextField } from '@material-ui/core';

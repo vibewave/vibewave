@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchRoom, fetchRequestedVideos, addRequestedVideoToQueue, handleAddOrDeleteToQueue } from '../../store';
+import { fetchRoom, fetchRequestedVideos, addRequestedVideoToQueue } from '../../store';
 import useStyles from './RequestedVideosStyle';
 import he from 'he';
 
