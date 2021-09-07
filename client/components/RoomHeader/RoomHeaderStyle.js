@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.light
   },
   liveUsersContainer: {
+    padding: '0 0.5em',
     height: '70%',
     width: '35%',
     display: 'flex',
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'hidden'
   },
   liveUsersText: {
-    width: '88%',
+    // width: '88%',
     fontStyle: 'italic',
   },
   numUsers: {

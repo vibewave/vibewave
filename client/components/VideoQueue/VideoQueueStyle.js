@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 		overflow: 'hidden',
 		padding: '0.5em',
     margin: '0 0 2.5% 2.5%',
+		cursor: 'default',
 	},
 	videoQueueDescription: {
 		padding: '0.3em 0.3em 0.3em 0.8em',
@@ -43,8 +44,7 @@ const useStyles = makeStyles(theme => ({
 		fontSize: '0.9em',
 	},
 	videoThumbnail: {
-		width: '4em',
-		height: '4em',
+		width: '5em',
 	},
 }));
 

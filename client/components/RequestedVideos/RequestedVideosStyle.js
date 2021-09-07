@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     height: '92%',
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     overflowY: 'auto',
     overflowX: 'hidden',
   },
@@ -17,7 +18,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '5px',
     display: 'flex',
     alignItems: 'center',
-    alignSelf: 'flex-start',
     width: '30%',
     minWidth: '15em',
 		height: '5.5em',
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     alignSelf: 'flex-start',
     width: '30%',
-    minWidth: '12em',
+    minWidth: '14em',
 		height: '5.5em',
 		backgroundColor: '#151A1C',
 		color: 'white',
@@ -54,8 +54,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '0.8em',
   },
   videoThumbnail: {
-    width: '4em',
-    height: '4em',
+    width: '5em',
   }
 }));
 
