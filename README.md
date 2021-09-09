@@ -1,6 +1,6 @@
 # Vibewave
 
-## A Group Music & Video Party Platform
+## _A Group Music & Video Party Platform_
 
 <a href="https://vibewave.herokuapp.com" target="_blank">Visit Vibewave</a>
 
@@ -12,8 +12,6 @@
 
 ---
 
-<br/>
-
 ## About Vibewave
 
 Vibewave is an app where you can listen to and share music & videos with your friends and the broader community in real time.
@@ -23,7 +21,7 @@ Vibewave is an app where you can listen to and share music & videos with your fr
 - Inside a room, users can also interact with each other through chat, sharing their thoughts, ideas, or just anything they want to talk about.
 - Users can also make song/video requests, which will show up on the 'Request Board', from which the host can choose to add to the room's playlist queue
 
-### _If you love music and want to enjoy listening with your friends in real time, hop into Vibewave!_
+> ### _If you love music and want to enjoy listening with your friends in real time, hop in to Vibewave!_
 
 <br/>
 
@@ -50,8 +48,6 @@ Built with <a href="https://www.npmjs.com/package/nodejs-express-app" target="_b
 <br/>
 
 ---
-
-<br/>
 
 ## The Engineers
 
