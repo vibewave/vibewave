@@ -26,7 +26,7 @@ const CreateRoom = () => {
 
 	return (
 		<div className={classes.createRoom}>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className={classes.createRoomForm}>
 				<br />
 				<Typography component="h1" variant="h5" className={classes.name}>
 					Create Room
@@ -34,7 +34,7 @@ const CreateRoom = () => {
 				<br />
 				<TextField
 					id="outlined-basic"
-					label="Room Title"
+					label="Room Title (max length: 35 chars)"
 					variant="outlined"
 					value={roomTitle}
 					onChange={e => setRoomTitle(e.target.value)}
@@ -46,7 +46,7 @@ const CreateRoom = () => {
 					<br />
 					<TextField
 						id="outlined-basic"
-						label="Room Description"
+						label="Room Description (max length: 75 chars)"
 						variant="outlined"
 						size="medium"
 						value={roomDesc}

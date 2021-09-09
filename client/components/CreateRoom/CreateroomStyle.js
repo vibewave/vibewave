@@ -2,12 +2,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
 	descriptionInput: {
-		width: '500px',
+		width: '100%',
+		maxWidth: '35em',
 	},
 	titleInput: {
-		width: '500px',
+		width: '100%',
+		maxWidth: '35em',
 	},
 	submit: {
+		width: '100%',
+		maxWidth: '35em',
 		display: 'flex',
 		alignContent: 'center',
 	},
@@ -18,6 +22,10 @@ const useStyles = makeStyles(theme => ({
 	name: {
 		textAlign: 'center',
 	},
+	createRoomForm: {
+		width: '35em',
+		margin: '0 1.5em',
+	}
 }));
 
 export default useStyles;
