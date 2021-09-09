@@ -14,11 +14,11 @@
 
 ## About Vibewave
 
-Vibewave is an app where you can listen to and share music & videos with your friends and the broader community.
+Vibewave is an app where you can listen to and share music & videos with your friends and the broader community in real time.
 
 - Any Vibewave user can create his/her own room where he/she will be the host
 - Vibewave users can join any of the rooms available on Vibewave, and listen to the music/video selections played by the host together with other users in real time
-- Inside a room, users can also interact with each other through chat, sharing their thoughts, ideas, etc.
+- Inside a room, users can also interact with each other through chat, sharing their thoughts, ideas, or just anything they want to talk about.
 - Users can also make song/video requests, which will show up on the 'Request Board', from which the host can choose to add to the room's playlist queue
 
 ### _If you love music and want to enjoy listening with your friends in real time, hop into Vibewave!_
