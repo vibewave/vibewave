@@ -2,7 +2,9 @@
 
 ## A Group Music & Video Party Platform
 
-https://vibewave.herokuapp.com </br>
+<a href="https://vibewave.herokuapp.com" target="_blank">Visit Vibewave</a>
+
+</br>
 
 <img src="src/vibewave-banner.jpg" width="850">
 
