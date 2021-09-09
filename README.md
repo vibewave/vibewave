@@ -27,9 +27,9 @@ Vibewave is an app where you can listen to and share music & videos with your fr
 
 <img src="src/vibewave-snippet.gif" width="850">
 
----
-
 <br/>
+
+---
 
 ## Tech Stack
 
