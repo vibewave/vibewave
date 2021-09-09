@@ -39,9 +39,9 @@ Vibewave is an app where you can listen to and share music & videos with your fr
 - ![Express.js](https://img.shields.io/badge/-Express-05122A?style=plastic&color=252c2f&logo=express)
 - ![Postgres](https://img.shields.io/badge/-Postgres-05122A?style=plastic&color=032147&logo=postgresQL)
 - ![Sequelize](https://img.shields.io/badge/-Sequelize-05122A?style=plastic&color=0f5182&logo=sequelize)
-- ![Material UI](https://img.shields.io/badge/-MaterialUI-05122A?style=plastic&color=01335f&logo=materialui)
+- ![Material UI](https://img.shields.io/badge/-Material%20UI-05122A?style=plastic&color=01335f&logo=materialui)
 - ![Socket.io](https://img.shields.io/badge/-Socket.io-05122A?style=plastic&color=747e82&logo=socket.io)
-- ![YouTube Data API](https://img.shields.io/badge/-YouTubeDataAPI-05122A?style=plastic&color=d34051&logo=youtube)
+- ![YouTube Data API](https://img.shields.io/badge/-YouTube%20Data%20API-05122A?style=plastic&color=d34051&logo=youtube)
 
 Built with <a href="https://www.npmjs.com/package/nodejs-express-app" target="_blank" >`nodejs-express-app`</a>
 
