@@ -109,7 +109,7 @@ const VideoPlayer = props => {
 					<ReactPlayer
 						ref={ref}
 						width="100%"
-						height="29vw"
+						// height="29vw"
 						controls={room.hostId === user.id}
 						playing={playing}
 						onEnded={handleEnded}
